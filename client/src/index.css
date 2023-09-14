@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  margin: 0;
+  color: white;
+  background-color: rgb(237, 239, 242);
+  /* background-image:
+    radial-gradient(circle,
+      rgba(174, 238, 212, 1) 0%,
+      rgba(212, 148, 233, 0.760989010989011) 100%),
+    url(''); */
+  /* Imagen de fondo */
+  /* background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-width: 320px;
+  min-height: 100vh; */
+  /* Ajusta la altura del gradiente para ocupar más espacio vertical */
+  height: 120vh; /* Puedes ajustar este valor según tus necesidades */
+}
+
