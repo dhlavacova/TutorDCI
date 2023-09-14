@@ -2,9 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import { ButtonLink } from "./ui/ButtonLink";
+import { FaPlus } from "react-icons/fa";
+import App  from "../components/UserImage"
 
 export function Navbar() {
-  const { isAuthenticated, logout, user } = useAuth();
+  const { isAuthenticated} = useAuth();
 
   return (
     <nav className="my-3 flex justify-between py-5 px-10 rounded-lg bg-gray-100 bg-opacity-50 text-gray-800">
@@ -26,15 +28,15 @@ export function Navbar() {
       <ul className="flex gap-x-2">
         {isAuthenticated ? (
           <>
-            <li>Welcome {user.username}</li>
+
             <li>
-              <ButtonLink to="/add-task">Book Tutor <span className="text-white  ">+</span></ButtonLink>
-            </li>
-            <li>
-              <Link to="/" onClick={() => logout()}>
-                Logout
+              <Link to="/add-task" className="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-1 px-4 rounded-md inline-flex items-center">
+                Book tutor <FaPlus className="ml-1" />
               </Link>
             </li>
+            
+            <App />
+            
           </>
         ) : (
           <>
