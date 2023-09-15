@@ -1,5 +1,5 @@
 import Task from "../models/task.model.js";
-
+/*
 export const getTasks = async (req, res) => {
   try {
     const tasks = await Task.find({ user: req.user.id }).populate("user");
@@ -60,7 +60,7 @@ export const getTask = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
-
+*/
 export const getTasksAll = async (req, res) => {
   try {
     const allTasks = await Task.find({});

@@ -1,14 +1,15 @@
 import React, {useEffect}from 'react';
-import { useTasks} from "../context/protocolContext.jsx";
+import { useProtocol} from "../context/protocolContext.jsx";
 import { Button, } from "../components/ui";
-export function Protocol() {
-    const { allTasks,getAllTasks } = useTasks();
+function Protocol() {
+    const {allProtocols, getAllProtocols} = useProtocol();
+    // allProtocols, setAllProtocols
 
-useEffect(() => {
+    useEffect(() => {
 
-     getAllTasks();
+        getAllProtocols();
 
-}, []);
+    }, []);
     function getCurrentDate(datum) {
         try {
             const options = { weekday: 'long',day: '2-digit', month: '2-digit', year: 'numeric' };
@@ -25,8 +26,8 @@ useEffect(() => {
     }
     return (
         <div className="flex items-center justify-center flex-col w-full space-y-4">
-<div className="headerMonth">September 2023</div>
-                {allTasks.map((data,index) => <div className="w-full flex items-center justify-between mb-2" key={index}>
+            <div className="headerMonth">September 2023</div>
+                {allProtocols.map((data,index) => <div className="w-full flex items-center justify-between mb-2" key={index}>
                     <div className="flex-shrink-0">
                         <div className="date">{getCurrentDate(data.date)}</div>
                     </div>
@@ -38,8 +39,8 @@ useEffect(() => {
                         <div className="flex-shrink-0">
                             <Button className="ml-auto">pdf Herunterladen</Button>
                         </div>
-                    </div>
-                </div>)}
+            </div>
+        </div>)}
 
 
 
@@ -49,4 +50,6 @@ useEffect(() => {
         </div>
     );
 }
+
+export default Protocol
 
