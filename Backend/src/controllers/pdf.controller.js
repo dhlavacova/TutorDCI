@@ -1,5 +1,5 @@
 import Task from "../models/task.model.js";
-import pdf from "../middleware/pdf.js"
+import pdf from "../middlewares/pdf.middleware.js";
 
 /**
  * Handle request to some endpoint
@@ -12,15 +12,15 @@ export const convertToPdf = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const protocoll = await Task.findOne({uuid: id});
-        if (!protocoll) {
-            res.status(404).json({message: "Protocoll not found"});
+        const protocol = await Task.findOne({uuid: id});
+        if (!protocol) {
+            res.status(404).json({message: "Protocol not found"});
             return;
         }
-        pdf(protocoll,res)
+        pdf(protocol,res)
 //res.status(200).json(protocoll.thema);
 
-        console.log(protocoll)
+        console.log(protocol)
     }catch (err) {
         console.error(err.message);
     }}
