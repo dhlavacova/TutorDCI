@@ -24,11 +24,8 @@ function Protocol() {
             return "Invalid Date";
         }
     }
-    const HandlePdf = (id) => {
 
-       const  pdf=allProtocols.find((data)=>data.uuid===id)
-        console.log(pdf)
-    }
+
     return (
         <div className="flex items-center justify-center flex-col w-full space-y-4">
             <div className="headerMonth">September 2023</div>
@@ -42,7 +39,7 @@ function Protocol() {
                     <div className="student">{data.name}</div>
                     <div className="topic">{data.theme}</div>
                         <div className="flex-shrink-0">
-                            <Button className="ml-auto" onClick= {()=>HandlePdf(data.uuid)}>pdf Herunterladen</Button>
+                        <Button className="ml-auto"><a href={"/api/protocol/pdf/" + data.uuid} className="btn ml-auto">pdf Herunterladen</a></Button>
                         </div>
             </div>
         </div>)}
