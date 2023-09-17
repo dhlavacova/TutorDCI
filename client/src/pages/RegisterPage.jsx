@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useAuth } from "../context/authContext";
+
 import { Link, useNavigate } from "react-router-dom";
 import { Card, Message, Button, Input, Label } from "../components/ui";
 import { useForm } from "react-hook-form";
@@ -18,6 +19,8 @@ function Register() {
   const navigate = useNavigate();
 
   const onSubmit = async (value) => {
+
+    console.log(value)
     await signup(value); // Suponiendo que signup establece el rol del usuario en el backend
     const userRole = value.role; // Obten el rol del usuario del formulario
     navigate(`/profile/${userRole}`); // Redirige al perfil correspondiente

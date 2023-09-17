@@ -39,7 +39,7 @@ function Protocol() {
                     <div className="student">{data.name}</div>
                     <div className="topic">{data.theme}</div>
                         <div className="flex-shrink-0">
-                        <Button className="ml-auto"><a href={"/api/protocol/pdf/" + data.uuid} className="btn ml-auto">pdf Herunterladen</a></Button>
+                        <Button className="ml-auto"><a href={"/api/protocol/pdf/" + data._id} className="btn ml-auto">pdf Herunterladen</a></Button>
                         </div>
             </div>
         </div>)}

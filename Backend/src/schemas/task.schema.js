@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const createTaskSchema = z.object({
+
   theme: z.string({
     required_error: "Theme is required",
   }),

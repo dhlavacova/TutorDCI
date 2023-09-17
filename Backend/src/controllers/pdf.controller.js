@@ -12,7 +12,7 @@ export const convertToPdf = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const protocol = await Task.findOne({uuid: id});
+        const protocol = await Task.findOne({_id: id});
         if (!protocol) {
             res.status(404).json({message: "Protocol not found"});
             return;

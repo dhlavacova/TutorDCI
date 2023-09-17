@@ -11,8 +11,9 @@ export const getTasks = async (req, res) => {
 
 export const createTask = async (req, res) => {
   try {
-    const { theme, tutor, date } = req.body;
+    const { uuid,theme, tutor, date } = req.body;
     const newTask = new Task({
+      uuid,
       theme,
       tutor,
       date,
