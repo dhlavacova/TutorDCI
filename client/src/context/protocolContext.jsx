@@ -14,7 +14,7 @@ export const useProtocol = () => {
 export function ProtocolProvider({children}) {
 
     const [allProtocols, setAllProtocols] = useState([]); // Nuevo estado para todas las tareas [
-
+const[studentName, setStudentName] = useState([]);
 
     const getAllProtocols = async () => {
         try {
