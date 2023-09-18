@@ -42,7 +42,7 @@ export default async function pdf(data,res) {
         <div class="item"><strong>Tutor Name:</strong> ${data.tutor}</div>
         <div class="item"><strong>Datum:</strong> ${getCurrentDate(data.date)}</div>
         <!--<div class="item"><strong>Uhrzeit:</strong> </div>-->
-        <div class="item"><strong>Student:</strong> ${data.user}</div>
+        <div class="item"><strong>Student:</strong> ${data.student}</div>
     </div>
 </body>
 </html>`

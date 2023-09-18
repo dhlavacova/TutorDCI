@@ -20,6 +20,7 @@ const[studentName, setStudentName] = useState([]);
         try {
             const res = await getTasksAllRequest();
             setAllProtocols(res.data);
+
         } catch (error) {
             console.error(error);
         }
@@ -29,6 +30,7 @@ const[studentName, setStudentName] = useState([]);
         <ProtocolContext.Provider
             value={{
                 allProtocols,
+                studentName,
                 getAllProtocols,
             }}
         >

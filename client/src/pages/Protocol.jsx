@@ -36,8 +36,10 @@ function Protocol() {
                     <div className="flex flex-row items-center space-x-4 flex-grow">
                     <div className="time">20:00-22:00</div>
 
-                    <div className="student">{data.name}</div>
+
                     <div className="topic">{data.theme}</div>
+                        <div className="topic">{data.student}</div>
+
                         <div className="flex-shrink-0">
                         <Button className="ml-auto"><a href={"/api/protocol/pdf/" + data._id} className="btn ml-auto">pdf Herunterladen</a></Button>
                         </div>

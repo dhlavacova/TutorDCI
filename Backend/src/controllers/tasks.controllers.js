@@ -10,10 +10,11 @@ export const getTasks = async (req, res) => {
 };
 
 export const createTask = async (req, res) => {
+  const student = req.user.username;
   try {
-    const { uuid,theme, tutor, date } = req.body;
+    const {theme, tutor, date } = req.body;
     const newTask = new Task({
-      uuid,
+      student: student,
       theme,
       tutor,
       date,
