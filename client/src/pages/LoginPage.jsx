@@ -1,14 +1,14 @@
 import { useAuth } from "../context/authContext";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Card, Message, Button, Input, Label } from "../components/ui";
 import { loginSchema } from "../schemas/auth";
 
 
 
-export function LoginPage() {
+function LoginPage() {
   const {
     register,
     handleSubmit,
@@ -19,14 +19,12 @@ export function LoginPage() {
   const { signin, errors: loginErrors, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
- 
-  const onSubmit = (data) => signin(data);
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/dashboard");
-    }
-  }, [isAuthenticated]);
+  const onSubmit = async (data) => {
+    await signin(data);
+    navigate(`/book`);
+  }
+
 
   return (
     <div className="h-[calc(100vh-100px)] flex items-center justify-center">
@@ -69,4 +67,6 @@ export function LoginPage() {
   );
 }
 
+
+export default LoginPage;
 

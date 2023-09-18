@@ -71,6 +71,7 @@ export const login = async (req, res) => {
     const token = await createAccessToken({
       id: userFound._id,
       username: userFound.username,
+      role: userFound.role, 
     });
 
     res.cookie("token", token, {
@@ -79,6 +80,7 @@ export const login = async (req, res) => {
       sameSite: "none",
     });
 
+    // Incluye el campo 'role' en la respuesta
     res.json({
       id: userFound._id,
       username: userFound.username,
@@ -89,6 +91,7 @@ export const login = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+
 
 export const verifyToken = async (req, res) => {
   const { token } = req.cookies;

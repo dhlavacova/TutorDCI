@@ -6,7 +6,7 @@ import { ProtectedRoute } from "./routes";
 import Home from "./pages/HomePage";
 import RegisterPage from "./pages/RegisterPage";
 import { TutoringBookingForm } from "./pages/TutoringBookingForm";
-import { LoginPage } from "./pages/LoginPage";
+import  LoginPage  from "./pages/LoginPage";
 import { ClassesPage } from "./pages/ClassesPage";
 import StudentProfile from "./pages/StudentProfile";
 import TutorProfile from "./pages/TutorProfile"; // 
