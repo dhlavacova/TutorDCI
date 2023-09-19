@@ -2,8 +2,13 @@ import { useTasks } from "../../context/tasksContext";
 import { Button, ButtonLink, Card } from "../ui";
 import { useAuth } from "../../context/authContext";
 import { useState } from "react";
-import { FiChevronDown } from "react-icons/fi";
-
+import { 
+  FiCalendar, 
+  FiClock, 
+  FiUser, 
+  FiVideo,
+  FiChevronDown 
+} from "react-icons/fi";
 
 export function TaskCard({ task }) {
   const { deleteTask } = useTasks();
@@ -21,28 +26,37 @@ export function TaskCard({ task }) {
       <header className="flex justify-between">
         <h1 className="text-2xl text-slate-800">Individuelle class by {task.tutor}</h1>
       </header>
-      <h2 className="text-2xl text-slate-700 font-bold ">{task.theme}</h2>
-      <p className="text-slate-600 text-sm mb-2">O Mittwoch, 18 september 2023</p>
-      <p className="text-slate-600 text-sm mb-2">O 20:00 - 21:00(GMT+2)</p>
-      <p className="text-slate-600 text-sm mb-2">O Participant {user.username}</p>
-      <p className="text-slate-600 text-sm mb-2">O Zoom link</p>
-      <p className="text-slate-500 text-sm italic">O will be provided 5 minutes before class</p>
-
+      <h2 className="text-2xl text-slate-700 font-bold mb-2">{task.theme}</h2>
+      <div className="flex items-center mb-2">
+      <FiCalendar className="mr-2" /> Mittwoch, 18 september 2023
+    </div>
+    <div className="flex items-center mb-2">
+      <FiClock className="mr-2" /> 20:00 - 21:00(GMT+2)
+    </div>
+    <div className="flex items-center mb-2">
+      <FiUser className="mr-2" /> Participant {user.username}
+    </div>
+    <div className="flex items-center mb-2">
+      <FiVideo className="mr-2" /> Zoom link
+    </div>
+    <p className="text-slate-500 text-sm italic ml-6 ">
+      Will be provided 5 minutes before class
+    </p>
 
       {/* format date */}
-      <p className="italic text-slate-500 text-sm">
-        O{" "}
+      <p className=" text-slate-500 text-sm ml-6 mb-2">
+        {" "}
         {task.date &&
           new Date(task.date).toLocaleDateString("De", {
             weekday: "long",
             year: "numeric",
-            month: "long",
+            month: "2-digit",
             day: "numeric",
           })}
       </p>
       <div className="flex">
         <button
-          className="bg-slate-500 text-white font-bold py-2 px-4 rounded-l-lg hover:bg-slate-600"
+          className="bg-slate-500 text-white font-bold py-2 px-4 rounded-l-lg hover:bg-slate-600 ml-6"
           onClick={() => {
             // Lógica para "Join class"
           }}

@@ -15,12 +15,17 @@ export default function App() {
                     <User
                         as="button"
                         avatarProps={{
+                            
                             isBordered: true,
                             src: "https://i.pravatar.cc/150?u=a04258114e29026708c",
                         }}
                         className="transition-transform"
                         description={`@${user.username}`}
                         name={user.username}
+
+                        // className="transition-transform"
+                        // description={`@ DCI ${user.role}`}
+                        // name={user.username}
                     />
                 </DropdownTrigger>
                 <DropdownMenu aria-label="User Actions" variant="flat" className="text-black" >
@@ -31,6 +36,10 @@ export default function App() {
 
                     <DropdownItem key="settings">
                         My Settings
+                    </DropdownItem>
+
+                    <DropdownItem key="protocol">
+                        My Protocol
                     </DropdownItem>
 
                     <DropdownItem key="logout" color="danger" onClick={logout}>
