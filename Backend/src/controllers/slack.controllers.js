@@ -3,8 +3,8 @@ import axios from "axios";
 export const slackTutorCommunity = async (req, res) => {
 
     try {
-        const message = req.body.message; // Extract 'message' from the POST request body
-
+       /* const message = req.body.message; */// Extract 'message' from the POST request body
+const message= ` :wave: Hi! `;
         if (!message) {
             return res
                 .status(400)
@@ -17,7 +17,7 @@ export const slackTutorCommunity = async (req, res) => {
 
         res.send("Message sent to Slack successfully");
     } catch (error) {
-        res.send("Failed to send message to Slack");
+        res.send("Failed to send message to Slack"+error.message)
     }
 };
 
