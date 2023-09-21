@@ -3,7 +3,6 @@ import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Avatar, User } f
 import { useAuth } from "../context/authContext";
 import { Link } from "react-router-dom";
 
-
 export default function App() {
     const { isAuthenticated, logout, user } = useAuth();
 
@@ -25,8 +24,9 @@ export default function App() {
                 </DropdownTrigger>
                 <DropdownMenu aria-label="User Actions" variant="flat" className="text-black" >
 
-                    <DropdownItem key="profile">
-                        My Profile
+                    <DropdownItem key="profile" >
+
+                      <Link to="/protocol"> My Protocol</Link>
                     </DropdownItem>
 
                     <DropdownItem key="settings">
