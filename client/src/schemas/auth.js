@@ -21,7 +21,7 @@ export const registerSchema = z
     email: z.string().email({
       message: "Please enter a valid email address",
     }),
-    role: z.enum(["student", "tutor"]), // Definir las opciones válidas
+    role: z.enum(["Student", "Tutor"]), // Definir las opciones válidas
     password: z.string().min(6, {
       message: "Password must be at least 6 characters",
     }),

@@ -64,7 +64,7 @@ function Register() {
               <Input
                 type="radio"
                 name="role"
-                value="student"
+                value="Student"
                 {...register("role", { required: true })}
 
               />
@@ -74,7 +74,7 @@ function Register() {
               <Input
                 type="radio"
                 name="role"
-                value="tutor"
+                value="Tutor"
                 {...register("role", { required: true })}
 
               />

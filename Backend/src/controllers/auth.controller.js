@@ -113,7 +113,7 @@ export const verifyToken = async (req, res) => {
 
 export const getTutors = async (req, res) => {
   try {
-    const tutors = await User.find({ role: "tutor" }, "_id username email role");
+    const tutors = await User.find({ role: "Tutor" }, "_id username email role");
     res.json({ tutors });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -121,10 +121,14 @@ export const getTutors = async (req, res) => {
 };
 
 export const logout = async (req, res) => {
-  res.cookie("token", "", {
-    httpOnly: true,
-    secure: true,
-    expires: new Date(0),
-  });
+  res.clearCookie("token");
+  console.log("logout controller")
+  // res.cookie("token", "", {
+  //   httpOnly: true,
+  //   secure: true,
+  //   expires: new Date(0),
+  
+  // }); 
+  
   return res.sendStatus(200);
 };

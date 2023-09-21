@@ -15,7 +15,7 @@ export function ClassesPage() {
 
   return (
     <div className="flex flex-col space-y-4">
-      <div className="flex items-center p-10 bg-gray-100 rounded-md">
+      {/* <div className="flex items-center p-10 bg-gray-100 rounded-md">
         <img
           src="/img/slide1.jpg"
           alt="Imagen de usuario"
@@ -30,7 +30,7 @@ export function ClassesPage() {
             DCI {isAuthenticated ? user.role : ""}, - Kein Standort
           </p>
         </div>
-      </div>
+      </div> */}
 
       {tasks.length === 0 ? (
         <div className="flex justify-center items-center p-10">
