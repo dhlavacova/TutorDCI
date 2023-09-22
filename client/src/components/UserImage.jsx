@@ -27,7 +27,9 @@ export default function App() {
                 </DropdownTrigger>
                 <DropdownMenu aria-label="User Actions" variant="flat" className="text-black">
                     <DropdownItem key="profile" >
-                        <Link to={`/profile/${userRole}`}><div className="w-full">Profile</div></Link>
+                        <Link to={`/profile/${userRole}`}>
+                            <div className="w-full">Profile</div>
+                            </Link>
                     </DropdownItem>
                     <DropdownItem key="settings">
                         <Link to="/settings">My Settings</Link>

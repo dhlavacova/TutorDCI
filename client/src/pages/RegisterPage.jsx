@@ -20,7 +20,7 @@ function Register() {
 
   const onSubmit = async (value) => {
 
-    console.log(value)
+    // console.log(value)
     await signup(value); // Suponiendo que signup establece el rol del usuario en el backend
     const userRole = value.role; // Obten el rol del usuario del formulario
     navigate(`/profile/${userRole}`); // Redirige al perfil correspondiente
@@ -64,7 +64,7 @@ function Register() {
               <Input
                 type="radio"
                 name="role"
-                value="Student"
+                value="student"
                 {...register("role", { required: true })}
 
               />
@@ -74,7 +74,7 @@ function Register() {
               <Input
                 type="radio"
                 name="role"
-                value="Tutor"
+                value="tutor"
                 {...register("role", { required: true })}
 
               />

@@ -8,7 +8,7 @@ body {
   background-color: #f5f5f5; 
   background-image:
   radial-gradient(circle,
-    rgba(200, 200, 200, 0.231) 0%, /* Ajusta la opacidad del gradiente radial */
+    rgba(200, 200, 200, 0.262) 0%, /* Ajusta la opacidad del gradiente radial */
     rgba(150, 150, 150, 0.038) 100%);
   /* url('./assets/Leonardo_Diffusion_perspectiva_geometrica_2.jpg') */
 
@@ -37,4 +37,7 @@ body {
   color: white;
 } */
 
+.gradient-background {
+  background: linear-gradient(to right, #ff9900, #ff66cc); /* Cambia los colores a tu elección */
+}
 

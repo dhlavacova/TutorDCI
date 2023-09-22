@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const roleSchema = z.enum(["Student", "Tutor"]);
+export const roleSchema = z.enum(["student", "tutor"]);
 
 export const registerSchema = z.object({
   username: z.string({
