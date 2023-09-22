@@ -39,12 +39,12 @@ export function TaskCard({ task }) {
     <div className="flex items-center mb-2">
       <FiVideo className="mr-2" /> Zoom link
     </div>
-    <p className="text-slate-500 text-sm italic ml-6 ">
-      Will be provided 5 minutes before class
+    <p className="text-slate-500 text-sm italic ml-6 mb-4">
+      Will be provided 5 minutes before class.
     </p>
 
       {/* format date */}
-      <p className=" text-slate-500 text-sm ml-6 mb-2">
+      {/* <p className=" text-slate-500 text-sm ml-6 mb-2">Created
         {" "}
         {task.date &&
           new Date(task.date).toLocaleDateString("De", {
@@ -53,7 +53,7 @@ export function TaskCard({ task }) {
             month: "2-digit",
             day: "numeric",
           })}
-      </p>
+      </p> */}
       <div className="flex">
         <button
           className="bg-slate-500 text-white font-bold py-2 px-4 rounded-l-lg hover:bg-slate-600 ml-6"
