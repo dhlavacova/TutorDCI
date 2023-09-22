@@ -7,6 +7,7 @@ import authRoutes from "./routes/auth.routes.js";
 import taksRoutes from "./routes/tasks.routes.js";
 import protocolRoutes from "./routes/protocol.routes.js";
 import slackRoutes from "./routes/slack.routes.js";
+import passwordRoutes from "./routes/password.routes.js";
 
 
 const app = express();
@@ -24,8 +25,9 @@ app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
 app.use("/api", taksRoutes);
-app.use("/api/protocol", protocolRoutes);
+app.use("/api/", protocolRoutes);
 app.use("/api/", slackRoutes);
+app.use("/api/", passwordRoutes);
 
 
 
