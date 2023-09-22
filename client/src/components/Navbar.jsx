@@ -3,52 +3,64 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import { ButtonLink } from "./ui/ButtonLink";
 import { FaPlus } from "react-icons/fa";
-import App  from "../components/UserImage"
+import App from "../components/UserImage";
+import { ImFileEmpty } from "react-icons/im";
 
 export function Navbar() {
-  const { isAuthenticated} = useAuth();
+  const { isAuthenticated } = useAuth();
 
   return (
-    <nav className="my-3 flex justify-between py-5 px-10 rounded-lg bg-gray-100 bg-opacity-50 text-gray-800">
-      <h1 className="text-xl font-semibold">
-        <Link to={isAuthenticated ? "/dashboard" : "/login"}>D&OS</Link>
-      </h1>
-      <ul className="flex gap-x-2">
-        <li className="flex">
-          <Link to="/dashboard">Dashboard</Link>
-        </li>
-        <li className="flex">
-          <Link to="/protocol">Protocol</Link>
-        </li>
-        <li className="flex">
-          <Link to="/book">My Classes</Link>
-        </li>
+    <nav className="my-3 flex justify-between py-5 px-10 rounded-lg  bg-opacity-50 text-gray-800">
+      <div className="flex items-center"> {/* Contenedor izquierdo */}
+        <h1 className="text-xl font-semibold rotate-180">
+          <Link to={isAuthenticated ? "/dashboard" : "/login"}>D&OS</Link>
+        </h1>
+        <ul className="flex gap-x-2 ml-4">
+          {isAuthenticated && (
+            <>
+             
+              <li className="flex">
+                <Link to="/protocol">Protocol</Link>
+              </li>
+              <li className="flex">
+                <Link to="/book">My Booking</Link>
+              </li>
+            </>
+          )}
+        </ul>
+      </div>
+      <div className="flex items-center"> {/* Contenedor derecho */}
+        <ul className="flex gap-x-2">
+          {isAuthenticated ? (
+            <>
+              <li>
+                <Link
+                  to="/add-task"
+                  className="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-1 px-4 rounded-md inline-flex items-center"
+                >
 
-      </ul>
-      <ul className="flex gap-x-2">
-        {isAuthenticated ? (
-          <>
+                  Book Class 
+                  {/* <FaPlus className="ml-1" /> */}
+                  <ImFileEmpty className="ml-1"/>
 
-            <li>
-              <Link to="/add-task" className="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-1 px-4 rounded-md inline-flex items-center">
-                Book tutor <FaPlus className="ml-1" />
-              </Link>
-            </li>
-            
-            <App />
-            
-          </>
-        ) : (
-          <>
-            <li>
-              <ButtonLink to="/login">Login</ButtonLink>
-            </li>
-            <li>
-              <ButtonLink to="/register">Register</ButtonLink>
-            </li>
-          </>
-        )}
-      </ul>
+                </Link>
+              </li>
+              <li>
+                <App />
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <ButtonLink to="/login">Login</ButtonLink>
+              </li>
+              <li>
+                <ButtonLink to="/register">Register</ButtonLink>
+              </li>
+            </>
+          )}
+        </ul>
+      </div>
     </nav>
   );
 }

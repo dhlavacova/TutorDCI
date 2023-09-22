@@ -99,7 +99,7 @@ export function TutoringBookingForm() {
   }, []);
 
   return (
-    <Card>
+    <Card className="booking-page">
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1 className="text-black , font-bold">{WEBDEVLOPER}</h1>
 
