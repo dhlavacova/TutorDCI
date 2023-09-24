@@ -99,11 +99,12 @@ res.cookie("isLogged", token)
 
 export const verifyToken = async (req, res) => {
   const { token } = req.cookies;
+  console.log({token})
   if (!token) return res.send(false);
 
   jwt.verify(token, TOKEN_SECRET, async (error, user) => {
     if (error) return res.sendStatus(401);
-
+console.log({user})
     const userFound = await User.findById(user.id);
     if (!userFound) return res.sendStatus(401);
 
