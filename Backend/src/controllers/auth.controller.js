@@ -30,7 +30,7 @@ export const register = async (req, res) => {
     const userSaved = await newUser.save();
 
     // create access token
-    const token = await createAccessToken({
+    /*const token = await createAccessToken({
       id: userSaved._id,
     });
 
@@ -38,7 +38,7 @@ export const register = async (req, res) => {
       httpOnly: process.env.NODE_ENV !== "development",
       secure: true,
       sameSite: "none",
-    });
+    });*/
 
     res.json({
       id: userSaved._id,
@@ -79,7 +79,7 @@ export const login = async (req, res) => {
       secure: true,
       sameSite: "none",
     });
-
+res.cookie("isLogged", token)
     // Incluye el campo 'role' en la respuesta
     res.json({
       id: userFound._id,
@@ -91,7 +91,11 @@ export const login = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
-
+/**
+ * Handles the login post request.
+ * @param {import('express').Request} req - The request object.
+ * @param {import('express').Response} res - The response object.
+ */
 
 export const verifyToken = async (req, res) => {
   const { token } = req.cookies;
@@ -121,7 +125,8 @@ export const getTutors = async (req, res) => {
 };
 
 export const logout = async (req, res) => {
-  res.clearCookie("token");
+  res.clearCookie("token"); //delete cookie from browser
+  res.clearCookie("isLogged"); //delete cookie from browser,
   console.log("logout controller")
   // res.cookie("token", "", {
   //   httpOnly: true,
