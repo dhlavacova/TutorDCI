@@ -25,7 +25,7 @@ function Register() {
     const userRole = value.role; // Obten el rol del usuario del formulario
     navigate(`/profile/${userRole}`); // Redirige al perfil correspondiente
   };
-  
+
 
 
 
@@ -35,7 +35,9 @@ function Register() {
         {registerErrors.map((error, i) => (
           <Message message={error} key={i} />
         ))}
-        <h1 className="text-3xl font-bold">Register</h1>
+        <h1 className="text-2xl font-bold">Join Our Educational Community</h1>
+        <p className="text-sm mb-9">Embark on your educational journey by registering as a tutor or student.</p>
+
         <form onSubmit={handleSubmit(onSubmit)}>
           <Label htmlFor="username">Name:</Label>
           <Input
@@ -113,9 +115,8 @@ function Register() {
 
           <Button>Submit</Button>
         </form>
-        <p>
-          Already Have an Account?
-          <Link className="text-sky-500" to="/login">
+        <p className="flex justify-between ">
+          Already Have an Account? <Link className="text-sky-500" to="/login">
             Login
           </Link>
         </p>
