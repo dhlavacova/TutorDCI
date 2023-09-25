@@ -70,8 +70,8 @@ export const login = async (req, res) => {
 
     const token = await createAccessToken({
       id: userFound._id,
-      username: userFound.username,
-      role: userFound.role, 
+   /* username: userFound.username,
+      role: userFound.role,*/
     });
 
     res.cookie("token", token, {
@@ -85,8 +85,9 @@ res.cookie("isLogged", token)
       id: userFound._id,
       username: userFound.username,
       role: userFound.role,
-      email: userFound.email,
+      /*email: userFound.email,*/
     });
+
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -98,8 +99,10 @@ res.cookie("isLogged", token)
  */
 
 export const verifyToken = async (req, res) => {
-  const { token } = req.cookies;
+  const {token}= req.cookies;
+  const{isLogged}= req.cookies;
   console.log({token})
+  console.log({isLogged})
   if (!token) return res.send(false);
 
   jwt.verify(token, TOKEN_SECRET, async (error, user) => {
@@ -112,6 +115,7 @@ console.log({user})
       id: userFound._id,
       username: userFound.username,
       email: userFound.email,
+     role:userFound.role
     });
   });
 };

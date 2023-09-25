@@ -8,7 +8,7 @@ export default function App() {
 
     // Supongamos que userRole está disponible en el contexto.
     const userRole = user.role;
-
+    console.log("user in App ", user)
     return (
         <div className="flex items-center gap-4">
             <Dropdown placement="bottom-start">
@@ -27,16 +27,16 @@ export default function App() {
 
 
                 <DropdownMenu aria-label="User Actions" variant="flat" className="text-black">
-                    <DropdownItem key="profile" >
+                    <DropdownItem key="profile" textValue="Profile" >
                         <Link to={`/profile/${userRole}`}>
                             <div className="w-full">Profile</div>
                             </Link>
 
                     </DropdownItem>
-                    <DropdownItem key="settings">
-                        <Link to="/settings">My Settings</Link>
+                    <DropdownItem key="settings" textValue="My Settings">
+                      <Link to="/settings">My Settings</Link>
                     </DropdownItem>
-                    <DropdownItem key="logout" color="danger" onClick={logout}>
+                    <DropdownItem key="logout" textValue="Log Out" color="danger" onClick={logout}>
                         Log Out
                     </DropdownItem>
                 </DropdownMenu>

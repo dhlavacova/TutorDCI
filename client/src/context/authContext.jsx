@@ -63,6 +63,7 @@ export const AuthProvider = ({ children }) => {
       const cookies = Cookies.get("isLogged");
       /*const cookiesToken=Cookies.get("token");*/
       if (!cookies) {
+        console.log("no cookies")
         setIsAuthenticated(false);
         setLoading(false);
         return;
@@ -70,7 +71,7 @@ export const AuthProvider = ({ children }) => {
 
       try {
         const res = await verifyTokenRequest(cookies.token);
-        console.log(res);
+        console.log("res in authcontext useEffect ", res);
         if (!res.data) return setIsAuthenticated(false);
         setIsAuthenticated(true);
         setUser(res.data);
