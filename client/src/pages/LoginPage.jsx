@@ -32,7 +32,9 @@ function LoginPage() {
         {loginErrors.map((error, i) => (
           <Message message={error} key={i} />
         ))}
-        <h1 className="text-2xl font-bold">Login</h1>
+        <h1 className="text-2xl font-bold">Welcome Back!</h1>
+        <p className="text-sm mb-8">Log in to your account</p>
+
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <Label htmlFor="email">Email:</Label>
@@ -49,7 +51,7 @@ function LoginPage() {
           <Input
             type="password"
             name="password"
-            placeholder="Write your password"
+            placeholder="**********"
             {...register("password", { required: true, minLength: 6 })}
           />
           <p>{errors.password?.message}</p>
@@ -59,8 +61,8 @@ function LoginPage() {
 
         </form>
 
-        <p className="flex gap-x-2 justify-between">
-          Don't have an account? <Link to="/register" className="text-sky-500">Sign up</Link>
+        <p className="flex justify-between mt-4">
+          Don't have an account?{" "} <Link to="/register" className="text-sky-500">Sign up</Link>
         </p>
       </Card>
     </div>

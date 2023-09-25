@@ -4,7 +4,9 @@ import { useAuth } from "../context/authContext";
 import { FaCamera } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa";
 import curve from "../assets/ttten.svg"
-
+import gggyrate from "../assets/gggyrate.svg"
+import ssstar from "../assets/ssstar.svg"
+import haikei from "../assets/blurry-gradient-haikei.svg"
 
 
 function StudentProfile() {
@@ -36,6 +38,7 @@ function StudentProfile() {
 
       <div className="flex items-center p-10 rounded-md relative" style={{
       backgroundImage: `url(${curve})`, // Establece el SVG como fondo
+      
       backgroundSize: "cover", // Ajusta el tamaño del fondo según sea necesario
       backgroundRepeat: "no-repeat", // Evita la repetición del fondo
       boxShadow: `-6px 6px 10px rgba(0, 0, 0, 0.2)`,
@@ -82,7 +85,7 @@ function StudentProfile() {
             <p className="text-xs flex items-center">
               {isAuthenticated && (
                 <>
-                  <FaEnvelope className="mr-1 text-blue-400" /> {user.email}
+                  <FaEnvelope className="mr-1" /> {user.email}
                 </>
               )}
             </p>
