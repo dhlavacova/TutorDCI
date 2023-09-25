@@ -8,8 +8,8 @@ const taskSchema = new mongoose.Schema(
       required: true,
     },
     tutor: {
-      type: String,
-      required: true,
+      type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
     },
     student: {
       type: String,
