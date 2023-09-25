@@ -41,9 +41,9 @@ export const slackToOnePerson = async (req, res, next) => {
             const userList = users.map((user) => ({
                 id: user.id,
                 name: user.name,
-                real_name: user.real_name,
+                profile: user.profile,
             }));
-            const myUser = userList.find((user) => user.real_name === "Dana Hlavacova");
+            const myUser = userList.find((user) => user.profile.find((profile) =>profile.display_name === "Danka"||profile.display_name ==="Dana Hlavacova"));
             if (!myUser) {
                 return res.status(404).send("User not found in Slack");
             }
