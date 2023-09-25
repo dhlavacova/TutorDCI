@@ -1,9 +1,12 @@
 import jwt from "jsonwebtoken";
 import { TOKEN_SECRET } from "../config.js";
-
+/**
+ * @param {express.Request} req
+ * @param {express.Response} res
+ */
 export const auth = (req, res, next) => {
   try {
-    const { token } = req.cookies;
+    const token= req.cookies.token;
 
     if (!token)
       return res
