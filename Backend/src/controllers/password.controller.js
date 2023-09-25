@@ -26,6 +26,7 @@ export const changePassword = async (req, res) => {
             }
         }
     } catch (err) {
+
         return res.status(500).json({message: err.message});
     }
 }
