@@ -1,6 +1,7 @@
 import React, {useEffect}from 'react';
 import { useProtocol} from "../context/protocolContext.jsx";
 import { Button, } from "../components/ui";
+import {data} from "autoprefixer";
 function Protocol() {
     const {allProtocols, getAllProtocols} = useProtocol();
     // allProtocols, setAllProtocols
@@ -24,7 +25,7 @@ function Protocol() {
             return "Invalid Date";
         }
     }
-
+console.log(allProtocols)
 
     return (
         <div className="flex items-center justify-center flex-col w-full space-y-4">
@@ -41,7 +42,8 @@ function Protocol() {
                         <div className="topic">{data.student}</div>
 
                         <div className="flex-shrink-0">
-                        <Button className="ml-auto"><a href={"/api/protocol/pdf/" + data._id} className="btn ml-auto">pdf Herunterladen</a></Button>
+
+                        <Button className="ml-auto"><a href={"/api/pdf/" + data._id} className="btn ml-auto">pdf Herunterladen</a></Button>
                         </div>
             </div>
         </div>)}
