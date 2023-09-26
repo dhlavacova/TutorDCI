@@ -20,6 +20,7 @@ function Protocol() {
     useEffect(() => {
         getAllProtocols();
     }, []);
+
     const users=allProtocols
     function getCurrentDate(datum) {
         console.log("getCurrentDate ausgeführt mit: ", datum)
@@ -58,7 +59,6 @@ function Protocol() {
             case "date":
                 return (
                     <div className="flex flex-col">
-                        {console.log(`switch datum ${user.date}`)}
                         <p className="text-bold text-sm capitalize">{getCurrentDate(user.date)}</p>
                     </div>
                 );
@@ -83,7 +83,7 @@ function Protocol() {
                 return cellValue;
         }
     }, []);
-    console.log(allProtocols)
+
 
     return (
         <Table aria-label="Example table with custom cells">
@@ -103,32 +103,6 @@ function Protocol() {
             </TableBody>
         </Table>
 
-       /* <div className="flex items-center justify-center flex-col w-full space-y-4">
-            <div className="headerMonth">September 2023</div>
-                {allProtocols.map((data,index) => <div className="w-full flex items-center justify-between mb-2" key={index}>
-                    <div className="flex-shrink-0">
-                        <div className="date">{getCurrentDate(data.date)}</div>
-                    </div>
-                    <div className="flex flex-row items-center space-x-4 flex-grow">
-                    <div className="time">20:00-22:00</div>
-
-
-                    <div className="topic">{data.theme}</div>
-                        <div className="topic">{data.student}</div>
-
-                        <div className="flex-shrink-0">
-
-                        <Button className="ml-auto"><a href={"/api/pdf/" + data._id} className="btn ml-auto">pdf Herunterladen</a></Button>
-                        </div>
-            </div>
-        </div>)}
-
-
-
-
-
-
-        </div>*/
     );
 }
 
