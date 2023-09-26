@@ -4,10 +4,11 @@ import User from "../models/user.model.js";
 export const changePassword = async (req, res) => {
     console.log("changePassword");
     try {
-        if (!req.user || !req.user.username) {
+        if (!req.user) {
+
             return res.status(400).json({message: "Chyba autentikace."});
         }
-        const userId = req.user._id; //Anfrage das Cookei Object
+        const userId = req.user.id; //Anfrage das Cookei Object
         const {oldPassword, newPassword} = req.body; //Anfrage des gesamten JSON Body: req.body.oldPassword
         console.log("req.body" + req.body);
         console.log("userId: " + userId);
