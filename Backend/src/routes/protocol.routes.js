@@ -10,6 +10,6 @@ const router = Router();
 
 
 
-router.get("/tasks-all", auth, getTasksAll);
+router.get("/protocol", auth, getTasksAll);
 router.get("/pdf/:id",   convertToPdf)
 export default router;

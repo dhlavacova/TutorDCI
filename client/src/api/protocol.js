@@ -1,7 +1,7 @@
 import axios from "./axios";
 
 //export const getTasksRequest = async () => axios.get("/protocol");
-export const getTasksAllRequest = async () => axios.get("/protocol/tasks-all");
+export const getTasksAllRequest = async () => axios.get("/protocol");
 //export const createTaskRequest = async (task) => axios.post("/protocol", task);
 
 //export const updateTaskRequest = async (task) =>

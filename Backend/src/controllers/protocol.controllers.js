@@ -66,24 +66,11 @@ export const getTasksAll = async (req, res) => {
     if (!req.user) {
       return res.status(400).json({ message: "Chyba autentikace." });
     }
-
-    else
-    {const allTasks = await Task.find({ tutor: req.user.id });
-
-/*const idStudent=allTasks.user
-const student=await User.findById(idStudent)
-const nameStudent=student.username*/
-
-    /*res.json({allTasks: allTasks,nameStudent: nameStudent});*/
+    else {
+      const allTasks = await Task.find({ tutor: req.user.username });
     res.json(allTasks);}
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 };
- /* try {
-    const allTasks = await Task.find({});
-    res.json(allTasks);
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
-};*/
+

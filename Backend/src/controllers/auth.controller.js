@@ -70,8 +70,8 @@ export const login = async (req, res) => {
 
     const token = await createAccessToken({
       id: userFound._id,
-   /* username: userFound.username,
-      role: userFound.role,*/
+    username: userFound.username,
+      role: userFound.role,
     });
 
     res.cookie("token", token, {
