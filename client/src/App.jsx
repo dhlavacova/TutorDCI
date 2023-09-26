@@ -15,6 +15,8 @@ import Protocol from "./pages/Protocol";
 import { AuthProvider } from "./context/authContext";
 import { TaskProvider } from "./context/tasksContext";
 import { ProtocolProvider } from "./context/protocolContext";
+import Setting from "./pages/Setting.jsx";
+import {PasswordProvider} from "./context/password.jsx";
 
 
 function App() {
@@ -22,6 +24,7 @@ function App() {
     <AuthProvider>
       <TaskProvider>
         <ProtocolProvider>
+          <PasswordProvider>
           <BrowserRouter>
             <Navbar />
             <Routes>
@@ -38,9 +41,11 @@ function App() {
                   <Route path="tutor" element={<TutorProfile />} />
                 </Route>
                 <Route path="/protocol" element={<Protocol/>}/>
+                <Route path="/settings" element={<Setting/>}/>
               </Route>
             </Routes>
           </BrowserRouter>
+          </PasswordProvider>
         </ProtocolProvider>
       </TaskProvider>
     </AuthProvider>
