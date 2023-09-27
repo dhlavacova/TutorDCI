@@ -1,10 +1,9 @@
 import React from 'react';
-import Password from "../components/settings/password.jsx";
+import Password from "../components/settings/Password.jsx";
 
 function Setting() {
     return (
         <div>
-
 <Password/>
         </div>
     );

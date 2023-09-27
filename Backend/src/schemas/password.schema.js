@@ -16,3 +16,10 @@ export const PasswordSchema = z.object({
             message: "Password must be at least 6 characters",
         }),
 })
+
+export const ForgestPasswordSchema = z.object({
+    email: z
+        .string({
+            required_error: "Email is required",
+        })
+})

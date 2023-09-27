@@ -1,4 +1,5 @@
 import axios from "./axios";
 
 
-export const changePasswordRequest = async () => axios.post("/password");
+
+export const changePasswordRequest = async (password) => axios.patch("/password",password);
