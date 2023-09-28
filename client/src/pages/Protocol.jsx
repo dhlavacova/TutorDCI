@@ -74,7 +74,7 @@ function Protocol() {
                     <div className="relative flex items-center ">
                         <button
                             >
-                        <Link href={"/api/pdf/" + user._id} className="bg-slate-500 text-white font-bold py-2 px-4 rounded-l-lg hover:bg-slate-600 ml-6" >pdf Herunterladen</Link>
+                        <Link style={{marginLeft:'6px'}} href={"/api/pdf/" + user._id} className="bg-slate-500 text-white font-bold py-2 px-2 rounded-l-lg hover:bg-slate-600 ml-6" >pdf Herunterladen</Link>
                     </button>
            </div>
            )

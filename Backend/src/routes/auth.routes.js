@@ -8,8 +8,6 @@ import {
 } from "../controllers/auth.controller.js";
 import { validateSchema } from "../middlewares/validator.middleware.js";
 import { loginSchema, registerSchema } from "../schemas/auth.schema.js";
-import {auth} from "../middlewares/auth.middleware.js";
-
 import { getUserImage } from "../controllers/user-controller.js";
 
 import multerController from '../controllers/multer-controller.js';
