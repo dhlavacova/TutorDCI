@@ -11,7 +11,7 @@ import { loginSchema, registerSchema } from "../schemas/auth.schema.js";
 import {auth} from "../middlewares/auth.middleware.js";
 
 import { getUserImage } from "../controllers/user-controller.js";
-import { auth } from "../middlewares/auth.middleware.js";
+
 import multerController from '../controllers/multer-controller.js';
 
 
