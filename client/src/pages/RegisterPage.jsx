@@ -31,7 +31,7 @@ function Register() {
 
   return (
     <div className="h-[calc(100vh-100px)] flex items-center justify-center">
-      <Card>
+      <Card >
         {registerErrors.map((error, i) => (
           <Message message={error} key={i} />
         ))}
@@ -39,11 +39,11 @@ function Register() {
         <p className="text-sm mb-9">Embark on your educational journey by registering as a tutor or student.</p>
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Label htmlFor="username">Name:</Label>
+          <Label htmlFor="username">Full Name:</Label>
           <Input
             type="text"
             name="username"
-            placeholder="Write your name"
+            placeholder="Enter your full name"
             {...register("username")}
             autoFocus
           />
@@ -60,27 +60,25 @@ function Register() {
           {errors.email?.message && (
             <p className="text-red-500">{errors.email?.message}</p>
           )}
-          <Label htmlFor="role">Role:</Label>
+          <p className="text-xs mt-2" htmlFor="role">Role:</p>
           <div className="flex items-center space-x-4">
             <Label>
-              <Input
+              <input className="mb-4 "
                 type="radio"
                 name="role"
                 value="student"
                 {...register("role", { required: true })}
 
-              />
-              Student
+              /> Student
             </Label>
             <Label>
-              <Input
+              <input className="mb-4"
                 type="radio"
                 name="role"
                 value="tutor"
                 {...register("role", { required: true })}
 
-              />
-              Tutor
+              /> Tutor
             </Label>
           </div>
           {errors.role?.message && (

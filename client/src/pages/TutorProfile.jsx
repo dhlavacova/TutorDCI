@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Card, Input, Label } from "../components/ui";
 import { useAuth } from "../context/authContext";
 import { FaCamera } from "react-icons/fa";
-
+import curve from "../assets/ttten.svg"
 
 function TutorProfile() {
   const [classNumber, setClassNumber] = useState("");
@@ -87,8 +87,18 @@ function TutorProfile() {
   };
 
   return (
-    <div className="bg-gray-100 w-full p-10 rounded-xs">
-      <div className="flex items-center p-10 bg-gray-100 rounded-md">
+    <div className=" w-full p-10 rounded-xs">
+      <div className=" flex items-center p-10 bg-gray-300 rounded-md
+relative"
+        style={{
+          backgroundImage: `url(${curve})`, // Establece el SVG como fondo
+
+          backgroundSize: "cover", // Ajusta el tamaño del fondo según sea necesario
+          backgroundRepeat: "no-repeat", // Evita la repetición del fondo
+          boxShadow: `-6px 6px 10px rgba(0, 0, 0, 0.2)`,
+          zIndex: 1,
+        }}
+      >
         <label htmlFor="profileImageInput"
           className="relative cursor-pointer"
           onMouseEnter={handleMouseEnter}
@@ -115,108 +125,109 @@ function TutorProfile() {
         </label>
         <div className="text-gray-900 ml-4">
           <p className="text-sm font-semibold">My profile</p>
-          <p className="text-4xl font-semibold mb-2">
+          <p className="text-4xl font-semibold mb-1">
             {isAuthenticated ? user.username : ""}
           </p>
-          <p className="text-xs mb-4">
-            {isAuthenticated ? user.email : ""}
-          </p>
+
+
         </div>
       </div>
-      <form onSubmit={handleSubmit}>
-        <Label htmlFor="course">Course</Label>
-        <select
-          className="w-full bg-gray-200 px-4 py-2 rounded-md text-black"
-          name="course"
-          value={course}
-          onChange={(e) => setCourse(e.target.value)}
-          required
-        >
-          <option value="">Select a course</option>
-          <option value="Web Development">Web Development</option>
-          <option value="Online Marketing">Online Marketing</option>
-        </select>
-
-
-        <Label htmlFor="classNumber">Class Number</Label>
-        <Input
-          type="text"
-          name="classNumber"
-          value={classNumber}
-          onChange={(e) => setClassNumber(e.target.value)}
-          placeholder="e.g., 22-d08-a"
-          required
-        />
-
-        <Label htmlFor="availability">Availability</Label>
-        <div className="flex">
+      <div className="max-w-md w-full pt-20 rounded-md ">
+        <form onSubmit={handleSubmit}>
+          <label className="text-xs text-black"htmlFor="course">Course</label>
           <select
-            className="w-1/3 bg-gray-200 px-2 py-2 rounded-md text-black"
-            name="availabilityDay"
-            value={availabilityDay}
-            onChange={(e) => setAvailabilityDay(e.target.value)}
+            className="w-full mt-2 bg-gray-200 px-4 py-2 rounded-md text-black"
+            name="course"
+            value={course}
+            onChange={(e) => setCourse(e.target.value)}
             required
           >
-            <option value="">Day</option>
-            <option value="Monday">Monday</option>
-            <option value="Tuesday">Tuesday</option>
-            <option value="Wednesday">Wednesday</option>
-            <option value="Thursday">Thursday</option>
-            <option value="Friday">Friday</option>
-            <option value="Saturday">Saturday</option>
-            <option value="Sunday">Sunday</option>
+            <option value="">Select a course</option>
+            <option value="Web Development">Web Development</option>
+            <option value="Online Marketing">Online Marketing</option>
           </select>
-          <input
-            type="time"
-            name="availabilityTime"
-            value={availabilityTime}
-            onChange={(e) => setAvailabilityTime(e.target.value)}
-            className="w-1/3 bg-gray-200 px-2 py-2 rounded-md text-black ml-2"
+
+
+          <Label htmlFor="classNumber">Class Number</Label>
+          <Input
+            type="text"
+            name="classNumber"
+            value={classNumber}
+            onChange={(e) => setClassNumber(e.target.value)}
+            placeholder="e.g., 22-d08-a"
             required
           />
-          <input
-            type="number"
-            name="availabilityDuration"
-            value={availabilityDuration}
-            onChange={(e) => setAvailabilityDuration(e.target.value)}
-            placeholder="Duration"
-            className="w-1/3 bg-gray-200 px-2 py-2 rounded-md text-black ml-2"
+
+          <label className="text-xs text-black" htmlFor="availability">Availability</label>
+          <div className="flex mt-2">
+            <select
+              className="w-1/3 bg-gray-200 px-2 py-2 rounded-md text-black"
+              name="availabilityDay"
+              value={availabilityDay}
+              onChange={(e) => setAvailabilityDay(e.target.value)}
+              required
+            >
+              <option value="">Day</option>
+              <option value="Monday">Monday</option>
+              <option value="Tuesday">Tuesday</option>
+              <option value="Wednesday">Wednesday</option>
+              <option value="Thursday">Thursday</option>
+              <option value="Friday">Friday</option>
+              <option value="Saturday">Saturday</option>
+              <option value="Sunday">Sunday</option>
+            </select>
+            <input
+              type="time"
+              name="availabilityTime"
+              value={availabilityTime}
+              onChange={(e) => setAvailabilityTime(e.target.value)}
+              className="w-1/3 bg-gray-200 px-2 py-2 rounded-md text-black ml-2 "
+              required
+            />
+            <input
+              type="number"
+              name="availabilityDuration"
+              value={availabilityDuration}
+              onChange={(e) => setAvailabilityDuration(e.target.value)}
+              placeholder="2h"
+              className="w-1/3 bg-gray-200 px-2 py-2 rounded-md text-black ml-2"
+              required
+            />
+          </div>
+          <Button type="button" onClick={addAvailability}>
+            Add availability
+          </Button>
+          {availability.length > 0 && (
+            <Card>
+              <div className="mt-2">
+                <h2 className="text-2xl font-semibold ">{course}</h2>
+                <p className="mb-4">Tutor in Course {classNumber}</p>
+                <p className="font-semibold">Availability:</p>
+                <ul>
+                  {availability.map((item, index) => (
+                    <li key={index}>
+                      {item.day}, {item.time} hours, {item.duration} {item.duration > 1 ? "hours" : "hour"}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Card>
+          )}
+
+          <div className="mt-4"></div>
+          <Label htmlFor="platformLink">Platform Link</Label>
+          <Input
+            type="text"
+            name="platformLink"
+            value={platformLink}
+            onChange={(e) => setPlatformLink(e.target.value)}
+            placeholder="e.g., https://us02web.zoom.us/oz"
             required
           />
-        </div>
-        <Button type="button" onClick={addAvailability}>
-          Add availability
-        </Button>
-        {availability.length > 0 && (
-          <Card>
-            <div className="mt-2">
-              <h2 className="text-2xl font-semibold ">{course}</h2>
-              <p className="mb-4">Tutor in Course {classNumber}</p>
-              <p className="font-semibold">Availability:</p>
-              <ul>
-                {availability.map((item, index) => (
-                  <li key={index}>
-                    {item.day}, {item.time} hours, {item.duration} {item.duration > 1 ? "hours" : "hour"}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Card>
-        )}
 
-        <div className="mt-4"></div>
-        <Label htmlFor="platformLink">Platform Link</Label>
-        <Input
-          type="text"
-          name="platformLink"
-          value={platformLink}
-          onChange={(e) => setPlatformLink(e.target.value)}
-          placeholder="e.g., https://us02web.zoom.us/oz"
-          required
-        />
-
-        <Button type="submit">Save</Button>
-      </form>
+          <Button type="submit">Save</Button>
+        </form>
+      </div>
     </div>
   );
 }

@@ -51,7 +51,7 @@ export function TutoringBookingForm() {
 
   const { isAuthenticated, user } = useAuth();
 
-  const WEBDEVLOPER = "Web Development";
+  
 
   const onSubmit = async (data) => {
     try {
@@ -99,75 +99,87 @@ export function TutoringBookingForm() {
   }, []);
 
   return (
-    <Card className="booking-page">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <h1 className="text-black , font-bold">{WEBDEVLOPER}</h1>
+    <div>
+      <header className="flex justify-between pl-10 pt-10">
+        <h1 className="text-3xl font-semibold text-slate-800">
+          Start today!
+        </h1>
+      </header>
+      <p className="text-slate-700 text-xs pl-10">
+        Reserve a class with our expert tutor and take one step closer to your academic goals.
+      </p>
+      <div className="p-10 max-w-md w-full  rounded-md">
+        <form onSubmit={handleSubmit(onSubmit)}>
+      
 
-        <Label htmlFor="theme">Theme</Label>
-        <Input
-          type="text"
-          name="theme"
-          placeholder="Enter your own theme"
-          {...register("theme")}
-        />
+          <Label htmlFor="theme">Theme</Label>
+          <Input
+            type="text"
+            name="theme"
+            placeholder="Enter your own theme"
+            {...register("theme")}
+          />
 
-        <Label htmlFor="tutor" className="block font-semibold mb-2">
-          Choose a Tutor
-        </Label>
-        <select
-          name="tutor"
-          {...register("tutor")}
-          value={selectedTutor} // Asigna el valor seleccionado a 'selectedTutor'
-          className="block w-full bg-gray-200 text-black p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
-          onChange={(e) => setSelectedTutor(e.target.value)}
-        >
-          <option className="text-black" value="">
-            Select a Tutor
-          </option>
+          <Label htmlFor="tutor">Choose a Tutor</Label>
 
-          {tutors.map((tutor) => (
-            <option
-              className="text-black"
-              value={tutor.username}
-              key={tutor._id}
-            >
-              {tutor.username}
+          
+          <select
+            name="tutor"
+            {...register("tutor")}
+            value={selectedTutor} 
+            className="block w-full bg-gray-200 text-black mt-2 mb-2 px-4 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            onChange={(e) => setSelectedTutor(e.target.value)}
+          >
+            <option className="text-black" value="">
+              Select a Tutor
             </option>
-          ))}
-        </select>
+
+            {tutors.map((tutor) => (
+              <option
+                className="text-black"
+                value={tutor.username}
+                key={tutor._id}
+              >
+                {tutor.username}
+              </option>
+            ))}
+          </select>
 
 
 
-        {/* Muestra las horas disponibles solo si se ha seleccionado un tutor */}
-        {selectedTutor && (
-          <>
-            <Label htmlFor="availableHours">Available Hours</Label>
-            <div>
-              {[20, 21].map((hour) => (
-                <button
-                  key={hour}
-                  onClick={() => setSelectedHour(hour)}
-                  className={`${selectedHour === hour
-                    ? "bg-blue-500 text-white"
-                    : "bg-gray-200 text-black"
-                    } p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300`}
-                >
-                  {hour}:00
-                </button>
-              ))}
-            </div>
-          </>
-        )}
+          {/* Muestra las horas disponibles solo si se ha seleccionado un tutor */}
+          {selectedTutor && (
+            <>
+              <label className="text-xs" htmlFor="availableHours">Available Hours</label>
+              <div className="mt-2 ">
+                {[20, 21].map((hour) => (
+                  <div 
+                    key={hour}
+                    onClick={() => setSelectedHour(hour)}
+                    className={`${selectedHour === hour
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-200 text-black"
+                      } p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 px-4 mb-4`}
+                  >
+                    {hour}:00
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
 
-        <Label htmlFor="date">Select a Date</Label>
-        <Calendar
-          onChange={(item) => setSelectedDate(item)}
-          locale={locales[locale]}
-          date={selectedDate}
-        />
+          <Label htmlFor="date">Select a Date</Label>
+          <Calendar
+            className="w-full"
+            onChange={(item) => setSelectedDate(item)}
+            locale={locales[locale]}
+            date={selectedDate}
+          />
 
-        <Button type="submit">Confirm</Button>
-      </form>
-    </Card>
+          <Button type="submit">Confirm</Button>
+        </form>
+      </div>
+    </div>
+
   );
 }

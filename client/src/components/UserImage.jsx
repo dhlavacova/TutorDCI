@@ -1,5 +1,5 @@
 import React from "react";
-import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, User } from "@nextui-org/react";
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Avatar, User } from "@nextui-org/react";
 import { useAuth } from "../context/authContext";
 import { Link } from "react-router-dom";
 
@@ -13,24 +13,15 @@ export default function App() {
         <div className="flex items-center gap-4">
             <Dropdown placement="bottom-start">
                 <DropdownTrigger>
-                    <User
-                        as="button"
-                        avatarProps={{
-                            isBordered: true,
-                            src: "https://i.pravatar.cc/150?u=a04258114e29026708c",
-                        }}
-                        className="transition-transform"
-                        description={`DCI@${user.role}`}
-                        name={user.username}
-                    />
+                    <Avatar  isBordered color="default"/>
                 </DropdownTrigger>
 
 
-                <DropdownMenu aria-label="User Actions" variant="flat" className="text-black">
+                <DropdownMenu aria-label="User Actions" variant="faded"   className="text-black">
                     <DropdownItem key="profile" >
                         <Link to={`/profile/${userRole}`}>
                             <div className="w-full">Profile</div>
-                            </Link>
+                        </Link>
 
                     </DropdownItem>
                     <DropdownItem key="settings">
