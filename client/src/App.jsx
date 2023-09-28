@@ -55,7 +55,7 @@ function App() {
       </TaskProvider>
     </AuthProvider>
   );
+}
 
 
-
-  export default App;
+export default App;
