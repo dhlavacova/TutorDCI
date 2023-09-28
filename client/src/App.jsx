@@ -1,3 +1,4 @@
+
 import React from "react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
@@ -14,12 +15,15 @@ import { AuthProvider } from "./context/authContext";
 import { TaskProvider } from "./context/tasksContext";
 import { ProtocolProvider } from "./context/protocolContext";
 import Footer from "./components/footer";
+import Setting from "./pages/Setting.jsx";
+import {SettingsProvider} from "./context/settingsContext.jsx";
 
 function App() {
   return (
     <AuthProvider>
       <TaskProvider>
         <ProtocolProvider>
+    <SettingsProvider>
           <BrowserRouter>
             <div className="min-h-screen flex flex-col">
               <main className="container content-container mx-auto px-4 md:px-10 flex-grow"> {/* Cambia el px-10 a px-4 en pantallas pequeñas */}
@@ -27,8 +31,8 @@ function App() {
                 <Navbar />
                 <Routes>
                   <Route path="/dashboard" element={<Home />} />
-                  <Route path="/register" element={<RegisterPage />} />
-                  <Route path="/login" element={<LoginPage />} />
+                 <Route path="/login" element={<LoginPage/>}/>
+        <Route path="/register" element={<RegisterPage/>}/>
                   <Route element={<ProtectedRoute />}>
                     <Route path="/book" element={<ClassesPage />} />
                     <Route path="/add-task" element={<TutoringBookingForm />} />
@@ -38,6 +42,7 @@ function App() {
                       <Route path="tutor" element={<TutorProfile />} />
                     </Route>
                     <Route path="/protocol" element={<Protocol />} />
+                       <Route path="/settings" element={<Setting/>}/>
                   </Route>
                 </Routes>
               </main>
@@ -45,10 +50,12 @@ function App() {
               <Footer />
             </div>
           </BrowserRouter>
+</SettingsProvider>
         </ProtocolProvider>
       </TaskProvider>
     </AuthProvider>
   );
-}
+
+
 
 export default App;
