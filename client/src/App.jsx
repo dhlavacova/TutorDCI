@@ -16,41 +16,41 @@ import { TaskProvider } from "./context/tasksContext";
 import { ProtocolProvider } from "./context/protocolContext";
 import Footer from "./components/footer";
 import Setting from "./pages/Setting.jsx";
-import {SettingsProvider} from "./context/settingsContext.jsx";
+import { SettingsProvider } from "./context/settingsContext.jsx";
 
 function App() {
   return (
     <AuthProvider>
       <TaskProvider>
         <ProtocolProvider>
-    <SettingsProvider>
-          <BrowserRouter>
-            <div className="min-h-screen flex flex-col">
-              <main className="container content-container mx-auto px-4 md:px-10 flex-grow"> {/* Cambia el px-10 a px-4 en pantallas pequeñas */}
+          <SettingsProvider>
+            <BrowserRouter>
+              <div className="min-h-screen flex flex-col">
+                <main className="container content-container mx-auto px-4 md:px-10 flex-grow"> {/* Cambia el px-10 a px-4 en pantallas pequeñas */}
 
-                <Navbar />
-                <Routes>
-                  <Route path="/dashboard" element={<Home />} />
-                 <Route path="/login" element={<LoginPage/>}/>
-        <Route path="/register" element={<RegisterPage/>}/>
-                  <Route element={<ProtectedRoute />}>
-                    <Route path="/book" element={<ClassesPage />} />
-                    <Route path="/add-task" element={<TutoringBookingForm />} />
-                    <Route path="/book/:id" element={<TutoringBookingForm />} />
-                    <Route path="/profile">
-                      <Route path="student" element={<StudentProfile />} />
-                      <Route path="tutor" element={<TutorProfile />} />
+                  <Navbar />
+                  <Routes>
+                    <Route path="/dashboard" element={<Home />} />
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/register" element={<RegisterPage />} />
+                    <Route element={<ProtectedRoute />}>
+                      <Route path="/book" element={<ClassesPage />} />
+                      <Route path="/add-task" element={<TutoringBookingForm />} />
+                      <Route path="/book/:id" element={<TutoringBookingForm />} />
+                      <Route path="/profile">
+                        <Route path="student" element={<StudentProfile />} />
+                        <Route path="tutor" element={<TutorProfile />} />
+                      </Route>
+                      <Route path="/protocol" element={<Protocol />} />
+                      <Route path="/settings" element={<Setting />} />
                     </Route>
-                    <Route path="/protocol" element={<Protocol />} />
-                       <Route path="/settings" element={<Setting/>}/>
-                  </Route>
-                </Routes>
-              </main>
-              <Outlet /> {/* Renderiza las rutas anidadas */}
-              <Footer />
-            </div>
-          </BrowserRouter>
-</SettingsProvider>
+                  </Routes>
+                </main>
+                <Outlet /> {/* Renderiza las rutas anidadas */}
+                <Footer />
+              </div>
+            </BrowserRouter>
+          </SettingsProvider>
         </ProtocolProvider>
       </TaskProvider>
     </AuthProvider>
@@ -58,4 +58,4 @@ function App() {
 
 
 
-export default App;
+  export default App;
