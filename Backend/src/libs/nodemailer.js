@@ -1,9 +1,10 @@
+/*
 import nodemailer from 'nodemailer';
 import 'dotenv/config';
 
 const transporter = nodemailer.createTransport({
-    /*host: "smtp.forwardemail.net",
-    port: 465,*/
+    /!*host: "smtp.forwardemail.net",
+    port: 465,*!/
     service:'gmail',
    // secure: true,
     auth: {
@@ -29,4 +30,4 @@ async function main() {
 
 }
 
-main().catch(console.error);
+main().catch(console.error);*/
