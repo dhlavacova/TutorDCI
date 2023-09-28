@@ -5,39 +5,9 @@
 body {
   margin: 0;
   color: #333; 
-  background-color: #f5f5f5; 
-  background-image:
-  radial-gradient(circle,
-    rgba(200, 200, 200, 0.262) 0%, /* Ajusta la opacidad del gradiente radial */
-    rgba(150, 150, 150, 0.038) 100%);
-  /* url('./assets/Leonardo_Diffusion_perspectiva_geometrica_2.jpg') */
 
+  background: linear-gradient(180deg, rgba(198,224,242,1) 0%, rgba(64,106,143,1) 43%, rgba(1,10,18,1) 100%);
 
-
-
-  /*background-image:
-    radial-gradient(circle,
-      rgba(174, 238, 212, 0.5) 0%,  Ajusta la opacidad del gradiente radial 
-       rgba(212, 148, 233, 0.5) 50%, Ajusta la opacidad del gradiente radial para que sea más claro en el medio 
-      #1a1b1f 100%), Color de fondo oscuro en la parte exterior del gradiente
-    url(''); */
-  /* Imagen de fondo */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  min-width: 320px;
-  min-height: 100vh; 
-  /* Ajusta la altura del gradiente para ocupar más espacio vertical */
-  height: 120vh; /* Puedes ajustar este valor según tus necesidades */
-}
-
-/* Ejemplo de color de acento */
-/* button {
-  background-color: #3498db; 
-  color: white;
-} */
-
-.gradient-background {
-  background: linear-gradient(to right, #ff9900, #ff66cc); /* Cambia los colores a tu elección */
+  min-height: 100vh; /* Establece la altura mínima del body al 100% del viewport */
 }
 

@@ -10,6 +10,7 @@ import slackRoutes from "./routes/slack.routes.js";
 import passwordRoutes from "./routes/password.routes.js";
 
 
+
 const app = express();
 
 app.use(
@@ -28,6 +29,7 @@ app.use("/api", taksRoutes);
 app.use("/api/", protocolRoutes);
 app.use("/api/", slackRoutes);
 app.use("/api/", passwordRoutes);
+
 
 
 

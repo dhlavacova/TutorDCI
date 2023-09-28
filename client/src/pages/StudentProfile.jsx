@@ -34,21 +34,21 @@ function StudentProfile() {
 
   return (
     <div>
-      <div className="bg-gray-300 w-full p-10 rounded-xs">
+      <div className="w-full p-10 rounded-xs">
 
-      <div className="flex items-center p-10 rounded-md relative" style={{
-      backgroundImage: `url(${curve})`, // Establece el SVG como fondo
-      
-      backgroundSize: "cover", // Ajusta el tamaño del fondo según sea necesario
-      backgroundRepeat: "no-repeat", // Evita la repetición del fondo
-      boxShadow: `-6px 6px 10px rgba(0, 0, 0, 0.2)`,
-      zIndex: 1,
-    }}>
+        <div className="bg-slate-300 flex items-center p-10 rounded-md relative" style={{
+          backgroundImage: `url(${curve})`, // Establece el SVG como fondo
+
+          backgroundSize: "cover", // Ajusta el tamaño del fondo según sea necesario
+          backgroundRepeat: "no-repeat", // Evita la repetición del fondo
+          boxShadow: `-6px 6px 10px rgba(0, 0, 0, 0.2)`,
+          zIndex: 1,
+        }}>
 
 
 
-      
-  
+
+
 
 
           <label
@@ -80,6 +80,8 @@ function StudentProfile() {
             <p className="text-sm font-semibold">My Profile</p>
             <p className="text-4xl font-semibold mb-1">{isAuthenticated ? user.username : ""}
             </p>
+
+
             <p className="font-semibold">{course}  </p>
             <p className="text-xs">DCI {isAuthenticated ? user.role : ""} {classNumber}</p>
             <p className="text-xs flex items-center">
@@ -93,7 +95,8 @@ function StudentProfile() {
         </div>
 
       </div>
-      <Card>
+      <div className="max-w-md w-full p-10 rounded-md ">
+
         <form>
           <Label htmlFor="course">Select your profession</Label>
           <select
@@ -127,7 +130,7 @@ function StudentProfile() {
 
 
         </form>
-      </Card>
+      </div>
     </div>
   );
 }

@@ -58,10 +58,13 @@ function LoginPage() {
 
           <Button>Login</Button>
 
-
+          <p className="mt-4">
+            <Link className="text-sky-500" to="/reset-password">
+              Forgot your password?{" "}
+            </Link>
+          </p>
         </form>
-
-        <p className="flex justify-between mt-4">
+        <p className="flex justify-between ">
           Don't have an account?{" "} <Link to="/register" className="text-sky-500">Sign up</Link>
         </p>
       </Card>
