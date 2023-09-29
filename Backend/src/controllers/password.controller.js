@@ -23,7 +23,7 @@ export const changePassword = async (req, res) => {
         } else {
             const salt = await bcrypt.genSalt(10);
             const passwordHash = await bcrypt.hash(newPassword, salt);
-            const userUpdatedPassword = await User.findOneAndUpdate({_id: userId}, {password: passwordHash}, {new: true});
+            const userUpdatedPassword = await User.findOneAndUpdate({_id: userId}, {$set :{password: passwordHash,  passwordCreatedAt: null}}, {new: true});
             console.log("findoneandupdate" + userUpdatedPassword)
             if (userUpdatedPassword) {
                 return res.status(200).json({message: "Password changed."})

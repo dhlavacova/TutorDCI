@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Card, Message, Button, Input, Label } from "../components/ui";
 import { loginSchema } from "../schemas/auth";
+import {useEffect} from "react";
 
 
 
@@ -21,9 +22,16 @@ function LoginPage() {
 
 
   const onSubmit = async (data) => {
+    try{
     await signin(data);
-    navigate(`/book`);
+    if (isAuthenticated) {
+      navigate(`/book`);
+    }
+  }catch(err) {
+      console.log("Error during login:", error.message);
+    }
   }
+
 
 
   return (
