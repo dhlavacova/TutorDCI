@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }) => {
 
       try {
         const res = await verifyTokenRequest(cookies.token);
-        console.log("res in authcontext useEffect ", res);
+        // console.log("res in authcontext useEffect ", res);
         if (!res.data) return setIsAuthenticated(false);
         setIsAuthenticated(true);
         setUser(res.data);

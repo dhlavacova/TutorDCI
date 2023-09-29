@@ -26,8 +26,8 @@ export function ClassesPage() {
       Explore your past and upcoming tutoring reservations.
     </p>
       {tasks.length === 0 ? (
-        <div className="flex justify-center items-center p-10">
-          <div>
+        <div className="flex justify-center items-center py-20 px-10">
+          <div >
             <Link
               to="/add-task" >
 

@@ -3,6 +3,8 @@ import { Button, Card, Input, Label } from "../components/ui";
 import { useAuth } from "../context/authContext";
 import { FaCamera } from "react-icons/fa";
 import curve from "../assets/ttten.svg"
+import { createTutor } from "../api/infotutor.js";
+
 
 function TutorProfile() {
   const [classNumber, setClassNumber] = useState("");
@@ -61,29 +63,37 @@ function TutorProfile() {
 
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Aquí puedes enviar la información del perfil del tutor, incluida la imagen de perfil (profileImage), al servidor para guardarla
+    try {
+      // Crea un objeto con los datos del formulario
+      const tutorData = {
+        course,
+        classNumber,
+        availability,
+        platformLink,
+        profileImage,
+      };
 
-    const tutorProfileData = {
-      classNumber,
-      availability,
-      platformLink,
-      course,
-      profileImage, // Incluye la imagen de perfil en los datos del perfil
-    };
+      // Llama a la función para crear un tutor en el servidor
+      const response = await createTutor(tutorData);
 
-    // Envía los datos al servidor
-
-    // Limpia los campos después de enviar los datos si es necesario
-    setClassNumber("");
-    setAvailability("");
-    setPlatformLink("");
-    setCourse("");
-    setProfileImage(null);
-
-    // Esto es solo un ejemplo de cómo se podría enviar la información al servidor.
+      // Verifica la respuesta del servidor y muestra un mensaje si es necesario
+      if (response.data && response.data.message) {
+        console.log("Server response:", response.data.message);
+        // Limpia los campos después de enviar los datos si es necesario
+        setClassNumber("");
+        setAvailability([]);
+        setPlatformLink("");
+        setCourse("");
+        setProfileImage(null);
+      } else {
+        console.error("Error al crear el tutor");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
@@ -134,7 +144,7 @@ relative"
       </div>
       <div className="max-w-md w-full pt-20 rounded-md ">
         <form onSubmit={handleSubmit}>
-          <label className="text-xs text-black"htmlFor="course">Course</label>
+          <label className="text-xs text-black" htmlFor="course">Course</label>
           <select
             className="w-full mt-2 bg-gray-200 px-4 py-2 rounded-md text-black"
             name="course"
@@ -194,10 +204,8 @@ relative"
               required
             />
           </div>
-          <Button type="button" onClick={addAvailability}>
-            Add availability
-          </Button>
-          {availability.length > 0 && (
+
+          {/* {availability.length > 0 && (
             <Card>
               <div className="mt-2">
                 <h2 className="text-2xl font-semibold ">{course}</h2>
@@ -212,7 +220,7 @@ relative"
                 </ul>
               </div>
             </Card>
-          )}
+          )} */}
 
           <div className="mt-4"></div>
           <Label htmlFor="platformLink">Platform Link</Label>
@@ -225,7 +233,9 @@ relative"
             required
           />
 
-          <Button type="submit">Save</Button>
+          <Button type="submit"  >Save</Button>
+        
+
         </form>
       </div>
     </div>
