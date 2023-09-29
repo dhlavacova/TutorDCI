@@ -1,6 +1,8 @@
 import bcrypt from "bcryptjs";
 import User from "../models/user.model.js";
 import { v4 as uuid } from 'uuid'
+import cron from 'node-cron'
+
 export const changePassword = async (req, res) => {
     console.log("changePassword");
     try {
@@ -46,12 +48,32 @@ export const forgetPassword = async(req, res) => {
             }
             else{
                 const randomPassword=uuid().slice(0,8)
-                console.log({randomPassword})
                 const salt = await bcrypt.genSalt(10);
                 const passwordHash = await bcrypt.hash(randomPassword, salt);
-                const userUpdatedPassword = await User.findOneAndUpdate({email: email}, {password: passwordHash}, {new: true});
+                const userUpdatedPassword = await User.findOneAndUpdate({email: email},{$set: {password: passwordHash, passwordCreatedAt:new Date()}},{new: true});
                 console.log("findoneandupdate" + userUpdatedPassword)
                 console.log(randomPassword)
+                console.log(userUpdatedPassword)
+                console.log('date now'+ new Date(Date.now() + 60 * 1000).toISOString())
+                //spustit casovac
+                cron.schedule('*/30 * * * *', async () => {
+                    console.log('Kontrola hesla po 30 minutách...');
+
+                    const fiveMinutesAgo = new Date(Date.now() + 30* 60 * 1000);
+
+                    // Hledejte uživatele, kteří změnili heslo před více než 5 minutami a update je
+                    const usersWithOldPasswords = await User.updateMany({
+                        passwordCreatedAt: { $lt: fiveMinutesAgo }
+                    }, {
+                        $set: {
+                            passwordCreatedAt: null,
+                            password: null
+                        }
+                    });
+                    console.log(usersWithOldPasswords)
+
+
+                });
                 if (userUpdatedPassword) {
                     return res.status(200).json({message: "Password changed."})
                 }
