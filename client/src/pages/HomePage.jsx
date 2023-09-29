@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "../components/ui/Button"
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -15,8 +16,8 @@ const Home = () => {
         <p className="text-lg mb-8">
           Encuentra a los mejores tutores para alcanzar tus metas académicas.
         </p>
-        <Button >
-          Join now
+        <Button > 
+          <Link to="/register">Join now </Link>
         </Button>
       </section>
 

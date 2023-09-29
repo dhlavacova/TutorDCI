@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 export default function App() {
     const { logout, user } = useAuth();
 
-    // Supongamos que userRole está disponible en el contexto.
+  
     const userRole = user.role;
-    console.log("user in App ", user)
+    // console.log("user in App ", user)
     return (
         <div className="flex items-center gap-4">
             <Dropdown placement="bottom-start">
