@@ -7,7 +7,7 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, 
 
 
 const columns = [
-    { name: "STUDENT", uid: "student" },
+    { name: "PARTICIPANT", uid: "student" },
     { name: "DATE", uid: "date" },
     { name: "THEME", uid: "theme" },
     { name: "PDF PRINT", uid: "pdf" },
@@ -75,7 +75,7 @@ function Protocol() {
                         <button
 
                             >
-                        <Link style={{marginLeft:'6px'}} href={"/api/pdf/" + user._id} className="bg-slate-500 text-white font-bold py-2 px-2 rounded-l-lg hover:bg-slate-600 ml-6" >pdf Herunterladen</Link>
+                        <Link style={{marginLeft:'6px'}} href={"/api/pdf/" + user._id} className="bg-slate-500 text-white font-bold py-2 px-2 rounded-lg hover:bg-slate-600 ml-6" >pdf Herunterladen</Link>
                     </button>
            </div>
            )
