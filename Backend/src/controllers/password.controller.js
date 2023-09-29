@@ -43,10 +43,12 @@ export const forgetPassword = async(req, res) => {
         else{
             const email=req.body.email;
             const isUserinRegister=await User.findOne({email:req.body.email})
+            //if user is not in register
             if(!isUserinRegister){
                 return res.status(400).json({message: "User was not finde. Pleas make registration"})
             }
             else{
+                //if user is in register
                 const randomPassword=uuid().slice(0,8)
                 const salt = await bcrypt.genSalt(10);
                 const passwordHash = await bcrypt.hash(randomPassword, salt);
