@@ -8,9 +8,13 @@ import {
 } from "../controllers/auth.controller.js";
 import { validateSchema } from "../middlewares/validator.middleware.js";
 import { loginSchema, registerSchema } from "../schemas/auth.schema.js";
+import { auth } from "../middlewares/auth.middleware.js";
+
 import { getUserImage } from "../controllers/user-controller.js";
 
 import multerController from '../controllers/multer-controller.js';
+
+import { createTutor } from "../controllers/infotutor.controller.js";
 
 
 
@@ -21,8 +25,9 @@ router.post("/login", validateSchema(loginSchema), login);
 router.post("/logout", logout);
 router.get("/verify", verifyToken);
 
+router.post('/tutors', createTutor);
 router.get("/tutors", getTutors);
 router.get("/user-image", auth, getUserImage);
-router.post('/api/upload',auth, multerController);
+router.post('/api/upload', auth, multerController);
 
 export default router;

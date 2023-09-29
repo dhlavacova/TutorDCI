@@ -70,7 +70,7 @@ export const login = async (req, res) => {
 
     const token = await createAccessToken({
       id: userFound._id,
-    username: userFound.username,
+      username: userFound.username,
       role: userFound.role,
     });
 
@@ -79,14 +79,15 @@ export const login = async (req, res) => {
       secure: true,
       sameSite: "none",
     });
-res.cookie("isLogged", token)
-    // Incluye el campo 'role' en la respuesta
+    res.cookie("isLogged", token)
     res.json({
       id: userFound._id,
       username: userFound.username,
       role: userFound.role,
+      // userType: userFound.role === 'student' ? 'student' : 'tutor', 
       /*email: userFound.email,*/
     });
+
 
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -99,15 +100,15 @@ res.cookie("isLogged", token)
  */
 
 export const verifyToken = async (req, res) => {
-  const {token}= req.cookies;
-  const{isLogged}= req.cookies;
-  console.log({token})
-  console.log({isLogged})
+  const { token } = req.cookies;
+  const { isLogged } = req.cookies;
+  console.log({ token })
+  console.log({ isLogged })
   if (!token) return res.send(false);
 
   jwt.verify(token, TOKEN_SECRET, async (error, user) => {
     if (error) return res.sendStatus(401);
-console.log({user})
+    console.log({ user })
     const userFound = await User.findById(user.id);
     if (!userFound) return res.sendStatus(401);
 
@@ -115,7 +116,7 @@ console.log({user})
       id: userFound._id,
       username: userFound.username,
       email: userFound.email,
-     role:userFound.role
+      role: userFound.role
     });
   });
 };
@@ -137,8 +138,8 @@ export const logout = async (req, res) => {
   //   httpOnly: true,
   //   secure: true,
   //   expires: new Date(0),
-  
+
   // }); 
-  
+
   return res.sendStatus(200);
 };

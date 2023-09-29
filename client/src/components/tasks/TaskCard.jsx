@@ -46,7 +46,7 @@ function TaskCard({ task }) {
 
       <ButtonClass task={task} />
 
-{/* button vllt aber besser nicht  */}
+{/* other button  aber besser nicht verwendet */}
       {/* <div className="flex">
         <button
           className="bg-slate-500 text-white font-bold py-2 px-4 rounded-l-lg hover:bg-slate-600"

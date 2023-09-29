@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer className="bg-gray-800 text-white py-4">
       <div className="container mx-auto text-center">
-        <p>&copy; 2023 D&OS. Všechna práva vyhrazena.</p>
+        <p>&copy; 2023 D&OS. All rights are reserved</p>
       </div>
     </footer>
   );
