@@ -1,7 +1,7 @@
 
 import {useEffect} from "react";
 import {createContext, useContext, useState} from "react";
-import {changePasswordRequest} from "../api/password.js";
+import {changePasswordRequest, forgotPasswordRequest} from "../api/password.js";
 
 
 export const SettingsContext = createContext();
@@ -14,7 +14,7 @@ export const useSetting = () => {
 
 export const SettingsProvider = ({children}) => {
     const [password, setPassword] = useState(null)
-
+    const [email, setEmail] = useState('')
     const [errors, setErrors] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -33,7 +33,7 @@ export const SettingsProvider = ({children}) => {
             const res = await changePasswordRequest(data)
            if (res.status === 200) {
                 setPassword(res.data);
-console.log({password})
+
             }
         } catch (err) {
             console.log(err.response.data);
@@ -41,8 +41,24 @@ console.log({password})
 
         }
     }
+
+    const forgotPassword = async (data) => {
+        console.log("forgotPassword context",data)
+        try {
+            const res = await forgotPasswordRequest(data)
+            if (res.status === 200) {
+                setEmail(res.data);
+
+            }
+        } catch (err) {
+            console.log(err.response.data);
+            setErrors(err.response.data.message);
+
+        }
+    }
+
     return (<SettingsContext.Provider
-            value={{changePassword, errors,password, loading}}
+            value={{changePassword, errors,password, loading, forgotPassword, email}}
         >
             {children}
     </SettingsContext.Provider>

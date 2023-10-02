@@ -67,8 +67,8 @@ function LoginPage() {
           <Button>Login</Button>
 
           <p className="mt-4">
-            <Link className="text-sky-500" to="/reset-password">
-              Forgot your password?{" "}
+            <Link className="text-sky-500" to="/forgot-password">
+              Forgot your password?{""}
             </Link>
           </p>
         </form>
