@@ -60,6 +60,11 @@ export const login = async (req, res) => {
       return res.status(400).json({
         message: ["The email does not exist"],
       });
+    if (userFound.password === null) {
+      return res.status(400).json({
+        message: ["The password is incorrect"],
+      });
+    }
 
     const isMatch = await bcrypt.compare(password, userFound.password);
     if (!isMatch) {
