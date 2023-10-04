@@ -26,19 +26,12 @@ export default function UserImage() {
                             <p className="text-xs text-slate-600 italic">Edit profile</p>
                         </Link>
                     </DropdownItem>
-                    <DropdownItem key="settings" textValue="View Settings" color="primary">
-                        <Link to="/settings">
-                            <div className="w-full font-bold text-blue-600">My Settings</div>
-                            <p className="text-xs text-slate-600 italic">New password</p>
-                        </Link>
-                    </DropdownItem>
                     <DropdownItem key="book" textValue="View Bookings" color="primary">
                         <Link to="/book">
                             <div className="w-full font-bold text-blue-600">My Booking</div>
                             <p className="text-xs text-slate-600 italic">New class</p>
                         </Link>
                     </DropdownItem>
-
                     {isTutor && (
                         <DropdownItem key="protocol" textValue="My Protocol" color="primary">
                             <Link to="/protocol">
@@ -47,6 +40,15 @@ export default function UserImage() {
                             </Link>
                         </DropdownItem>
                     )}
+                    <DropdownItem key="settings" textValue="View Settings" color="primary">
+                        <Link to="/settings">
+                            <div className="w-full font-bold text-blue-600">My Settings</div>
+                            <p className="text-xs text-slate-600 italic">New password</p>
+                        </Link>
+                    </DropdownItem>
+
+
+
 
                     <DropdownItem
                         key="logout"
