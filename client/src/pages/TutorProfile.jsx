@@ -33,8 +33,6 @@ function TutorProfile() {
   const [profileImage, setProfileImage] = useState(null);
 
 
-
-
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setProfileImage(file);
@@ -71,26 +69,25 @@ function TutorProfile() {
       alert("please complete the following conditions");
     }
   };
-
-
-
-
-
-
-
-  const handleSubmit = async (e) => {
+/*console.log({availability})
+console.log({availabilityDay})
+  console.log({})*/
+  const handleSubmit = async (e,availability) => {
     e.preventDefault();
-
+console.log("availability in hanldeSubmit",availability)
     try {
       // Crea un objeto con los datos del formulario
       const tutorData = {
         course,
         classNumber,
-        availability,
+        availability:
+            [{  day: availabilityDay,
+          time: availabilityTime,
+          duration: availabilityDuration,}],
         platformLink,
         profileImage,
       };
-
+console.log({tutorData})
       // Llama a la función para crear un tutor en el servidor
       const response = await createTutor(tutorData);
 
@@ -103,7 +100,9 @@ function TutorProfile() {
         setPlatformLink("");
         setCourse("");
         setProfileImage(null);
-        addAvailability();
+        setAvailabilityDay("");
+        setAvailabilityTime("");
+        setAvailabilityDuration("");
       } else {
         console.error("Error identifying user");
       }
@@ -256,7 +255,7 @@ relative"
             />
 
             <Button type="submit">Save</Button>
-            {/* <Button type="button" onClick={addAvailability}>Add Availability</Button> */}
+             <Button type="button" onClick={addAvailability}>Add Availability</Button>
 
           </form>
         </div>
