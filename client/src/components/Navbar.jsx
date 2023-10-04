@@ -2,34 +2,28 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import { ButtonLink } from "./ui/ButtonLink";
-import App from "../components/UserImage";
+import UserImage from "../components/UserImage";
 import { ImFileEmpty } from "react-icons/im";
+import { useLocation } from "react-router-dom";
 
 export function Navbar() {
-  const { isAuthenticated, user } = useAuth(); // Suponiendo que tienes un userType en tu objeto de autenticación
+  const { isAuthenticated } = useAuth(); // 
+  const location = useLocation();
+
+  // Verifica si la ruta actual es "/login" o "/register"
+  const isLoginPage = location.pathname === "/login";
+  const isRegisterPage = location.pathname === "/register";
+
+
 
   return (
     <nav className="flex justify-between py-5 px-10 rounded-lg bg-opacity-50 text-gray-800">
       <div className="flex items-center">
         {/* Contenedor izquierdo */}
-        <Link to={isAuthenticated ? "/" : "/login"}>
+        <Link to={isAuthenticated ? "" : "/"}>
           {/* <img src="img/30.png" alt="Logo" width="100" height="40"  /> */}
-<h1 className="font-bold text-lg">D&OS</h1>
+          <h1 className="font-bold text-2xl text-red-600">D&OS</h1>
         </Link>
-        <ul className="flex gap-x-2 ml-4">
-          {isAuthenticated && (
-            <>
-              {user.role === "tutor" && ( // Verification tutor oder nicht
-                <li className="flex">
-                  <Link to="/protocol">Protocol</Link>
-                </li>
-              )}
-              <li className="flex">
-                <Link to="/book">My Booking</Link>
-              </li>
-            </>
-          )}
-        </ul>
       </div>
       <div className="flex items-center">
         {/* Contenedor derecho */}
@@ -39,25 +33,29 @@ export function Navbar() {
               <li>
                 <Link
                   to="/add-task"
-                  className="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-1 px-4 rounded-md inline-flex items-center"
-                >
-                  Book now
-                  <ImFileEmpty className="ml-1" />
+                  className="bg-slate-200 hover:bg-slate-300 text-black font-semibold rounded-full py-2 px-5 inline-flex items-center"
+                >Book now <ImFileEmpty className="ml-2" />
                 </Link>
               </li>
               <li>
-                <App />
+                <UserImage />
               </li>
             </>
           ) : (
-            <>
-              <li>
-                <ButtonLink to="/login">Login</ButtonLink>
-              </li>
-              {/* <li>
-                <ButtonLink to="/register">Register</ButtonLink>
-              </li> */}
-            </>
+            // Condiciona el renderizado de los botones en función de la ruta actual
+            (isLoginPage || isRegisterPage) ? null : (
+              <>
+                <li className="relative inline-block">
+                  <Link to="/login" className="relative inline-block font-semibold py-3 px-4 rounded-full text-black transition overflow-hidden">
+                    Sign in <div className="absolute inset-0 bg-transparent opacity-0 backdrop-blur-lg hover:opacity-50 rounded-full transition "></div>
+                  </Link>
+
+                </li>
+                <li>
+                  <ButtonLink to="/register">Get Started</ButtonLink>
+                </li>
+              </>
+            )
           )}
         </ul>
       </div>

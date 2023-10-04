@@ -2,13 +2,12 @@ import { z } from "zod";
 
 export const BookingTutorSchema = z.object({
   theme: z.string({
-    required_error: "Title is required",
+    required_error: "Theme is required",
   }),
-   specific: {
-      type: String, // Puedes ajustar el tipo según tus necesidades
-      required: false,
-    },
   tutor: z.string({
-    required_error: "Description is required",
+    required_error: "Is required",
   }),
+  // date: z.string({
+  //   required_error: "Date is required",
+  // }),
 });
