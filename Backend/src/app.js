@@ -29,6 +29,7 @@ app.use("/api", taksRoutes);
 app.use("/api/", protocolRoutes);
 app.use("/api/", slackRoutes);
 app.use("/api/", passwordRoutes);
+app.post("/upload/", authRoutes);
 
 
 

@@ -12,7 +12,7 @@ function LoginPage() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: {  errors },
   } = useForm({
     resolver: zodResolver(loginSchema),
   });
@@ -68,6 +68,7 @@ function LoginPage() {
           Don't have an account?{" "} <Link to="/register" className="text-sky-500">Sign up</Link>
         </p>
       </Card>
+
     </div>
   );
 }

@@ -8,3 +8,7 @@ export const loginRequest = async (user) => axios.post(`/auth/login`, user);
 export const verifyTokenRequest = async () => axios.get(`/auth/verify`);
 
 export const logoutRequest = async () => axios.post(`/auth/logout`);
+
+// export const getTutorAvailability = async (tutorId) => axios.get(`/auth/tutors/${tutorId}/availability`)
+
+

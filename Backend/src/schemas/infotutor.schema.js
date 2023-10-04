@@ -1,8 +1,12 @@
 import { z } from "zod";
 
 export const tutorSchema = z.object({
-  course: z.string().min(1).max(255),
-  classNumber: z.string().min(1).max(50),
+  course: z.string({
+    required_error: "Course is required"
+  }),
+  classNumber: z.string({
+    required_error: "Class number is required"
+  }),
   availability: z.array(
     z.object({
       day: z.string().min(1).max(255),
@@ -11,7 +15,7 @@ export const tutorSchema = z.object({
     })
   ),
   platformLink: z.string().min(1).max(255),
-    // profileImage: z.string().min(1).max(255), // Almacenar la URL de la imagen
+  // profileImage: z.string().min(1).max(255), // Almacenar la URL de la imagen
 });
 
 

@@ -4,10 +4,22 @@
 
 body {
   margin: 0;
-  color: #333; 
+  color: #333;
+  /* background: linear-gradient(to bottom, #87CEFA, #f3f3f4); */
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 
-  background: linear-gradient(180deg, rgba(198,224,242,1) 0%, rgba(64,106,143,1) 43%, rgba(1,10,18,1) 100%);
-
-  min-height: 100vh; /* Establece la altura mínima del body al 100% del viewport */
+  background-image: url('img/mesh.png');
+  background-size: cover;
+  
 }
 
+#root {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  
+  
+}
