@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
 
-
 const tutorSchema = new mongoose.Schema({
-
+ 
   course: {
     type: String,
     required: true,
@@ -22,10 +21,6 @@ const tutorSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-
-  // profileImage: {
-  //   type: String, // Almacenar la URL de la imagen
-  // },
 });
 
-export default mongoose.model('Tutor', tutorSchema);
+export default mongoose.model("Tutor", tutorSchema);

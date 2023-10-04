@@ -1,0 +1,17 @@
+{
+    "assertions": [],
+    "body": {
+        "data": [],
+        "formDataType": "formdata",
+        "mode": "formdata"
+    },
+    "ext": {},
+    "headers": [],
+    "isFromCollection": false,
+    "name": "Get Tutors",
+    "preRequestScript": null,
+    "queryParams": [],
+    "requestType": "GET",
+    "url": "http://localhost:5173/api/auth/tutors",
+    "version": 2
+}

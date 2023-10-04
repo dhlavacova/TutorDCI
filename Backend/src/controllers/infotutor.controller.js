@@ -21,6 +21,19 @@ export const createTutor = async (req, res) => {
   }
 };
 
+export const getTutors = async (req, res) => {
+  try {
+    const tutors = await Tutor.find();
+    res.json({ tutors });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+
+
+
 // export const getTutorsProfile = async (req, res) => {
 //   try {
 //     const tutors = await User.find({ role: "tutor" }, "_id username email role");

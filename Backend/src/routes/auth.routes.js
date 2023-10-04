@@ -15,7 +15,7 @@ import multerController from '../controllers/multer-controller.js';
 
 import { 
 createTutor,
-// getTutorsProfile 
+getTutors, 
 } from "../controllers/infotutor.controller.js";
 
 
@@ -29,7 +29,7 @@ router.post("/logout", logout);
 router.get("/verify", verifyToken);
 
 router.post("/tutors", createTutor);
-// router.get("/tutors", getTutorsProfile);
+router.get("/tutors", getTutors);
 
 
 // router.get("/tutors/:tutorId/availability", getTutorAvailability);
