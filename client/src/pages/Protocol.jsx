@@ -5,7 +5,7 @@ import { useProtocol } from "../context/protocolContext.jsx";
 //import {  Table,  TableHeader,  TableBody,  TableColumn,  TableRow,  TableCell} from "@nextui-org/react";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Tooltip, getKeyValue, Link } from "@nextui-org/react";
 
-
+import { AiOutlineDownload } from "react-icons/ai";
 const columns = [
     { name: "PARTICIPANT", uid: "student" },
     { name: "DATE", uid: "date" },
@@ -49,8 +49,8 @@ function Protocol() {
             case "student":
                 return (
                     <User
-                        //    avatarProps={{radius: "lg", src: user.avatar}}
-                        description={user.student}
+                           avatarProps={{radius: "lg", src: user.profileImage}}
+                       /* description={user.student}*/
                         name={cellValue}
                     >
                         {user.student}
@@ -75,7 +75,7 @@ function Protocol() {
                         <button
 
                             >
-                        <Link style={{marginLeft:'6px'}} href={"/api/pdf/" + user._id} className="bg-slate-500 text-white font-bold py-2 px-2 rounded-lg hover:bg-slate-600 ml-6" >pdf Herunterladen</Link>
+                        <Link style={{marginLeft:'6px'}} href={"/api/pdf/" + user._id} className="bg-slate-500 text-white font-bold py-2 px-2 rounded-lg hover:bg-slate-600 ml-6" ><AiOutlineDownload/></Link>
                     </button>
            </div>
            )
@@ -92,11 +92,11 @@ function Protocol() {
         <div className='p-10'>
             <header className="flex justify-between  ">
                 <h1 className="text-3xl font-semibold text-slate-800">
-                    hier dein Text
+                    Overview of Your Lessons
                 </h1>
             </header>
             <p className="text-slate-700 text-xs pb-10 ">
-                Hier auch
+                Here you will find a complete list of your lessons with the option to download protocols in PDF format.
             </p>
             <Table aria-label="Example table with custom cells">
                 <TableHeader columns={columns}>

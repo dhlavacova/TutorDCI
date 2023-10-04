@@ -34,6 +34,7 @@ app.post("/upload/", authRoutes);
 
 
 
+
 //app.use("/", express.static("./frontend"));
 
 // app.get("/*", (req, res) => res.sendFile("/frontend/index.html", { root: process.env.PWD }));

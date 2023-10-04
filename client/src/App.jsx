@@ -17,6 +17,7 @@ import { ProtocolProvider } from "./context/protocolContext";
 import Footer from "./components/footer";
 import Setting from "./pages/Setting.jsx";
 import { SettingsProvider } from "./context/settingsContext.jsx";
+import ForgotPassword from "./pages/ForgotPassword.jsx";
 import NotFound from './pages/NotFound';
 import './index.css';
 
@@ -35,6 +36,8 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
+
                     <Route element={<ProtectedRoute />}>
                       <Route path="/book" element={<ClassesPage />} />
                       <Route path="/add-task" element={<TutoringBookingForm />} />

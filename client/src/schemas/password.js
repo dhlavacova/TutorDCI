@@ -8,3 +8,9 @@ export const passwordSchema = z.object({
         message: "New password must be at least 6 characters",
     }),
 });
+
+export const forgotPasswordSchema = z.object({
+    email: z.string().email({
+        message: "Please enter a valid email address",
+    }),
+})

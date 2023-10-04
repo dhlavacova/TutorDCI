@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import User from "../models/user.model.js";
 import { v4 as uuid } from 'uuid'
 import cron from 'node-cron'
+import {sendEmail} from "../libs/nodemailer.js";
 
 export const changePassword = async (req, res) => {
     console.log("changePassword");
@@ -23,7 +24,7 @@ export const changePassword = async (req, res) => {
         } else {
             const salt = await bcrypt.genSalt(10);
             const passwordHash = await bcrypt.hash(newPassword, salt);
-            const userUpdatedPassword = await User.findOneAndUpdate({_id: userId}, {password: passwordHash}, {new: true});
+            const userUpdatedPassword = await User.findOneAndUpdate({_id: userId}, {$set :{password: passwordHash,  passwordCreatedAt: null}}, {new: true});
             console.log("findoneandupdate" + userUpdatedPassword)
             if (userUpdatedPassword) {
                 return res.status(200).json({message: "Password changed."})
@@ -53,12 +54,13 @@ export const forgetPassword = async(req, res) => {
                 const salt = await bcrypt.genSalt(10);
                 const passwordHash = await bcrypt.hash(randomPassword, salt);
                 const userUpdatedPassword = await User.findOneAndUpdate({email: email},{$set: {password: passwordHash, passwordCreatedAt:new Date()}},{new: true});
-                console.log("findoneandupdate" + userUpdatedPassword)
+
                 console.log(randomPassword)
-                console.log(userUpdatedPassword)
+
                 console.log('date now'+ new Date(Date.now() + 60 * 1000).toISOString())
                 //spustit casovac
-                cron.schedule('*/30 * * * *', async () => {
+
+                cron.schedule(`*/30 * * * *`, async () => { //*/30 * * * *\`
                     console.log('Kontrola hesla po 30 minutách...');
 
                     const fiveMinutesAgo = new Date(Date.now() + 30* 60 * 1000);
@@ -72,16 +74,45 @@ export const forgetPassword = async(req, res) => {
                             password: null
                         }
                     });
-                    console.log(usersWithOldPasswords)
+
 
 
                 });
                 if (userUpdatedPassword) {
-                    return res.status(200).json({message: "Password changed."})
+
+                    /**
+                     * For this example to work, you need to set up a sending domain,
+                     * and obtain a token that is authorized to send from the domain.
+                     */
+/*
+                   const TOKEN = "ea668bbf7c92dc9863f539c9f9345cb6";
+                    const SENDER_EMAIL = "diosabesteam@gmail.com";
+                    const RECIPIENT_EMAIL = "dana@hlavacova.de";
+
+                    const client = new MailtrapClient({ token: TOKEN });
+
+                    const sender = { name: "Mailtrap Test", email: SENDER_EMAIL };
+
+                    client
+                        .send({
+                            from: sender,
+                            to: [{ email: RECIPIENT_EMAIL }],
+                            subject: "Hello from Mailtrap!",
+                            text: "Welcome to Mailtrap Sending!",
+                        })
+                        .then(console.log("send email"))
+                        .catch(console.error);*/
+
+                    sendEmail(randomPassword,email)
+                    return res.status(200).json({message: "Password changed,email send."})
+                }
+
+
+
                 }
             }
         }
-    }
+
     catch (err) {
         return res.status(500).json({message: err.message});
     }
