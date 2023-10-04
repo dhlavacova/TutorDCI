@@ -18,6 +18,9 @@ import Footer from "./components/footer";
 import Setting from "./pages/Setting.jsx";
 import { SettingsProvider } from "./context/settingsContext.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
+import NotFound from './pages/NotFound';
+import './index.css';
+
 
 function App() {
   return (
@@ -27,9 +30,8 @@ function App() {
           <SettingsProvider>
             <BrowserRouter>
               <div className="min-h-screen flex flex-col">
-                <main className="container content-container mx-auto px-4 md:px-10 flex-grow"> {/* Cambia el px-10 a px-4 en pantallas pequeñas */}
-
-                  <Navbar />
+                <main className="container content-container mx-auto px-4 md:px-10 flex-grow">
+                  <Navbar className="navbar"  />
                   <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<LoginPage />} />
@@ -46,12 +48,13 @@ function App() {
                       </Route>
                       <Route path="/protocol" element={<Protocol />} />
                       <Route path="/settings" element={<Setting />} />
+                      <Route path="*" element={<NotFound />} />
                     </Route>
                   </Routes>
                 </main>
-                <Outlet /> {/* Renderiza las rutas anidadas */}
-                <Footer />
               </div>
+              <Outlet />
+              <Footer />
             </BrowserRouter>
           </SettingsProvider>
         </ProtocolProvider>
@@ -61,3 +64,6 @@ function App() {
 }
 
 export default App;
+
+
+

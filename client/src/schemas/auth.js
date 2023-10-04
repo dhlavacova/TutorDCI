@@ -9,8 +9,7 @@ export const loginSchema = z.object({
   }),
 });
 
-export const registerSchema = z
-  .object({
+export const registerSchema = z.object({
     username: z
       .string({
         required_error: "Username is required",

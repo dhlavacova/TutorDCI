@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+
 import { useAuth } from "../context/authContext";
 
 import { Link, useNavigate } from "react-router-dom";
@@ -31,6 +31,7 @@ function Register() {
 
   return (
     <div className="h-[calc(100vh-100px)] flex items-center justify-center">
+     
       <Card >
         {registerErrors.map((error, i) => (
           <Message message={error} key={i} />
@@ -111,7 +112,7 @@ function Register() {
             <p className="text-red-500">{errors.confirmPassword?.message}</p>
           )}
 
-          <Button>Submit</Button>
+          <Button>Create account</Button>
         </form>
         <p className="flex justify-between ">
           Already Have an Account? <Link className="text-sky-500" to="/login">
