@@ -48,7 +48,7 @@ function TutorProfile() {
     setIsHovered(false);
   };
 
-  const addAvailability = () => {
+ /* const addAvailability = () => {
     // Verificar si se han ingresado todos los campos de disponibilidad
     if (availabilityDay && availabilityTime && availabilityDuration) {
       // Crear un objeto para representar la disponibilidad
@@ -68,7 +68,7 @@ function TutorProfile() {
     } else {
       alert("please complete the following conditions");
     }
-  };
+  };*/
 /*console.log({availability})
 console.log({availabilityDay})
   console.log({})*/
