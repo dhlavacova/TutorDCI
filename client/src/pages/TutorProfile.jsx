@@ -181,83 +181,83 @@ relative"
 
       <div className="w-full p-10 bg-gray-100  rounded-md flex ">
         <div className="w-1/2 ">
-          <form onSubmit={handleSubmit}>
-            <label className="text-xs text-black" htmlFor="course">Select the course you wish to teach</label>
-            <select
-              className="w-full mt-2 bg-gray-200 px-4 py-2 rounded-md text-black"
-              name="course"
-              value={course}
-              onChange={(e) => setCourse(e.target.value)}
-              required
-            >
-              <option value="">Select a course</option>
-              <option value="Web Development">Web Development</option>
-              <option value="Online Marketing">Online Marketing</option>
-            </select>
+          {/*<form onSubmit={handleSubmit}>*/}
+          {/*  <label className="text-xs text-black" htmlFor="course">Select the course you wish to teach</label>*/}
+          {/*  <select*/}
+          {/*    className="w-full mt-2 bg-gray-200 px-4 py-2 rounded-md text-black"*/}
+          {/*    name="course"*/}
+          {/*    value={course}*/}
+          {/*    onChange={(e) => setCourse(e.target.value)}*/}
+          {/*    required*/}
+          {/*  >*/}
+          {/*    <option value="">Select a course</option>*/}
+          {/*    <option value="Web Development">Web Development</option>*/}
+          {/*    <option value="Online Marketing">Online Marketing</option>*/}
+          {/*  </select>*/}
 
 
-            <Label htmlFor="classNumber">Course ID</Label>
-            <Input
-              type="text"
-              name="classNumber"
-              value={classNumber}
-              onChange={(e) => setClassNumber(e.target.value)}
-              placeholder="e.g., 22d08a"
-              required
-            />
+          {/*  <Label htmlFor="classNumber">Course ID</Label>*/}
+          {/*  <Input*/}
+          {/*    type="text"*/}
+          {/*    name="classNumber"*/}
+          {/*    value={classNumber}*/}
+          {/*    onChange={(e) => setClassNumber(e.target.value)}*/}
+          {/*    placeholder="e.g., 22d08a"*/}
+          {/*    required*/}
+          {/*  />*/}
 
-            <label className="text-xs text-black" htmlFor="availability">How many hours can you teach per week?</label>
-            <div className="flex mt-2">
-              <select
-                className="w-1/3 bg-gray-200 px-2 py-2 rounded-md text-black"
-                name="availabilityDay"
-                value={availabilityDay}
-                onChange={(e) => setAvailabilityDay(e.target.value)}
-                required
-              >
-                <option value="">Day</option>
-                <option value="Monday">Monday</option>
-                <option value="Tuesday">Tuesday</option>
-                <option value="Wednesday">Wednesday</option>
-                <option value="Thursday">Thursday</option>
-                <option value="Friday">Friday</option>
-                <option value="Saturday">Saturday</option>
-                <option value="Sunday">Sunday</option>
-              </select>
-              <input
-                type="time"
-                name="availabilityTime"
-                value={availabilityTime}
-                onChange={(e) => setAvailabilityTime(e.target.value)}
-                className="w-1/3 bg-gray-200 px-2 py-2 rounded-md text-black ml-2 "
-                required
-              />
-              <input
-                type="number"
-                name="availabilityDuration"
-                value={availabilityDuration}
-                onChange={(e) => setAvailabilityDuration(e.target.value)}
-                placeholder="2h"
-                className="w-1/3 bg-gray-200 px-2 py-2 rounded-md text-black ml-2"
-                required
-              />
-            </div>
+          {/*  <label className="text-xs text-black" htmlFor="availability">How many hours can you teach per week?</label>*/}
+          {/*  <div className="flex mt-2">*/}
+          {/*    <select*/}
+          {/*      className="w-1/3 bg-gray-200 px-2 py-2 rounded-md text-black"*/}
+          {/*      name="availabilityDay"*/}
+          {/*      value={availabilityDay}*/}
+          {/*      onChange={(e) => setAvailabilityDay(e.target.value)}*/}
+          {/*      required*/}
+          {/*    >*/}
+          {/*      <option value="">Day</option>*/}
+          {/*      <option value="Monday">Monday</option>*/}
+          {/*      <option value="Tuesday">Tuesday</option>*/}
+          {/*      <option value="Wednesday">Wednesday</option>*/}
+          {/*      <option value="Thursday">Thursday</option>*/}
+          {/*      <option value="Friday">Friday</option>*/}
+          {/*      <option value="Saturday">Saturday</option>*/}
+          {/*      <option value="Sunday">Sunday</option>*/}
+          {/*    </select>*/}
+          {/*    <input*/}
+          {/*      type="time"*/}
+          {/*      name="availabilityTime"*/}
+          {/*      value={availabilityTime}*/}
+          {/*      onChange={(e) => setAvailabilityTime(e.target.value)}*/}
+          {/*      className="w-1/3 bg-gray-200 px-2 py-2 rounded-md text-black ml-2 "*/}
+          {/*      required*/}
+          {/*    />*/}
+          {/*    <input*/}
+          {/*      type="number"*/}
+          {/*      name="availabilityDuration"*/}
+          {/*      value={availabilityDuration}*/}
+          {/*      onChange={(e) => setAvailabilityDuration(e.target.value)}*/}
+          {/*      placeholder="2h"*/}
+          {/*      className="w-1/3 bg-gray-200 px-2 py-2 rounded-md text-black ml-2"*/}
+          {/*      required*/}
+          {/*    />*/}
+          {/*  </div>*/}
 
-            <div className="mt-4"></div>
-            <Label htmlFor="platformLink">Platform Link</Label>
-            <Input
-              type="text"
-              name="platformLink"
-              value={platformLink}
-              onChange={(e) => setPlatformLink(e.target.value)}
-              placeholder="e.g., https://us02web.zoom.us/oz"
-              required
-            />
+          {/*  <div className="mt-4"></div>*/}
+          {/*  <Label htmlFor="platformLink">Platform Link</Label>*/}
+          {/*  <Input*/}
+          {/*    type="text"*/}
+          {/*    name="platformLink"*/}
+          {/*    value={platformLink}*/}
+          {/*    onChange={(e) => setPlatformLink(e.target.value)}*/}
+          {/*    placeholder="e.g., https://us02web.zoom.us/oz"*/}
+          {/*    required*/}
+          {/*  />*/}
 
-            <Button type="submit">Save</Button>
-             <Button type="button" onClick={addAvailability}>Add Availability</Button>
+          {/*  <Button type="submit">Save</Button>*/}
+          {/*   <Button type="button" onClick={addAvailability}>Add Availability</Button>*/}
 
-          </form>
+          {/*</form>*/}
         </div>
         <div className="w-1/2 p-10">
           {availability.length > 0 && (
