@@ -7,7 +7,7 @@ import {zodResolver} from "@hookform/resolvers/zod";
 
 import {register2Schema} from "../../schemas/auth.js";
 
-function SelectCoursTutor(props) {
+function CreatTutorClass(props) {
     const {
         register,
         handleSubmit,
@@ -15,7 +15,18 @@ function SelectCoursTutor(props) {
     } = useForm({
         resolver: zodResolver(register2Schema)
     });
+    const {tutClass, errors: loginErrors, isAuthenticated} = useAuth();
+    const navigate = useNavigate();
+    const onSubmit = async (data) => {
+        console.log('submit', data)
+        await tutClass(data);
+        if (isAuthenticated) {
+            navigate('/book')
+        } else {
+            navigate('/login')
+        }
 
+    }
     return (
         <div className="h-[calc(100vh-100px)] flex items-center justify-center">
             <Card>
@@ -87,24 +98,24 @@ function SelectCoursTutor(props) {
                             <p>{errors.availabilityDuration?.message}</p>
                         </div>
                     </div>
-                        <div className="mt-4"></div>
-                        <Label htmlFor="platformLink">Platform Link</Label>
-                        <Input
-                            type="text"
-                            name="platformLink"
-                            placeholder="e.g., https://us02web.zoom.us/oz"
-                            {...register("platformLink", {required: true, minLength: 6})}
-                        />
-                        <p>{errors.platformLink?.message}</p>
+                    <div className="mt-4"></div>
+                    <Label htmlFor="platformLink">Platform Link</Label>
+                    <Input
+                        type="text"
+                        name="platformLink"
+                        placeholder="e.g., https://us02web.zoom.us/oz"
+                        {...register("platformLink", {required: true, minLength: 6})}
+                    />
+                    <p>{errors.platformLink?.message}</p>
 
 
-                        <Button>Send</Button>
+                    <Button>Send</Button>
 
 
                 </form>
             </Card>
         </div>
-);
+    );
 }
 
-export default SelectCoursTutor;
+export default CreatTutorClass;

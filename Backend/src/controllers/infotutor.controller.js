@@ -1,7 +1,7 @@
 import Tutor from '../models/infotutor.model.js';
 
 
-export const createTutor = async (req, res) => {
+export const createTutorClass = async (req, res) => {
   try {
     
     const tutorData = tutorSchema.parse(req.body);
