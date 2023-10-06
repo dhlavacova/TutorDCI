@@ -3,10 +3,10 @@ import { Button, Card, Input, Label, Message } from "../components/ui";
 import { useAuth } from "../context/authContext";
 import { FaCamera } from "react-icons/fa";
 import curve from "../assets/ttten.svg"
-import { createTutor} from "../api/infotutor.js";
+//import { createTutor} from "../api/infotutor.js";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { tutorSchema } from "../schemas/infotutor.js"
+//import { tutorSchema } from "../schemas/infotutor.js"
 
 
 

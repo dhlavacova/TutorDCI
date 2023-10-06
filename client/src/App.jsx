@@ -20,6 +20,8 @@ import { SettingsProvider } from "./context/settingsContext.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import NotFound from './pages/NotFound';
 import './index.css';
+import CreatTutorClass from "./components/SelectCours/CreatTutorClass.jsx";
+import {ClassTutorProvider} from "./context/creatTutorClassContext.jsx";
 
 
 function App() {
@@ -28,6 +30,7 @@ function App() {
       <TaskProvider>
         <ProtocolProvider>
           <SettingsProvider>
+            <ClassTutorProvider>
             <BrowserRouter>
               <div className="min-h-screen flex flex-col">
                 <main className="container content-container mx-auto px-4 md:px-10 flex-grow">
@@ -36,6 +39,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
+                    <Route path="/register2/:role" element={<CreatTutorClass />} /> {/* <--- Add this route */}
                     <Route path="/forgot-password" element={<ForgotPassword />} />
 
                     <Route element={<ProtectedRoute />}>
@@ -56,6 +60,7 @@ function App() {
               <Outlet />
               <Footer />
             </BrowserRouter>
+            </ClassTutorProvider>
           </SettingsProvider>
         </ProtocolProvider>
       </TaskProvider>

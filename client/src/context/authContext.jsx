@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { createContext, useContext, useState } from "react";
 import { loginRequest, registerRequest, verifyTokenRequest, logoutRequest } from "../api/auth";
+//import{createTutorClassRequer} from "../api/infotutor.js"
 import Cookies from "js-cookie";
 
 const AuthContext = createContext();
@@ -16,7 +17,7 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
-const [tutorClass, setTutorClass] = useState(null)
+//const [tutorClass, setTutorClass] = useState(null)
   // clear errors after 5 seconds
   useEffect(() => {
     if (errors.length > 0) {
@@ -84,7 +85,7 @@ const [tutorClass, setTutorClass] = useState(null)
     checkLogin();
   }, []);
 
-  const tutClass = async (data) => {
+/*  const tutClass = async (data) => {
     console.log("tutorClass",data)
     try{
       const res =await createTutorClassRequer(data)
@@ -97,13 +98,13 @@ const [tutorClass, setTutorClass] = useState(null)
       setErrors(err.response.data.message);
 
     }
-  }
+  }*/
 
   return (
     <AuthContext.Provider
       value={{
-        tutorClass,
-        tutClass,
+      /*  tutorClass,
+        tutClass,*/
         user,
         signup,
         signin,
