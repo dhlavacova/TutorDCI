@@ -1,10 +1,13 @@
 import React from 'react';
 import {useSetting} from "../context/settingsContext.jsx";
+import {useEffect} from "react";
 import {useForm} from "react-hook-form";
 import {Button, Card, Input, Label, Message} from "../components/ui/index.js";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {forgotPasswordSchema} from "../schemas/password.js";
 import { Link, useNavigate } from "react-router-dom";
+import {Modal} from '@nextui-org/modal';
+
 
 function ForgotPassword(props) {
 
@@ -16,13 +19,24 @@ function ForgotPassword(props) {
         resolver:zodResolver(forgotPasswordSchema),
     });
 
-    const {forgotPassword, errors:loginErrors, se}=useSetting();
+    const {forgotPassword, errors:loginErrors, success}=useSetting();
     const navigate = useNavigate();
-    const onSubmit =async(data)=>{
-        console.log('submit',data)
+
+
+
+    const onSubmit1 = async(data) => {
+        console.log('submit', data);
         await forgotPassword(data);
-        navigate('/login');
-    }
+        navigate("/login");
+    };
+
+/*    useEffect(() => {
+        if (success) {
+            alert("Thank you! If the email address is associated with an account, we've sent a temporary password to it. Please check your inbox.");
+            navigate("/login");
+        }
+    }, [onSubmit1]); // watch the `success` state for changes*/
+
 
     return (
         <div className="h-[calc(100vh-100px)] flex items-center justify-center">
@@ -33,8 +47,7 @@ function ForgotPassword(props) {
                 <h1 className="text-2xl font-bold">Write your email</h1>
 
 
-                <form onSubmit={handleSubmit(onSubmit)}>
-
+                <form onSubmit={handleSubmit(onSubmit1)}>
 
 
                     <Label htmlFor="email">Email:</Label>
@@ -43,17 +56,16 @@ function ForgotPassword(props) {
                         type="email"
                         name="email"
                         placeholder="youremail@domain.tld"
-                        {...register("email", { required: true })}
+                        {...register("email", {required: true})}
                     />
                     <p>{errors.email?.message}</p>
 
-                    <Button>Send</Button>
-
-
+                    <Button >Send</Button>
                 </form>
 
 
             </Card>
+
         </div>
     );
 }
