@@ -63,7 +63,7 @@ function CreatTutorClass(props) {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Label htmlFor="tutorName"> </Label>
                     <Input
-                        type="hiden"
+                        type="text"
                         name="tutorName"
                         value={tutorName}
                         {...register("tutorName", {required: true})}

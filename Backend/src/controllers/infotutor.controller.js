@@ -15,6 +15,29 @@ export const createTutorClass = async (req, res) => {
     res.status(500).json({ error: 'Error' });
   }
 };
+/**
+ * Handle request to some endpoint
+ *
+ * @param {import('express').Request} req - Express request object
+ * @param {import('express').Response} res - Express response object
+ */
+export const getAvailibility = async (req, res) => {
+
+  try {
+    if (!req.user.username) {
+
+      return res.status(400).json({message: "Chyba autentikace."});
+    }
+else{
+      const availibity = await Tutor.find({ tutorName: req.user.username });
+      console.log({availibity})
+    res.json(availibity)
+  }
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 export const getTutors = async (req, res) => {
   try {
@@ -22,6 +45,5 @@ export const getTutors = async (req, res) => {
     res.json({ tutors });
   } catch (error) {
     res.status(500).json({ message: error.message });
-  }
-};
+  }};
 
