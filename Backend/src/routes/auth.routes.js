@@ -8,7 +8,7 @@ import {
 import { validateSchema } from "../middlewares/validator.middleware.js";
 import { loginSchema, registerSchema } from "../schemas/auth.schema.js";
 import { auth } from "../middlewares/auth.middleware.js";
-
+import { tutorSchema } from "../schemas/infotutor.schema.js";
 import { getUserImage } from "../controllers/user-controller.js";
 
 import multerController from '../controllers/multer-controller.js';
@@ -32,7 +32,7 @@ router.get("/verify", verifyToken);
 
 
 router.get("/tutors", getTutors);
-router.post("/tutors", createTutorClass);
+router.post("/tutors2", validateSchema(tutorSchema),createTutorClass);
 
 
 router.get("/user-image", auth, getUserImage);
