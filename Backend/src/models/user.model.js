@@ -21,9 +21,9 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        passwordCreatedAt:{
+        passwordCreatedAt: {
             type: Date,
-            required:false,
+            required: false,
         },
         profileImage: String,
     },

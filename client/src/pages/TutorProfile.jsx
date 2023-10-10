@@ -3,10 +3,9 @@ import { Button, Card, Input, Label, Message } from "../components/ui";
 import { useAuth } from "../context/authContext";
 import { FaCamera } from "react-icons/fa";
 import curve from "../assets/ttten.svg"
-import { createTutor } from "../api/infotutor.js";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { tutorSchema } from "../schemas/infotutor.js"
+
 
 
 
@@ -35,8 +34,6 @@ function TutorProfile() {
   const [tutorName, setTutorName] = useState("");
 
 
-
-
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setProfileImage(file);
@@ -52,7 +49,12 @@ function TutorProfile() {
     setIsHovered(false);
   };
 
+
   const addAvailability = () => {
+=======
+ /* const addAvailability = () => {
+    // Verificar si se han ingresado todos los campos de disponibilidad
+
     if (availabilityDay && availabilityTime && availabilityDuration) {
 
       const newAvailability = {
@@ -70,23 +72,38 @@ function TutorProfile() {
     } else {
       alert("please complete the following conditions");
     }
+
   };
 
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
 
+  };*/
+/*console.log({availability})
+console.log({availabilityDay})
+  console.log({})*/
+  const handleSubmit = async (e,availability) => {
+
+    e.preventDefault();
+console.log("availability in hanldeSubmit",availability)
     try {
 
       const tutorData = {
         tutorName,
         course,
         classNumber,
-        availability,
+        availability:
+            [{  day: availabilityDay,
+          time: availabilityTime,
+          duration: availabilityDuration,}],
         platformLink,
         profileImage,
       };
+
       // debugger
+
+
+console.log({tutorData})
 
       const response = await createTutor(tutorData);
 
@@ -98,7 +115,9 @@ function TutorProfile() {
         setPlatformLink("");
         setCourse("");
         setProfileImage(null);
-        addAvailability();
+        setAvailabilityDay("");
+        setAvailabilityTime("");
+        setAvailabilityDuration("");
       } else {
         console.error("Error identifying user");
       }
@@ -176,6 +195,7 @@ relative"
       <div className="w-full p-10 bg-gray-100  rounded-md flex ">
 
         <div className="w-1/2 ">
+
           <form onSubmit={handleSubmit}>
             <input
               type="hidden"
@@ -264,6 +284,7 @@ relative"
             {/* <Button type="button" onClick={addAvailability}>Add Availability</Button> */}
 
           </form>
+
         </div>
         <div className="w-1/2 p-10">
           {availability.length > 0 && (

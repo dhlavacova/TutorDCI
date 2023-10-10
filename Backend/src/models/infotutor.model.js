@@ -17,12 +17,13 @@ const tutorSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+
   availability:[ 
-    {
+{
       day: String,
       time: String,
       duration: String,
-    },
+    }
   ],
   platformLink: {
     type: String,

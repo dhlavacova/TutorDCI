@@ -25,12 +25,15 @@ import { InfoTutorProvider } from './context/infotutorContext'
 import { Navbar } from "./components/Navbar";
 import Footer from "./components/footer";
 import './index.css';
+import CreatTutorClass from "./components/SelectCours/CreatTutorClass.jsx";
+import {ClassTutorProvider} from "./context/creatTutorClassContext.jsx";
 
 function App() {
   return (
     <AuthProvider>
       <TaskProvider>
         <ProtocolProvider>
+<ClassTutorProvider>
           <InfoTutorProvider>
             <SettingsProvider>
               <BrowserRouter>
@@ -41,6 +44,7 @@ function App() {
                       <Route path="/" element={<Home />} />
                       <Route path="/login" element={<LoginPage />} />
                       <Route path="/register" element={<RegisterPage />} />
+                         <Route path="/register2/:role" element={<CreatTutorClass />} /> {/* <--- Add this route */}
                       <Route path="/forgot-password" element={<ForgotPassword />} />
                       <Route element={<ProtectedRoute />}>
                         <Route path="/book" element={<ClassesPage />} />
@@ -62,6 +66,7 @@ function App() {
               </BrowserRouter>
             </SettingsProvider>
           </InfoTutorProvider>
+</ClassTutorProvider>
         </ProtocolProvider>
       </TaskProvider>
     </AuthProvider>

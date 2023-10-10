@@ -22,6 +22,7 @@ function Protocol() {
     }, []);
 
     const users = allProtocols
+
     function getCurrentDate(datum) {
         try {
             const dateOptions = { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' };
@@ -32,7 +33,10 @@ function Protocol() {
             }
             const datePart = datum.toLocaleDateString('de-De', dateOptions);
             /*const timePart = datum.toLocaleTimeString('en-US', timeOptions);*/
+
             // console.log("getCurrentDate returned: ", `${datePart}`)
+
+
             return `${datePart}`
         } catch (error) {
             console.error("Error in getCurrentDate:", error);
@@ -42,7 +46,9 @@ function Protocol() {
     const renderCell = React.useCallback((user, columnKey) => {
         // console.log("renderCell ausgeführt")
         const cellValue = user[columnKey];
+
         // console.log("columnkey", columnKey);
+
         switch (columnKey) {
 
             case "student":
@@ -113,6 +119,8 @@ function Protocol() {
                     )}
                 </TableBody>
             </Table>
+
+
         </div>
 
 

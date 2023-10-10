@@ -13,9 +13,11 @@ import { getUserImage } from "../controllers/user-controller.js";
 
 import multerController from '../controllers/multer-controller.js';
 
-import { 
-createTutor,
-getTutors, 
+
+
+import {
+  createTutorClass,
+  getTutors, 
 } from "../controllers/infotutor.controller.js";
 
 
@@ -28,8 +30,10 @@ router.post("/login", validateSchema(loginSchema), login);
 router.post("/logout", logout);
 router.get("/verify", verifyToken);
 
-router.post("/tutors", createTutor);
+
 router.get("/tutors", getTutors);
+router.post("/tutors", createTutorClass);
+
 
 router.get("/user-image", auth, getUserImage);
 router.post("/upload", auth, multerController);
