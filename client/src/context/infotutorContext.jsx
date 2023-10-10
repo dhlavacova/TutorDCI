@@ -4,7 +4,7 @@ import {
     useState
 } from "react";
 import {
-    createTutor,
+   
     getTutors
 } from "../api/infotutor.js";
 
