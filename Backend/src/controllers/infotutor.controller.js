@@ -2,16 +2,16 @@ import Tutor from '../models/infotutor.model.js';
 
 
 export const createTutorClass = async (req, res) => {
+  const tutorData = req.body;
+  if(!tutorData){
+    return res.status(400).json({message: "not data"});
+  }
   try {
-
-    const tutorData = tutorSchema.parse(req.body);
- 
     const tutor = new Tutor(tutorData);
-
     await tutor.save();
     res.status(201).json({ message: 'Tutor information was created successfully' });
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
     res.status(500).json({ error: 'Error' });
   }
 };

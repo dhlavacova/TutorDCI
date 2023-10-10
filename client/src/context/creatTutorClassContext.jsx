@@ -1,4 +1,6 @@
+/*
 import {createContext, useContext, useState} from "react";
+import {createTutorClassRequer} from "../api/infotutor.js";
 
 
 const ClassTutorContext = createContext();
@@ -24,7 +26,6 @@ export function ClassTutorProvider({children}) {
         } catch (err) {
             console.log(err.response.data);
             setErrors(err.response.data.message);
-
         }
     }
 
@@ -39,4 +40,4 @@ export function ClassTutorProvider({children}) {
             {children}
         </ClassTutorContext.Provider>
     );
-}
+}*/

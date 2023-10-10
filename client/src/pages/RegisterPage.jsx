@@ -20,13 +20,16 @@ function Register() {
 
   const onSubmit = async (value) => {
 
-    // console.log(value)
+    console.log(value)
+    console.log(value.role)
     await signup(value); // Suponiendo que signup establece el rol del usuario en el backend
-    const userRole = value.role; // Obten el rol del usuario del formulario
+    const userRole = value.role; //studen// Obten el rol del usuario del formulario
+
     if(userRole === "student"){
       navigate('/login')
     }
-    navigate(`/register2/${userRole}`); // Redirige al perfil correspondiente
+    else{navigate(`/register2/${userRole}`); }// Redirige al perfil correspondiente
+
   };
 
 
