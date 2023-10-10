@@ -1,7 +1,13 @@
 import mongoose from "mongoose";
 
+// Teaching Unit teachingUnitSchema
 
 const tutorSchema = new mongoose.Schema({
+
+  tutorName: {
+    type: "string",
+    required: true,
+  },
 
   course: {
     type: String,
@@ -11,20 +17,18 @@ const tutorSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  availability:
-    {
+
+  availability:[ 
+{
       day: String,
       time: String,
       duration: String,
-    },
+    }
+  ],
   platformLink: {
     type: String,
     required: true,
   },
-
-  // profileImage: {
-  //   type: String, // Almacenar la URL de la imagen
-  // },
 });
 
-export default mongoose.model('Tutor', tutorSchema);
+export default mongoose.model("Tutor", tutorSchema);

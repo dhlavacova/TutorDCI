@@ -1,11 +1,11 @@
 import { useAuth } from "../context/authContext";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-// import { useEffect } from "react";
+import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Card, Message, Button, Input, Label } from "../components/ui";
 import { loginSchema } from "../schemas/auth";
-import {useEffect} from "react";
+
 
 
 
@@ -21,17 +21,11 @@ function LoginPage() {
   const navigate = useNavigate();
 
 
-  const onSubmit = async (data) => {
-    try{
-    await signin(data);
-    if (isAuthenticated) {
-      navigate(`/book`);
-    }
-  }catch(err) {
-      console.log("Error during login:", error.message);
-    }
-  }
 
+  const onSubmit = async (data) => {
+    await signin(data);
+    navigate(`/book`);
+  }
 
 
   return (

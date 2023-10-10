@@ -24,16 +24,18 @@ function Protocol() {
     const users = allProtocols
 
     function getCurrentDate(datum) {
-        console.log("getCurrentDate ausgeführt mit: ", datum)
         try {
             const dateOptions = { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' };
             /*const timeOptions = { hour: '2-digit', minute: '2-digit' };*/
             if (!(datum instanceof Date)) {
-                console.log("datum war kein date objekt")
+                console.log("datum was not a date object");
                 datum = new Date(datum);
             }
             const datePart = datum.toLocaleDateString('de-De', dateOptions);
             /*const timePart = datum.toLocaleTimeString('en-US', timeOptions);*/
+
+            // console.log("getCurrentDate returned: ", `${datePart}`)
+
 
             return `${datePart}`
         } catch (error) {
@@ -44,6 +46,8 @@ function Protocol() {
     const renderCell = React.useCallback((user, columnKey) => {
         // console.log("renderCell ausgeführt")
         const cellValue = user[columnKey];
+
+        // console.log("columnkey", columnKey);
 
         switch (columnKey) {
 

@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 
+
 export const register2Schema = z.object({
     course: z.enum(["Web Development", "Online Marketing"]),
     classNumber: z.string().nonempty({ required_error: "Number of class is required" }),
@@ -16,3 +17,4 @@ export const register2Schema = z.object({
     platformLink: z.string().nonempty({ required_error: "Platform link is required" })
         .refine(value => /^(http|https):\/\/[^ "]+$/.test(value), "Invalid URL format"),
 })
+

@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const tutorSchema = z.object({
+
     course: z.enum(["Web Development", "Online Marketing"]),
     classNumber: z.string().nonempty({ required_error: "Number of class is required" }),
     availability:
@@ -15,5 +16,6 @@ export const tutorSchema = z.object({
     platformLink: z.string().nonempty({ required_error: "Platform link is required" })
         .refine(value => /^(http|https):\/\/[^ "]+$/.test(value), "Invalid URL format"),
 });
+
 
 

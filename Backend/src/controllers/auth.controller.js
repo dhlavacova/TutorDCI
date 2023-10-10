@@ -126,34 +126,6 @@ export const verifyToken = async (req, res) => {
   });
 };
 
-export const getTutorsProfile = async (req, res) => {
-  try {
-    const tutors = await User.find({ role: "tutor" }, "_id username email role");
-    res.json({ tutors });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-
-// export const getTutorAvailability = async (req, res) => {
-//   try {
-//     const tutorId = req.params.tutorId;
-   
-//     const tutorAvailability = await TutorAvailabilityModel.findOne({ tutorId });
-//     if (!tutorAvailability) {
-//       return res.status(404).json({ error: "Tutor availability not found" });
-//     }
-//     res.json({ availability: tutorAvailability });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: "Internal server error" });
-//   }
-// };
-
-
-
-
 
 export const logout = async (req, res) => {
   res.clearCookie("token"); //delete cookie from browser

@@ -3,16 +3,16 @@ import { Button, Card, Input, Label, Message } from "../components/ui";
 import { useAuth } from "../context/authContext";
 import { FaCamera } from "react-icons/fa";
 import curve from "../assets/ttten.svg"
-//import { createTutor} from "../api/infotutor.js";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-//import { tutorSchema } from "../schemas/infotutor.js"
+
 
 
 
 function TutorProfile() {
 
   const {
+
     // register,
     // handleSubmit,
     formState: { errors },
@@ -31,6 +31,7 @@ function TutorProfile() {
   const [course, setCourse] = useState("");
   const [isHovered, setIsHovered] = useState(false);
   const [profileImage, setProfileImage] = useState(null);
+  const [tutorName, setTutorName] = useState("");
 
 
   const handleImageChange = (e) => {
@@ -48,18 +49,21 @@ function TutorProfile() {
     setIsHovered(false);
   };
 
+
+  const addAvailability = () => {
+=======
  /* const addAvailability = () => {
     // Verificar si se han ingresado todos los campos de disponibilidad
+
     if (availabilityDay && availabilityTime && availabilityDuration) {
-      // Crear un objeto para representar la disponibilidad
+
       const newAvailability = {
         day: availabilityDay,
         time: availabilityTime,
         duration: availabilityDuration,
       };
 
-      // Agregar la disponibilidad al array de disponibilidad
-      setAvailability([...availability, newAvailability]);
+      setAvailability((prevAvailability) => [...prevAvailability, newAvailability]);
 
       // Limpiar los campos de disponibilidad
       setAvailabilityDay("");
@@ -68,16 +72,24 @@ function TutorProfile() {
     } else {
       alert("please complete the following conditions");
     }
+
+  };
+
+
+  const handleSubmit = async (e) => {
+
   };*/
 /*console.log({availability})
 console.log({availabilityDay})
   console.log({})*/
   const handleSubmit = async (e,availability) => {
+
     e.preventDefault();
 console.log("availability in hanldeSubmit",availability)
     try {
-      // Crea un objeto con los datos del formulario
+
       const tutorData = {
+        tutorName,
         course,
         classNumber,
         availability:
@@ -87,11 +99,14 @@ console.log("availability in hanldeSubmit",availability)
         platformLink,
         profileImage,
       };
+
+      // debugger
+
+
 console.log({tutorData})
-      // Llama a la función para crear un tutor en el servidor
+
       const response = await createTutor(tutorData);
 
-      // Verifica la respuesta del servidor y muestra un mensaje si es necesario
       if (response.data && response.data.message) {
         console.log("Server response:", response.data.message);
         // Limpia los campos después de enviar los datos si es necesario
@@ -107,31 +122,22 @@ console.log({tutorData})
         console.error("Error identifying user");
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error creating tutor:", error);
+      alert("An error occurred while creating the tutor: " + error.message);
     }
+
   };
-  // const [tutors, setTutors] = useState([]);
-  // useEffect(() => {
 
-  //   const fetchTutorProfile = async () => {
-  //     try {
-  //       const profileData = await getTutorsProfile();         setClassNumber(profileData.classNumber);
-  //       setAvailability(profileData.availability);
-  //       setPlatformLink(profileData.platformLink);
-  //       setCourse(profileData.course);
-   
-  //     } catch (error) {
-  //       console.error("Error fetching tutor profile:", error);
-  //     }
-  //   };
+  useEffect(() => {
+    setTutorName(user.username);
+  }
+  )
 
-  //   if (isAuthenticated) {
-  //     fetchTutorProfile();
-  //   }
-  // }, [isAuthenticated]); 
+
 
   return (
     <div className=" w-full p-10 rounded-xs">
+
       <div className=" flex items-center p-10 bg-gray-300 rounded-md
 relative"
         style={{
@@ -176,88 +182,109 @@ relative"
 
         </div>
       </div>
-
+      {/* <header className="flex justify-between mt-10 ">
+        <h1 className="text-3xl font-semibold text-slate-800">
+          Tutor Register
+        </h1>
+      </header>
+      <p className="text-slate-700 text-xs pb-10 ">
+        rellena el formulario con tu id del curso ,
+      </p> */}
 
 
       <div className="w-full p-10 bg-gray-100  rounded-md flex ">
+
         <div className="w-1/2 ">
-          {/*<form onSubmit={handleSubmit}>*/}
-          {/*  <label className="text-xs text-black" htmlFor="course">Select the course you wish to teach</label>*/}
-          {/*  <select*/}
-          {/*    className="w-full mt-2 bg-gray-200 px-4 py-2 rounded-md text-black"*/}
-          {/*    name="course"*/}
-          {/*    value={course}*/}
-          {/*    onChange={(e) => setCourse(e.target.value)}*/}
-          {/*    required*/}
-          {/*  >*/}
-          {/*    <option value="">Select a course</option>*/}
-          {/*    <option value="Web Development">Web Development</option>*/}
-          {/*    <option value="Online Marketing">Online Marketing</option>*/}
-          {/*  </select>*/}
+
+          <form onSubmit={handleSubmit}>
+            <input
+              type="hidden"
+              name="tutorName"
+              value={user.username}
+            // onChange={(e) => setTutorName(e.target.value)}
+            />
+            <label className="text-xs text-black" htmlFor="course">Select the course you wish to teach</label>
+            <select
+              className="w-full mt-2 bg-gray-200 px-4 py-2 rounded-md text-black"
+              name="course"
+              value={course}
+              onChange={(e) => setCourse(e.target.value)}
+              required
+            >
+              <option value="">Select a course</option>
+              <option value="Web Development">Web Development</option>
+              <option value="Online Marketing">Online Marketing</option>
+            </select>
 
 
-          {/*  <Label htmlFor="classNumber">Course ID</Label>*/}
-          {/*  <Input*/}
-          {/*    type="text"*/}
-          {/*    name="classNumber"*/}
-          {/*    value={classNumber}*/}
-          {/*    onChange={(e) => setClassNumber(e.target.value)}*/}
-          {/*    placeholder="e.g., 22d08a"*/}
-          {/*    required*/}
-          {/*  />*/}
+            <Label htmlFor="classNumber">Course ID</Label>
+            <Input
+              type="text"
+              name="classNumber"
+              value={classNumber}
+              onChange={(e) => setClassNumber(e.target.value)}
+              placeholder="e.g., 22d08a"
+              required
+            />
 
-          {/*  <label className="text-xs text-black" htmlFor="availability">How many hours can you teach per week?</label>*/}
-          {/*  <div className="flex mt-2">*/}
-          {/*    <select*/}
-          {/*      className="w-1/3 bg-gray-200 px-2 py-2 rounded-md text-black"*/}
-          {/*      name="availabilityDay"*/}
-          {/*      value={availabilityDay}*/}
-          {/*      onChange={(e) => setAvailabilityDay(e.target.value)}*/}
-          {/*      required*/}
-          {/*    >*/}
-          {/*      <option value="">Day</option>*/}
-          {/*      <option value="Monday">Monday</option>*/}
-          {/*      <option value="Tuesday">Tuesday</option>*/}
-          {/*      <option value="Wednesday">Wednesday</option>*/}
-          {/*      <option value="Thursday">Thursday</option>*/}
-          {/*      <option value="Friday">Friday</option>*/}
-          {/*      <option value="Saturday">Saturday</option>*/}
-          {/*      <option value="Sunday">Sunday</option>*/}
-          {/*    </select>*/}
-          {/*    <input*/}
-          {/*      type="time"*/}
-          {/*      name="availabilityTime"*/}
-          {/*      value={availabilityTime}*/}
-          {/*      onChange={(e) => setAvailabilityTime(e.target.value)}*/}
-          {/*      className="w-1/3 bg-gray-200 px-2 py-2 rounded-md text-black ml-2 "*/}
-          {/*      required*/}
-          {/*    />*/}
-          {/*    <input*/}
-          {/*      type="number"*/}
-          {/*      name="availabilityDuration"*/}
-          {/*      value={availabilityDuration}*/}
-          {/*      onChange={(e) => setAvailabilityDuration(e.target.value)}*/}
-          {/*      placeholder="2h"*/}
-          {/*      className="w-1/3 bg-gray-200 px-2 py-2 rounded-md text-black ml-2"*/}
-          {/*      required*/}
-          {/*    />*/}
-          {/*  </div>*/}
 
-          {/*  <div className="mt-4"></div>*/}
-          {/*  <Label htmlFor="platformLink">Platform Link</Label>*/}
-          {/*  <Input*/}
-          {/*    type="text"*/}
-          {/*    name="platformLink"*/}
-          {/*    value={platformLink}*/}
-          {/*    onChange={(e) => setPlatformLink(e.target.value)}*/}
-          {/*    placeholder="e.g., https://us02web.zoom.us/oz"*/}
-          {/*    required*/}
-          {/*  />*/}
 
-          {/*  <Button type="submit">Save</Button>*/}
-          {/*   <Button type="button" onClick={addAvailability}>Add Availability</Button>*/}
+            {/* <div className=" mt-2"> */}
+            <label className="text-xs text-black" htmlFor="availability">How many hours can you teach per week?</label>
+            <input
+              type="number"
+              name="availabilityDuration"
+              value={availabilityDuration}
+              onChange={(e) => setAvailabilityDuration(e.target.value)}
+              placeholder="2h"
+              className="w-full bg-gray-200 px-2 py-2 rounded-md text-black mr-2 mt-2"
+              required
+            />
+            <Label htmlFor="classNumber">Select your day</Label>
+            <select
+              className="w-full bg-gray-200 mt-2 px-2 py-2 rounded-md text-black"
+              name="availabilityDay"
+              value={availabilityDay}
+              onChange={(e) => setAvailabilityDay(e.target.value)}
+              required
+            >
+              <option value="">Day</option>
+              <option value="Monday">Monday</option>
+              <option value="Tuesday">Tuesday</option>
+              <option value="Wednesday">Wednesday</option>
+              <option value="Thursday">Thursday</option>
+              <option value="Friday">Friday</option>
+              <option value="Saturday">Saturday</option>
+              <option value="Sunday">Sunday</option>
+            </select>
+            <Label htmlFor="classNumber">Select your time</Label>
+            <input
+              type="time"
+              name="availabilityTime"
+              value={availabilityTime}
+              onChange={(e) => setAvailabilityTime(e.target.value)}
+              className="w-full bg-gray-200 mt-2 px-2 py-2 rounded-md text-black "
+              required
+            />
 
-          {/*</form>*/}
+            {/* </div> */}
+
+            <div className="mt-4"></div>
+            <Label htmlFor="platformLink">Platform Link</Label>
+            <Input
+              type="text"
+              name="platformLink"
+              value={platformLink}
+              onChange={(e) => setPlatformLink(e.target.value)}
+              placeholder="e.g., https://us02web.zoom.us/oz"
+              required
+            />
+
+            <Button type="submit">Save</Button>
+            {/* <Button type="button" onClick={addAvailability}>Add Availability</Button> */}
+
+          </form>
+
         </div>
         <div className="w-1/2 p-10">
           {availability.length > 0 && (

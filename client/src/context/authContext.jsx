@@ -1,7 +1,19 @@
 import { useEffect } from "react";
-import { createContext, useContext, useState } from "react";
-import { loginRequest, registerRequest, verifyTokenRequest, logoutRequest } from "../api/auth";
+
+import {
+  createContext,
+  useContext,
+  useState
+} from "react";
+import {
+  loginRequest,
+  registerRequest,
+  verifyTokenRequest,
+  logoutRequest
+} from "../api/auth";
+
 //import{createTutorClassRequer} from "../api/infotutor.js"
+
 import Cookies from "js-cookie";
 
 const AuthContext = createContext();
@@ -49,6 +61,7 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
       setErrors(error.response.data.message);
+      setIsAuthenticated(false);
     }
   };
 
