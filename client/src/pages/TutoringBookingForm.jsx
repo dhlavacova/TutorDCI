@@ -18,7 +18,7 @@ dayjs.extend(utc);
 export function TutoringBookingForm() {
   const { createTask, getTask, updateTask } = useTasks();
   const navigate = useNavigate();
-  const params = useParams();
+  /*const params = useParams();*/
   const {
     register,
     setValue,

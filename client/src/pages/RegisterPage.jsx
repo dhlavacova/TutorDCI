@@ -23,7 +23,10 @@ function Register() {
     // console.log(value)
     await signup(value); // Suponiendo que signup establece el rol del usuario en el backend
     const userRole = value.role; // Obten el rol del usuario del formulario
-    navigate(`/profile/${userRole}`); // Redirige al perfil correspondiente
+    if(userRole === "student"){
+      navigate('/login')
+    }
+    navigate(`/register2/${userRole}`); // Redirige al perfil correspondiente
   };
 
 
