@@ -31,9 +31,6 @@ router.get("/verify", verifyToken);
 router.post("/tutors", createTutor);
 router.get("/tutors", getTutors);
 
-
-// router.get("/tutors/:tutorId/availability", getTutorAvailability);
-
 router.get("/user-image", auth, getUserImage);
 router.post("/upload", auth, multerController);
 

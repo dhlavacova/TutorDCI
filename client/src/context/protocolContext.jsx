@@ -1,4 +1,8 @@
-import {createContext, useContext, useState} from "react";
+import {
+    createContext,
+    useContext,
+    useState
+} from "react";
 import {
     getTasksAllRequest,
 } from "../api/protocol.js";
@@ -7,14 +11,14 @@ const ProtocolContext = createContext();
 
 export const useProtocol = () => {
     const context = useContext(ProtocolContext);
-    if (!context) throw new Error("useTasks must be used within a TaskProvider");
+    if (!context) throw new Error("useTasks must be used within a ProtocolProvider");
     return context;
 };
 
-export function ProtocolProvider({children}) {
+export function ProtocolProvider({ children }) {
 
     const [allProtocols, setAllProtocols] = useState([]); // Nuevo estado para todas las tareas [
-const[studentName, setStudentName] = useState([]);
+    const [studentName, setStudentName] = useState([]);
 
     const getAllProtocols = async () => {
         try {

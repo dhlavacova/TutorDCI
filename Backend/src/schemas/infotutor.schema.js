@@ -17,5 +17,3 @@ export const tutorSchema = z.object({
   platformLink: z.string().min(1).max(255),
   // profileImage: z.string().min(1).max(255), // Almacenar la URL de la imagen
 });
-
-

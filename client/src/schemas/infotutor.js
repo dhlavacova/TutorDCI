@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const tutorSchema = z.object({
+
   course: z.string().min(1).max(255).refine((value) => !!value, {
     message: "Course is required",
   }),

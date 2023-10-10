@@ -12,6 +12,7 @@ import passwordRoutes from "./routes/password.routes.js";
 
 
 const app = express();
+app.disable('x-powered-by')
 
 app.use(
   cors({

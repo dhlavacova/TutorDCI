@@ -1,7 +1,14 @@
 import mongoose from "mongoose";
 
+// Teaching Unit teachingUnitSchema
+
 const tutorSchema = new mongoose.Schema({
- 
+
+  tutorName: {
+    type: "string",
+    required: true,
+  },
+
   course: {
     type: String,
     required: true,
@@ -10,7 +17,7 @@ const tutorSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  availability: [
+  availability:[ 
     {
       day: String,
       time: String,
