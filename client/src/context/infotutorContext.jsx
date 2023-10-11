@@ -36,7 +36,6 @@ export function InfoTutorProvider({ children }) {
             value={{
                 allInfoTutors,
                 getAllInfoTutors,
-               /* createTutor,*/
             }}
         >
             {children}

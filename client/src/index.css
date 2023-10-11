@@ -4,6 +4,7 @@
 
 body {
   margin: 0;
+  background-color: #e8e8e8;
   color: #333;
   /* background: linear-gradient(to bottom, #87CEFA, #f3f3f4); */
   padding: 0;
@@ -11,13 +12,12 @@ body {
   flex-direction: column;
   min-height: 100vh;
   background-size: cover;
-  
+
 }
 
 #root {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  
-  
 }
+
