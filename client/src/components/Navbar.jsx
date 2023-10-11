@@ -52,8 +52,8 @@ const isRegisterPage2 = location.pathname === "/register2/:role";
 
                 </li>
                 <li>
-                  <ButtonLink to="/register">Get Started as student</ButtonLink>
-                  <ButtonLink to="/register">Get Started as tutor</ButtonLink>
+                  <ButtonLink to="/register">Get Started </ButtonLink>
+
                 </li>
               </>
             )

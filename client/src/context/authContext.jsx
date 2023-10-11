@@ -27,7 +27,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
 const [tutorClass, setTutorClass] = useState(null)
@@ -46,7 +46,7 @@ const [tutorClass, setTutorClass] = useState(null)
       const res = await registerRequest(user);
       if (res.status === 200) {
         setUser(res.data);
-        setIsAuthenticated(true); // Asegúrate de establecer isAuthenticated en true aquí
+        setIsAuthenticated(false); // Asegúrate de establecer isAuthenticated en true aquí
       }
     } catch (error) {
       console.log(error.response.data);

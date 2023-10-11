@@ -4,7 +4,8 @@ import {
     useState
 } from "react";
 import {
-   
+    getTAvaibilityRequer,
+
     getTutors
 } from "../api/infotutor.js";
 
@@ -19,7 +20,7 @@ export const useInfoTutor = () => {
 export function InfoTutorProvider({ children }) {
 
     const [allInfoTutors, setAllInfoTutors] = useState([]);
-
+ const[availibilityTutor,setAvailibilityTutor]=useState([])
 
     const getAllInfoTutors = async () => {
         try {
@@ -30,11 +31,22 @@ export function InfoTutorProvider({ children }) {
             console.error(error);
         }
     }
+    const getAvailibilityTutor = async () => {
+        try {
+            const res = await getTAvaibilityRequer();
+            setAvailibilityTutor(res.data);
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     return (
         <InfoTutorContext.Provider
             value={{
+                availibilityTutor,
                 allInfoTutors,
+getAvailibilityTutor,
                 getAllInfoTutors,
             }}
         >

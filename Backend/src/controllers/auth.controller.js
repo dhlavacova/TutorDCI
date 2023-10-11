@@ -107,8 +107,7 @@ export const login = async (req, res) => {
 export const verifyToken = async (req, res) => {
   const { token } = req.cookies;
   const { isLogged } = req.cookies;
-  console.log({ token })
-  console.log({ isLogged })
+
   if (!token) return res.send(false);
 
   jwt.verify(token, TOKEN_SECRET, async (error, user) => {

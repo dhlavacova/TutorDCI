@@ -2,6 +2,6 @@ POST http://localhost:4000/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "emi@emi.com",
-  "password": null
+  "email": "zuzanka@zuzanka.com",
+  "password": "zuzanka"
 }
