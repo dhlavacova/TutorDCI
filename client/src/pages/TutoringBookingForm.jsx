@@ -7,8 +7,11 @@ export function TutoringBookingForm() {
   const { allInfoTutors, getAllInfoTutors } = useInfoTutor();
   const [selectedTutor, setSelectedTutor] = useState(null);
   const [selectedDay, setSelectedDay] = useState("");
+  const [selectedDayNumber, setSelectedDayNumber] = useState(undefined);
   const [selectedTime, setSelectedTime] = useState("");
-
+  const [theme, setTheme] = useState("");
+  const [date, setDate] = useState("");
+const [timeout,setTimeout]=useState(undefined)
   useEffect(() => {
     getAllInfoTutors()
       .then(() => {
@@ -19,14 +22,37 @@ export function TutoringBookingForm() {
       });
   }, []);
 
+console.log({allInfoTutors});
   const handleTutorChange = (event) => {
     const tutorId = event.target.value;
     const selected = allInfoTutors.tutors.find((tutor) => tutor._id === tutorId);
     setSelectedTutor(selected);
     setSelectedDay("");
     setSelectedTime("");
-  };
 
+    const preDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const toDay = new Date();
+    const toDayWoche = toDay.getDay();
+
+    const futureDates = selected.availability.map(days => {
+      const dayIndex = preDay.indexOf(days.day);
+      const difference = dayIndex - toDayWoche;
+
+      const futureDate = new Date(toDay);
+      if (difference < 0) {
+        futureDate.setDate(toDay.getDate() + difference + 7);
+      } else if (difference === 0) {
+        return `Today (${toDay.getDate()}.${toDay.getMonth() + 1})`;
+      } else {
+        futureDate.setDate(toDay.getDate() + difference);
+      }
+
+      return `${preDay[dayIndex]} ${futureDate.getDate()}.${futureDate.getMonth() + 1}.${futureDate.getFullYear()} at  ${days.time} hours`;
+    });
+setTimeout(futureDates)
+    console.log({ futureDates });
+
+  };
   const handleDayChange = (event) => {
     const selectedDay = event.target.value;
     setSelectedDay(selectedDay);
@@ -36,6 +62,35 @@ export function TutoringBookingForm() {
     const selectedTime = event.target.value;
     setSelectedTime(selectedTime);
   };
+  const handleThemeChange= (event) => {
+    const theme=event.target.value;
+    setTheme(theme);
+  }
+  const handleDateChange = (event) => {
+    const choosedate = event.target.value;
+   /* const parts = choosedate.split(' ');
+    const day = parts[1].slice(0, -1); // "16"
+    const month = parts[2].split('.')[0]; // "10"
+    const hours = parts[4].split(':')[0]; // "16"
+    const minutes = parts[4].split(':')[1]; // "30"
+
+    const date = new Date(2023, month - 1, day, hours, minutes); // Měsíce začínají od 0 v JavaScriptu
+
+    const formattedDate = date.toISOString();*/
+    setDate(choosedate);
+  };
+
+const sendDatainTask = (event) => {
+  event.preventDefault();
+  console.log('klik')
+  const data={
+    tutor:selectedTutor.tutorName,
+    theme:theme,
+    user:selectedTutor._id,
+date:date
+  }
+  console.log(data)
+}
 
   return (
     <div>
@@ -55,6 +110,8 @@ export function TutoringBookingForm() {
               type="text"
               name="theme"
               placeholder="Enter the theme"
+              value={theme}
+              onChange={handleThemeChange}
             />
             <Label htmlFor="tutorSelect">Choose a Tutor</Label>
             <select
@@ -67,6 +124,7 @@ export function TutoringBookingForm() {
                 allInfoTutors.tutors.map((tutor) => (
                   <option key={tutor._id} value={tutor._id}>
                     {tutor.tutorName}
+
                   </option>
                 ))
               ) : (
@@ -81,19 +139,22 @@ export function TutoringBookingForm() {
                 <Label htmlFor="daySelect">Choose a Day</Label>
                 <select
                   name="daySelect"
+                  onChange={handleDateChange}
                   className="block w-full bg-gray-200 text-black mt-2 mb-2 px-4 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-300"
-                  onChange={handleDayChange}
+                 /* onChange={handleDayChange}*/
                 >
+
                   <option value="">Select day</option>
-                  {selectedTutor.availability.map((book) => (
-                    <option key={book.day} value={book.day}>
-                      {book.day}
+                  {timeout.map((book) =>  (
+                    <option key={book} value={book}>
+                      {book}
+                      {console.log({book}) }
                     </option>
                   ))}
                 </select>
-               
+{/*
 
-                {selectedDay && (
+               {selectedDay && (
                   <div className="mt-4">
                     <Label htmlFor="timeSelect">Choose a Time</Label>
                     <select
@@ -111,21 +172,21 @@ export function TutoringBookingForm() {
                         ))}
                     </select>
                   </div>
-                )}
+               )}*/}
               </div>
             )}
-
+{/*
             {selectedDay && selectedTime && (
               <div className="mt-4">
                 <h3>Detalles de la reserva:</h3>
                 <p>Tutor: {selectedTutor.tutorName}</p>
                 <p>Fecha seleccionada: {selectedDay}</p>
                 <p>Hora seleccionada: {selectedTime}</p>
-                {/* Puedes agregar más detalles aquí si es necesario */}
+                 Puedes agregar más detalles aquí si es necesario
               </div>
-            )}
+            )}*/}
 
-            <Button type="submit">Confirm</Button>
+            <Button type="submit" onClick={sendDatainTask}>Confirm</Button>
           </form>
         </Card>
       </div>
