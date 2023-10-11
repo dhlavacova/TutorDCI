@@ -19,6 +19,7 @@ const Home = () => {
 
         <ButtonLink  >
           <Link to="/register">Get Started </Link>
+
         </ButtonLink>
 
 

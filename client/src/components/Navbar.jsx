@@ -13,7 +13,7 @@ export function Navbar() {
   // Verifica si la ruta actual es "/login" o "/register"
   const isLoginPage = location.pathname === "/login";
   const isRegisterPage = location.pathname === "/register";
-
+const isRegisterPage2 = location.pathname === "/register2/:role";
 
 
   return (
@@ -43,7 +43,7 @@ export function Navbar() {
             </>
           ) : (
             // Condiciona el renderizado de los botones en función de la ruta actual
-            (isLoginPage || isRegisterPage) ? null : (
+            (isLoginPage || isRegisterPage||isRegisterPage2) ? null : (
               <>
                 <li className="relative inline-block">
                   <Link to="/login" className="relative inline-block font-semibold py-3 px-4 rounded-full text-black transition overflow-hidden">
@@ -52,7 +52,8 @@ export function Navbar() {
 
                 </li>
                 <li>
-                  <ButtonLink to="/register">Get Started</ButtonLink>
+                  <ButtonLink to="/register">Get Started as student</ButtonLink>
+                  <ButtonLink to="/register">Get Started as tutor</ButtonLink>
                 </li>
               </>
             )

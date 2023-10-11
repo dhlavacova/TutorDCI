@@ -26,13 +26,16 @@ import { Navbar } from "./components/Navbar";
 import Footer from "./components/footer";
 import './index.css';
 import CreatTutorClass from "./components/SelectCours/CreatTutorClass.jsx";
-import { ClassTutorProvider } from "./context/creatTutorClassContext.jsx";
+
+//import {ClassTutorProvider} from "./context/creatTutorClassContext.jsx";
+
 
 function App() {
   return (
     <AuthProvider>
       <TaskProvider>
         <ProtocolProvider>
+
           <ClassTutorProvider>
             <InfoTutorProvider>
               <SettingsProvider>
