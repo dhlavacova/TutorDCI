@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useInfoTutor } from "../context/infotutorContext";
 import { Button, Card, Label, Input } from "../components/ui";
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+import { FaCalendar, FaClock, FaHourglass } from "react-icons/fa";
 
 export function TutoringBookingForm() {
   const { allInfoTutors, getAllInfoTutors } = useInfoTutor();
   const [selectedTutor, setSelectedTutor] = useState(null);
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
-  const [availableDays, setAvailableDays] = useState([]);
 
   useEffect(() => {
     getAllInfoTutors()
@@ -21,36 +19,24 @@ export function TutoringBookingForm() {
       });
   }, []);
 
-
   const handleTutorChange = (event) => {
     const tutorId = event.target.value;
     const selected = allInfoTutors.tutors.find((tutor) => tutor._id === tutorId);
-
-    if (selected) {
-      setSelectedTutor(selected);
-      setSelectedDay("");
-      setSelectedTime("");
-      setAvailableDays(selected.availability.map((book) => book.day));
-    } else {
-      setSelectedTutor(null);
-      setSelectedDay("");
-      setSelectedTime("");
-      setAvailableDays([]);
-    }
+    setSelectedTutor(selected);
+    setSelectedDay("");
+    setSelectedTime("");
   };
 
-  const handleDayChange = (date) => {
-    setSelectedDay(date);
+  const handleDayChange = (event) => {
+    const selectedDay = event.target.value;
+    setSelectedDay(selectedDay);
   };
-
 
   const handleTimeChange = (event) => {
     const selectedTime = event.target.value;
     setSelectedTime(selectedTime);
   };
 
-
-  // console.log("selectedDay:", selectedDay);
   return (
     <div>
       <header className="flex justify-between pl-10 pt-10">
@@ -93,14 +79,19 @@ export function TutoringBookingForm() {
             {selectedTutor && (
               <div className="mt-4">
                 <Label htmlFor="daySelect">Choose a Day</Label>
-                <Calendar
+                <select
+                  name="daySelect"
+                  className="block w-full bg-gray-200 text-black mt-2 mb-2 px-4 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-300"
                   onChange={handleDayChange}
-                  value={selectedDay}
-                 
-                 
-                />
-
-
+                >
+                  <option value="">Select day</option>
+                  {selectedTutor.availability.map((book) => (
+                    <option key={book.day} value={book.day}>
+                      {book.day}
+                    </option>
+                  ))}
+                </select>
+               
 
                 {selectedDay && (
                   <div className="mt-4">
@@ -112,7 +103,7 @@ export function TutoringBookingForm() {
                     >
                       <option value="">Select time</option>
                       {selectedTutor.availability
-                        .filter((book) => book.day === selectedDay.toISOString().split('T')[0])
+                        .filter((book) => book.day === selectedDay)
                         .map((book) => (
                           <option key={book.time} value={book.time}>
                             {book.time}
@@ -123,6 +114,17 @@ export function TutoringBookingForm() {
                 )}
               </div>
             )}
+
+            {selectedDay && selectedTime && (
+              <div className="mt-4">
+                <h3>Detalles de la reserva:</h3>
+                <p>Tutor: {selectedTutor.tutorName}</p>
+                <p>Fecha seleccionada: {selectedDay}</p>
+                <p>Hora seleccionada: {selectedTime}</p>
+                {/* Puedes agregar más detalles aquí si es necesario */}
+              </div>
+            )}
+
             <Button type="submit">Confirm</Button>
           </form>
         </Card>
