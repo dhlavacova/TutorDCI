@@ -36,7 +36,13 @@ function CreatTutorClass(props) {
     const availabilities = watch('availability');
     /*const {tutClass, errors: loginErrors} = useClassTutor();*/
     const navigate = useNavigate();
+    useEffect(() => {
+        if (user) {
+            setTutorName(user.username);
+        }
+    }, [user]);
     const onSubmit = async (data) => {
+       /* data.tutorName=user.username*/
         console.log('submit', data)
         await tutClass(data);
         navigate('/login')
@@ -47,11 +53,7 @@ function CreatTutorClass(props) {
         }*/
 
     }
-    useEffect(() => {
-        if (user) {
-            setTutorName(user.username);
-        }
-    }, [user]);
+
     return (
         <div className="h-[calc(100vh-100px)] flex items-center justify-center">
             <Card>

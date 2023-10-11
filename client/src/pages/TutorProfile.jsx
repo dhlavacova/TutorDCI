@@ -100,7 +100,7 @@ function TutorProfile() {
 
                   { availibilityTutor.map((tutor,index)=> ( tutor.availability.map(avail=> (
                       <ul>
-                        <li key={index} className="w-2/3 px-2">
+                        <li key={index} className="w-1/2 px-2">
 
                           <Label>
                             <FaCalendar/> Day: {avail.day}
