@@ -30,9 +30,7 @@ function CreatTutorClass(props) {
     const addAvailability = () => {
         append({day: '', time: '', duration: ''});
     }
-    const resetAvailability = () => {
-        remove({day: '', time: '', duration: ''});
-    }
+
     const availabilities = watch('availability');
     /*const {tutClass, errors: loginErrors} = useClassTutor();*/
     const navigate = useNavigate();
@@ -42,15 +40,11 @@ function CreatTutorClass(props) {
         }
     }, [user]);
     const onSubmit = async (data) => {
-       /* data.tutorName=user.username*/
+
         console.log('submit', data)
         await tutClass(data);
         navigate('/login')
-        /*if (isAuthenticated) {
-            navigate('/book')
-        } else {
-            navigate('/login')
-        }*/
+
 
     }
 
@@ -65,17 +59,12 @@ function CreatTutorClass(props) {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Label htmlFor="tutorName"> </Label>
                     <Input
-                        type="text"
-                        name="tutorName"
-                        value={tutorName}
-                        {...register("tutorName", {required: true})}
-                    />
-                   {/* <input
                         type="hidden"
                         name="tutorName"
                         value={user.username}
-                        // onChange={(e) => setTutorName(e.target.value)}
-                    />*/}
+                        {...register("tutorName", {required: true})}
+                    />
+
                     <Label htmlFor="course"> Select the course you wish to teach</Label>
                     <select {...register("course")} required>
                         <option value="">Select a course</option>
