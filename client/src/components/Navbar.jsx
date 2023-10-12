@@ -13,7 +13,10 @@ export function Navbar() {
   // Verifica si la ruta actual es "/login" o "/register"
   const isLoginPage = location.pathname === "/login";
   const isRegisterPage = location.pathname === "/register";
-const isRegisterPage2 = location.pathname === "/register2/:role";
+  const isRegisterPage2 = location.pathname.startsWith("/register2/");
+const ispagenotfound = location.pathname === "*"
+
+  // const isRegisterPage2 = location.pathname === "/register2/:role";
 
 
   return (
@@ -31,23 +34,23 @@ const isRegisterPage2 = location.pathname === "/register2/:role";
           {isAuthenticated ? (
             <>
               <li>
-                <Link
+                {/* <Link
                   to="/add-task"
                   className="bg-slate-200 hover:bg-slate-300 text-black font-semibold rounded-full py-2 px-5 inline-flex items-center"
-                >Book now <ImFileEmpty className="ml-2" />
-                </Link>
+                >Book now <ImFileEmpty className="ml-2 animate-icon" />
+                </Link> */}
               </li>
-              <li>
+              <li >
                 <UserImage />
               </li>
             </>
           ) : (
             // Condiciona el renderizado de los botones en función de la ruta actual
-            (isLoginPage || isRegisterPage||isRegisterPage2) ? null : (
+            (isLoginPage || isRegisterPage || isRegisterPage2 || ispagenotfound) ? null : (
               <>
                 <li className="relative inline-block">
                   <Link to="/login" className="relative inline-block font-semibold py-3 px-4 rounded-full text-black transition overflow-hidden">
-                    Sign in <div className="absolute inset-0 bg-transparent opacity-0 backdrop-blur-lg hover:opacity-50 rounded-full transition "></div>
+                    Sign in <div className="absolute inset-0 bg-transparent opacity-0 backdrop-blur-lg hover:opacity-80 rounded-full transition "></div>
                   </Link>
 
                 </li>
