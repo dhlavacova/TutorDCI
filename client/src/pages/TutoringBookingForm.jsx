@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useInfoTutor} from "../context/infotutorContext";
 import {Button, Card, Input, Label} from "../components/ui";
+import {useTasks} from "../context/tasksContext.jsx";
 
 export function TutoringBookingForm() {
     const {allInfoTutors, getAllInfoTutors} = useInfoTutor();
@@ -11,6 +12,7 @@ export function TutoringBookingForm() {
     const [theme, setTheme] = useState("");
     const [date, setDate] = useState("");
     const [timeout, setTimeout] = useState({})
+    const{createTask} = useTasks()
     useEffect(() => {
         getAllInfoTutors()
             .then(() => {
@@ -61,7 +63,7 @@ export function TutoringBookingForm() {
         console.log({futureDates});
 
     };
-    const handleDayChange = (event) => {
+/*    const handleDayChange = (event) => {
         const selectedDay = event.target.value;
         setSelectedDay(selectedDay);
     };
@@ -69,27 +71,17 @@ export function TutoringBookingForm() {
     const handleTimeChange = (event) => {
         const selectedTime = event.target.value;
         setSelectedTime(selectedTime);
-    };
+    };*/
     const handleThemeChange = (event) => {
         const theme = event.target.value;
         setTheme(theme);
     }
     const handleDateChange = (event) => {
         const choosedate = event.target.value;
-        /* const parts = choosedate.match(/(\d{2})\.(\d{2})\.(\d{4}) at (\d{2}):(\d{2})/);
-
-         const year = parts[3];
-         const month = parts[2];
-         const day = parts[1];
-         const hour = parts[4];
-         const minute = parts[5];
-
-         const localDate = new Date(Date.UTC(year, month - 1, day, hour, minute));
-         const formattedDate = localDate.toISOString();*/
         setDate(choosedate);
     };
 
-    const sendDatainTask = (event) => {
+    const sendDatainTask = async (event) => {
         event.preventDefault();
         console.log('klik')
         const data = {
@@ -98,6 +90,7 @@ export function TutoringBookingForm() {
             date: date
         }
         console.log(data)
+        await createTask(data);
     }
 
     return (
