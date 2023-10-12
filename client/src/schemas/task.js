@@ -7,7 +7,7 @@ export const BookingTutorSchema = z.object({
   tutor: z.string({
     required_error: "Is required",
   }),
-  // date: z.string({
-  //   required_error: "Date is required",
-  // }),
+   date: z.string({
+     required_error: "Date is required",
+   }),
 });

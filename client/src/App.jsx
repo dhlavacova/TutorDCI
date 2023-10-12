@@ -36,7 +36,7 @@ function App() {
       <TaskProvider>
         <ProtocolProvider>
 
-          {/* <ClassTutorProvider> */}
+
             <InfoTutorProvider>
               <SettingsProvider>
                 <BrowserRouter>
@@ -69,7 +69,7 @@ function App() {
                 </BrowserRouter>
               </SettingsProvider>
             </InfoTutorProvider>
-          {/* </ClassTutorProvider> */}
+
         </ProtocolProvider>
       </TaskProvider>
     </AuthProvider>
