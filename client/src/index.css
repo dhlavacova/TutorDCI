@@ -4,15 +4,13 @@
 
 body {
   margin: 0;
-  background-color: #e8e8e8;
   color: #333;
-  /* background: linear-gradient(to bottom, #87CEFA, #f3f3f4); */
+  background-image: url('bg/bgD&OS.png');
+  background-size: cover;
   padding: 0;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-size: cover;
-
 }
 
 #root {
@@ -21,3 +19,18 @@ body {
   flex-direction: column;
 }
 
+.animate-icon {
+  animation: scale 2s infinite; /* Tu animación CSS específica para el icono "File Empty" */
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
