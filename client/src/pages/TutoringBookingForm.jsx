@@ -50,8 +50,8 @@ export function TutoringBookingForm() {
             if (difference < 0) {
                 futureDate.setDate(toDay.getDate() + difference + 7);
             } else if (difference === 0) {
-                futureDates[toDay.toISOString()] = `${preDay[dayIndex]} ${toDay.getDate()}.${toDay.getMonth() + 1} at ${days.time}`;
-                return;
+                futureDates[futureDate.toISOString()] = `${preDay[dayIndex]} ${toDay.getDate()}.${toDay.getMonth() + 1} at ${days.time}`;
+                return  futureDates[toDay.toISOString()] ;
             } else {
                 futureDate.setDate(toDay.getDate() + difference);
             }
