@@ -24,7 +24,6 @@ function TaskCard({ task }) {
             const dateOptions = { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' };
             /*const timeOptions = { hour: '2-digit', minute: '2-digit' };*/
             if (!(datum instanceof Date)) {
-                console.log("datum was not a date object");
                 datum = new Date(datum);
             }
             const datePart = datum.toLocaleDateString('en-GB', dateOptions);
@@ -41,7 +40,6 @@ function TaskCard({ task }) {
         try{
             const dateOptions = { hour: '2-digit', minute: '2-digit' };
             if (!(hours instanceof Date)) {
-                console.log("datum was not a date object");
               hours= new Date(hours);
             }
             const timePart = hours.toLocaleTimeString('en-GB', dateOptions);
@@ -51,11 +49,11 @@ function TaskCard({ task }) {
             console.error("Error in getCurrentDate:", error);
             return "Invalid Date";
         }
-        } function addHours(time) {
+        }
+        function addHours(time) {
         try{
             const dateOptions = { hour: '2-digit', minute: '2-digit' };
             if (!(time instanceof Date)) {
-                console.log("datum was not a date object");
               time= new Date(time)
             }
             time.setHours(time.getHours() + 1)
