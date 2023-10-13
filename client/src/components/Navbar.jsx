@@ -34,11 +34,11 @@ const ispagenotfound = location.pathname === "*"
           {isAuthenticated ? (
             <>
               <li>
-                {/* <Link
+                 <Link
                   to="/add-task"
                   className="bg-slate-200 hover:bg-slate-300 text-black font-semibold rounded-full py-2 px-5 inline-flex items-center"
                 >Book now <ImFileEmpty className="ml-2 animate-icon" />
-                </Link> */}
+                </Link>
               </li>
               <li >
                 <UserImage />

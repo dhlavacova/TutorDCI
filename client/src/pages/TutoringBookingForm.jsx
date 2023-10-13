@@ -50,13 +50,13 @@ export function TutoringBookingForm() {
             if (difference < 0) {
                 futureDate.setDate(toDay.getDate() + difference + 7);
             } else if (difference === 0) {
-                futureDates[toDay.toISOString()] = `Today (${toDay.getDate()}.${toDay.getMonth() + 1})`;
+                futureDates[toDay.toISOString()] = `${preDay[dayIndex]} ${toDay.getDate()}.${toDay.getMonth() + 1} at ${days.time}`;
                 return;
             } else {
                 futureDate.setDate(toDay.getDate() + difference);
             }
 
-            futureDates[futureDate.toISOString()] = `${preDay[dayIndex]} ${futureDate.getDate()}.${futureDate.getMonth() + 1}.${futureDate.getFullYear()} at ${days.time} hours`;
+            futureDates[futureDate.toISOString()] = `${preDay[dayIndex]} ${futureDate.getDate()}.${futureDate.getMonth() + 1}.${futureDate.getFullYear()} at ${days.time}`;
         });
 
         setTimeout(futureDates)

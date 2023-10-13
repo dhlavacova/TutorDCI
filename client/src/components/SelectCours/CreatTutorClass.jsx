@@ -93,11 +93,9 @@ function CreatTutorClass(props) {
                                 {...register(`availability[${index}].duration`)}
                                 className="w-full bg-gray-200 px-2 py-2 rounded-md text-black mr-2 mt-2"
                                 required>
-                                <option value="">Hour</option>
-                                <option value="1">1 hour</option>
-                                <option value="2">2 hours</option>
-                                <option value="3">3 hours</option>
-                                <option value="4">4 hours</option>
+                                <option value="">Select...</option>
+                                <option value="1">60 minutes</option>
+
                             </select>
                             <p>{errors.availability?.message}</p>
 
@@ -107,7 +105,7 @@ function CreatTutorClass(props) {
                             <select {...register(`availability[${index}].day`)}
 
                                 className="w-full bg-gray-200 mt-2 px-2 py-2 rounded-md text-black" required>
-                                <option value="">Day</option>
+                                <option value="">Select...</option>
                                 <option value="Monday">Monday</option>
                                 <option value="Tuesday">Tuesday</option>
                                 <option value="Wednesday">Wednesday</option>
@@ -124,7 +122,7 @@ function CreatTutorClass(props) {
                             <select {...register(`availability[${index}].time`)}
                                 className="w-full bg-gray-200 mt-2 px-2 py-2 rounded-md text-black "
                                 required>
-                                <option value="">Time</option>
+                                <option value="">Select..</option>
                                 <option value="16:00">16:00</option>
                                 <option value="16:30">16:30</option>
                                 <option value="17:00">17:00</option>

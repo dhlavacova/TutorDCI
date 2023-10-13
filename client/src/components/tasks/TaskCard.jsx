@@ -19,6 +19,55 @@ function TaskCard({ task }) {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+    function getCurrentDate(datum) {
+        try {
+            const dateOptions = { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' };
+            /*const timeOptions = { hour: '2-digit', minute: '2-digit' };*/
+            if (!(datum instanceof Date)) {
+                console.log("datum was not a date object");
+                datum = new Date(datum);
+            }
+            const datePart = datum.toLocaleDateString('en-GB', dateOptions);
+            console.log("datePart:", datePart)
+            return `${datePart}`
+        } catch (error) {
+            console.error("Error in getCurrentDate:", error);
+            return "Invalid Date";
+        }
+    }
+
+
+    function getCurrentHours(hours) {
+        try{
+            const dateOptions = { hour: '2-digit', minute: '2-digit' };
+            if (!(hours instanceof Date)) {
+                console.log("datum was not a date object");
+              hours= new Date(hours);
+            }
+            const timePart = hours.toLocaleTimeString('en-GB', dateOptions);
+            console.log("datePart:", timePart)
+            return `${timePart}`
+        } catch (error) {
+            console.error("Error in getCurrentDate:", error);
+            return "Invalid Date";
+        }
+        } function addHours(time) {
+        try{
+            const dateOptions = { hour: '2-digit', minute: '2-digit' };
+            if (!(time instanceof Date)) {
+                console.log("datum was not a date object");
+              time= new Date(time)
+            }
+            time.setHours(time.getHours() + 1)
+            const timePart = time.toLocaleTimeString('en-GB', dateOptions);
+            console.log("datePart:", timePart)
+            return `${timePart}`
+        } catch (error) {
+            console.error("Error in getCurrentDate:", error);
+            return "Invalid Date";
+        }
+        }
+
 
   return (
     <div className="bg-gray-100 shadow-xl max-w-md m-10 p-10 rounded-md">
@@ -29,10 +78,10 @@ function TaskCard({ task }) {
       </header>
       <h2 className="text-2xl text-slate-700 font-bold mb-2">{task.theme}</h2>
       <div className="flex items-center mb-2">
-        <FiCalendar className="mr-2" /> Mittwoch, 18 september 2023
+        <FiCalendar className="mr-2" /> {getCurrentDate(task.date)}
       </div>
       <div className="flex items-center mb-2">
-        <FiClock className="mr-2" /> 20:00 - 21:00(GMT+2)
+        <FiClock className="mr-2" /> {getCurrentHours(task.date)}-{addHours(task.date)}
       </div>
       <div className="flex items-center mb-2">
         <FiUser className="mr-2" /> Participant: {user.username}

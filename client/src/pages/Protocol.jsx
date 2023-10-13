@@ -31,12 +31,8 @@ function Protocol() {
                 console.log("datum was not a date object");
                 datum = new Date(datum);
             }
-            const datePart = datum.toLocaleDateString('de-De', dateOptions);
-            /*const timePart = datum.toLocaleTimeString('en-US', timeOptions);*/
-
-            // console.log("getCurrentDate returned: ", `${datePart}`)
-
-
+            const datePart = datum.toLocaleDateString('en-GB', dateOptions);
+            console.log("datePart:", datePart)
             return `${datePart}`
         } catch (error) {
             console.error("Error in getCurrentDate:", error);
