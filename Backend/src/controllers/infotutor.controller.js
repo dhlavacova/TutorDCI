@@ -21,6 +21,7 @@ export const createTutorClass = async (req, res) => {
  * @param {import('express').Request} req - Express request object
  * @param {import('express').Response} res - Express response object
  */
+//wann ist verfügbar den Tutor :) seinen terminen (tutor Profil)
 export const getAvailibility = async (req, res) => {
 
   try {
@@ -30,18 +31,19 @@ export const getAvailibility = async (req, res) => {
     }
 else{
       const availibity = await Tutor.find({ tutorName: req.user.username });
-      console.log({availibity})
-    res.json(availibity)
+     console.log({availibity})
+    res.json(availibity);
   }
   }
   catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
-
+//filter for the studenten (my Booking form) hir kann er die Tutor suchen und reservation booken
 export const getTutors = async (req, res) => {
   try {
     const tutors = await Tutor.find();
+    console.log(tutors.map((tutor) => tutor.availability.map((available) => available.day)))
     res.json({ tutors });
   } catch (error) {
     res.status(500).json({ message: error.message });
