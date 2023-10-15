@@ -7,7 +7,6 @@ export function TutoringBookingForm() {
     const {allInfoTutors, getAllInfoTutors} = useInfoTutor();
     const [selectedTutor, setSelectedTutor] = useState(null);
     const [selectedDay, setSelectedDay] = useState("");
-    const [selectedDayNumber, setSelectedDayNumber] = useState(undefined);
     const [selectedTime, setSelectedTime] = useState("");
     const [theme, setTheme] = useState("");
     const [date, setDate] = useState("");
