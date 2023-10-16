@@ -45,17 +45,17 @@ export function TutoringBookingForm() {
             futureDate.setMinutes(minutes)
             futureDate.setSeconds(0)
             futureDate.setMilliseconds(0)
-
+            console.log('date:', days.date)
             if (difference < 0) {
                 futureDate.setDate(toDay.getDate() + difference + 7);
             } else if (difference === 0) {
-                futureDates[futureDate.toISOString()] = `${preDay[dayIndex]} ${toDay.getDate()}.${toDay.getMonth() + 1} at ${days.time}`;
+                futureDates[days.date] = `${preDay[dayIndex]} ${toDay.getDate()}.${toDay.getMonth() + 1} at ${days.time}`;
                 return  futureDates[toDay.toISOString()] ;
             } else {
                 futureDate.setDate(toDay.getDate() + difference);
             }
 
-            futureDates[futureDate.toISOString()] = `${preDay[dayIndex]} ${futureDate.getDate()}.${futureDate.getMonth() + 1}.${futureDate.getFullYear()} at ${days.time}`;
+            futureDates[days.date] = `${preDay[dayIndex]} ${futureDate.getDate()}.${futureDate.getMonth() + 1}.${futureDate.getFullYear()} at ${days.time}`;
         });
 
         setTimeout(futureDates)
@@ -146,7 +146,7 @@ export function TutoringBookingForm() {
 
                                     <option value="">Select day</option>
                                     {Object.entries(timeout).map(([key, book]) => (
-                                        <option key={key} value={key}>
+                                        <option key={key} value={key} >
                                             {book}
                                         </option>
                                     ))}
