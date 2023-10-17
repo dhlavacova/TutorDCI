@@ -10,7 +10,7 @@ import Home from "./pages/HomePage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import StudentProfile from "./pages/StudentProfile";
-import TutorProfile from "./pages/TutorProfile";
+import { TutorProfile } from "./pages/TutorProfile";
 import Setting from "./pages/Setting.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import NotFound from './pages/NotFound';

@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+import React, {
+  useEffect,
+  useState
+} from "react";
+import axios from "../api/axios";
 import { useTasks } from "../context/tasksContext";
 import {
   Button,
@@ -6,13 +10,27 @@ import {
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
-  DropdownItem,
+  DropdownItem
 } from "@nextui-org/react";
 import { FiChevronDown } from "react-icons/fi";
 
 export default function ButtonClass({ task }) {
   const { deleteTask } = useTasks();
   const [selectedOption, setSelectedOption] = React.useState(new Set(["join"]));
+  const [platformLink, setPlatformLink] = useState("");
+
+  useEffect(() => {
+
+    axios.get("/auth/availibility").then((response) => {
+      // console.log("Response from API:", response.data); 
+      const tutorData = response.data;
+      // console.log("Tutor Data ", tutorData); 
+      setPlatformLink(tutorData[0].platformLink);
+    }).catch((error) => {
+
+      console.error("Error fetching platform link:", error);
+    });
+  }, []);
 
   const descriptionsMap = {
     join:
@@ -33,13 +51,18 @@ export default function ButtonClass({ task }) {
 
   const handleClick = () => {
     if (selectedOptionValue === "cancel") {
-      // Solo ejecuta la función de cancelación cuando se hace clic en "Cancel this class"
       if (task) {
         deleteTask(task._id);
       }
-    } else {
-      // Aquí puedes implementar la lógica para "Join class" o "Add to calendar"
-      // según los requisitos de tu aplicación.
+    } else if (selectedOptionValue === "join") {
+      // console.log("Platform Link:", platformLink); 
+      if (platformLink) {
+        window.location.href = platformLink;
+      }
+    } else if (selectedOptionValue === "calendar") {
+      // Implement the logic to add the class to the Google Calendar
+      // You may need to pass some data to the API to add the event to the calendar.
+      // Example: axios.post('/api/add-to-calendar', { event: task, platformLink });
     }
   };
 
