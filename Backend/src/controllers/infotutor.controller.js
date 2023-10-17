@@ -62,11 +62,12 @@ export const getTutors = async (req, res) => {
                 if (difference < 0) {
                     futureDate.setDate(toDay.getDate() + difference + 7);
                 } else if (difference === 0) {
-
-                    return (days.date = futureDate.toISOString());
+console.log(`${preDay[dayIndex]} ${toDay.getDate()}.${toDay.getMonth() + 1} at ${days.time}`)
+                    return (days.date = futureDate.toISOString(), days.dateforUser=`${preDay[dayIndex]} ${toDay.getDate()}.${toDay.getMonth() + 1} at ${days.time}`);
                 } else {
                     futureDate.setDate(toDay.getDate() + difference);
                 }
+                days.dateforUser=`${preDay[dayIndex]} ${futureDate.getDate()}.${futureDate.getMonth() + 1}.${futureDate.getFullYear()} at ${days.time}`
                 days.date = futureDate.toISOString();
             })
 

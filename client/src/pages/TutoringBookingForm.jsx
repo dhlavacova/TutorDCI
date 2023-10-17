@@ -10,7 +10,7 @@ export function TutoringBookingForm() {
     const [selectedTime, setSelectedTime] = useState("");
     const [theme, setTheme] = useState("");
     const [date, setDate] = useState("");
-    const [timeout, setTimeout] = useState({})
+    //const [isreserviert, setIsreserviert] = useState(false)
     const{createTask} = useTasks()
     useEffect(() => {
         getAllInfoTutors()
@@ -30,36 +30,6 @@ export function TutoringBookingForm() {
         setSelectedDay("");
         setSelectedTime("");
 
-        const preDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        const toDay = new Date();
-        const toDayWoche = toDay.getDay();
-
-        const futureDates = {};
-        selected.availability.forEach(days => {
-            const dayIndex = preDay.indexOf(days.day);
-            const difference = dayIndex - toDayWoche;
-
-            const futureDate = new Date(toDay);
-            const [hours, minutes] = days.time.split(":")
-            futureDate.setHours(hours)
-            futureDate.setMinutes(minutes)
-            futureDate.setSeconds(0)
-            futureDate.setMilliseconds(0)
-            console.log('date:', days.date)
-            if (difference < 0) {
-                futureDate.setDate(toDay.getDate() + difference + 7);
-            } else if (difference === 0) {
-                futureDates[days.date] = `${preDay[dayIndex]} ${toDay.getDate()}.${toDay.getMonth() + 1} at ${days.time}`;
-                return  futureDates[toDay.toISOString()] ;
-            } else {
-                futureDate.setDate(toDay.getDate() + difference);
-            }
-
-            futureDates[days.date] = `${preDay[dayIndex]} ${futureDate.getDate()}.${futureDate.getMonth() + 1}.${futureDate.getFullYear()} at ${days.time}`;
-        });
-
-        setTimeout(futureDates)
-        console.log({futureDates});
 
     };
 /*    const handleDayChange = (event) => {
@@ -80,7 +50,8 @@ export function TutoringBookingForm() {
         setDate(choosedate);
     };
 
-    const sendDatainTask = async (event) => {
+   async function sendDatainTask(event) {
+    /*const sendDatainTask = async (event) => {*/
         event.preventDefault();
         console.log('klik')
         const data = {
@@ -91,7 +62,7 @@ export function TutoringBookingForm() {
         console.log(data)
         await createTask(data);
     }
-
+console.log({selectedTutor})
     return (
         <div>
             <header className="flex justify-between pl-10 pt-10">
@@ -122,7 +93,7 @@ export function TutoringBookingForm() {
                             <option value="">Select tutor</option>
                             {allInfoTutors && allInfoTutors.tutors ? (
                                 allInfoTutors.tutors.map((tutor) => (
-                                    <option key={tutor._id} value={tutor._id}>
+                                    <option key={tutor._id} value={tutor._id} >
                                         {tutor.tutorName}
 
                                     </option>
@@ -141,49 +112,22 @@ export function TutoringBookingForm() {
                                     name="daySelect"
                                     onChange={handleDateChange}
                                     className="block w-full bg-gray-200 text-black mt-2 mb-2 px-4 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-300"
-                                    /* onChange={handleDayChange}*/
                                 >
-
                                     <option value="">Select day</option>
-                                    {Object.entries(timeout).map(([key, book]) => (
-                                        <option key={key} value={key} >
-                                            {book}
-                                        </option>
-                                    ))}
+                                    {selectedTutor.availability.map((day) => {
+                                        const isReserved = day.isreserviert;
+                                        return (
+                                            <option
+                                                key={day._id}
+                                                value={day.date}
+                                                className={isReserved ? "text-red-500" : "text-stone-950"}>
+                                                {day.dateforUser}
+                                            </option>
+                                        );
+                                    })}
                                 </select>
-                                {/*
-
-               {selectedDay && (
-                  <div className="mt-4">
-                    <Label htmlFor="timeSelect">Choose a Time</Label>
-                    <select
-                      name="timeSelect"
-                      className="block w-full bg-gray-200 text-black mt-2 mb-2 px-4 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-300"
-                      onChange={handleTimeChange}
-                    >
-                      <option value="">Select time</option>
-                      {selectedTutor.availability
-                        .filter((book) => book.day === selectedDay)
-                        .map((book) => (
-                          <option key={book.time} value={book.time}>
-                            {book.time}
-                          </option>
-                        ))}
-                    </select>
-                  </div>
-               )}*/}
                             </div>
                         )}
-                        {/*
-            {selectedDay && selectedTime && (
-              <div className="mt-4">
-                <h3>Detalles de la reserva:</h3>
-                <p>Tutor: {selectedTutor.tutorName}</p>
-                <p>Fecha seleccionada: {selectedDay}</p>
-                <p>Hora seleccionada: {selectedTime}</p>
-                 Puedes agregar más detalles aquí si es necesario
-              </div>
-            )}*/}
 
                         <Button type="submit" onClick={sendDatainTask}>Confirm</Button>
                     </form>
