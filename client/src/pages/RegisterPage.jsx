@@ -6,6 +6,7 @@ import { Card, Message, Button, Input, Label } from "../components/ui";
 import { useForm } from "react-hook-form";
 import { registerSchema } from "../schemas/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
+import logo from "/d-os.svg";
 
 function Register() {
   const { signup, errors: registerErrors, isAuthenticated } = useAuth();
@@ -19,17 +20,16 @@ function Register() {
   const navigate = useNavigate();
 
   const onSubmit = async (value) => {
-
-    console.log(value)
-    console.log(value.role)
+    console.log(value);
+    console.log(value.role);
     await signup(value); // Suponiendo que signup establece el rol del usuario en el backend
-    const userRole = value.role; //studen// Obten el rol del usuario del formulario
+    const userRole = value.role; // Obten el rol del usuario del formulario
 
-    if(userRole === "student"){
-      navigate('/login')
+    if (userRole === "student") {
+      navigate(`/register3/${userRole}`);
+    } else {
+      navigate(`/register2/${userRole}`);
     }
-    else{navigate(`/register2/${userRole}`); }// Redirige al perfil correspondiente
-
   };
 
 
@@ -37,11 +37,14 @@ function Register() {
 
   return (
     <div className="h-[calc(100vh-100px)] flex items-center justify-center">
-     
+
       <Card >
         {registerErrors.map((error, i) => (
           <Message message={error} key={i} />
         ))}
+
+
+        <img src={logo} alt="Logo" className="w-20 h-20 mb-4 mx-auto" />
         <h1 className="text-2xl font-bold">Join Our Educational Community</h1>
         <p className="text-sm mb-9">Embark on your educational journey by registering as a tutor or student.</p>
 

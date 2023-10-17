@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from "react";
-import {useInfoTutor} from "../context/infotutorContext";
-import {Button, Card, Input, Label} from "../components/ui";
-import {useTasks} from "../context/tasksContext.jsx";
+import React, { useEffect, useState } from "react";
+import { useInfoTutor } from "../context/infotutorContext";
+import { Button, Card, Input, Label } from "../components/ui";
+import { useTasks } from "../context/tasksContext.jsx";
 
 export function TutoringBookingForm() {
-    const {allInfoTutors, getAllInfoTutors} = useInfoTutor();
+    const { allInfoTutors, getAllInfoTutors } = useInfoTutor();
     const [selectedTutor, setSelectedTutor] = useState(null);
     const [selectedDay, setSelectedDay] = useState("");
     const [selectedDayNumber, setSelectedDayNumber] = useState(undefined);
@@ -12,7 +12,7 @@ export function TutoringBookingForm() {
     const [theme, setTheme] = useState("");
     const [date, setDate] = useState("");
     const [timeout, setTimeout] = useState({})
-    const{createTask} = useTasks()
+    const { createTask } = useTasks()
     useEffect(() => {
         getAllInfoTutors()
             .then(() => {
@@ -23,8 +23,7 @@ export function TutoringBookingForm() {
             });
     }, []);
 
-    console.log({allInfoTutors});
-    const handleTutorChange = (event) => {
+       const handleTutorChange = (event) => {
         const tutorId = event.target.value;
         const selected = allInfoTutors.tutors.find((tutor) => tutor._id === tutorId);
         setSelectedTutor(selected);
@@ -51,7 +50,7 @@ export function TutoringBookingForm() {
                 futureDate.setDate(toDay.getDate() + difference + 7);
             } else if (difference === 0) {
                 futureDates[futureDate.toISOString()] = `${preDay[dayIndex]} ${toDay.getDate()}.${toDay.getMonth() + 1} at ${days.time}`;
-                return  futureDates[toDay.toISOString()] ;
+                return futureDates[toDay.toISOString()];
             } else {
                 futureDate.setDate(toDay.getDate() + difference);
             }
@@ -60,18 +59,18 @@ export function TutoringBookingForm() {
         });
 
         setTimeout(futureDates)
-        console.log({futureDates});
+        console.log({ futureDates });
 
     };
-/*    const handleDayChange = (event) => {
-        const selectedDay = event.target.value;
-        setSelectedDay(selectedDay);
-    };
-
-    const handleTimeChange = (event) => {
-        const selectedTime = event.target.value;
-        setSelectedTime(selectedTime);
-    };*/
+    /*    const handleDayChange = (event) => {
+            const selectedDay = event.target.value;
+            setSelectedDay(selectedDay);
+        };
+    
+        const handleTimeChange = (event) => {
+            const selectedTime = event.target.value;
+            setSelectedTime(selectedTime);
+        };*/
     const handleThemeChange = (event) => {
         const theme = event.target.value;
         setTheme(theme);
@@ -142,7 +141,7 @@ export function TutoringBookingForm() {
                                     name="daySelect"
                                     onChange={handleDateChange}
                                     className="block w-full bg-gray-200 text-black mt-2 mb-2 px-4 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-300"
-                                    /* onChange={handleDayChange}*/
+                                /* onChange={handleDayChange}*/
                                 >
 
                                     <option value="">Select day</option>

@@ -20,7 +20,7 @@ export const useInfoTutor = () => {
 export function InfoTutorProvider({ children }) {
 
     const [allInfoTutors, setAllInfoTutors] = useState([]);
- const[availibilityTutor,setAvailibilityTutor]=useState([])
+    const [availibilityTutor, setAvailibilityTutor] = useState([])
 
     const getAllInfoTutors = async () => {
         try {
@@ -46,7 +46,7 @@ export function InfoTutorProvider({ children }) {
             value={{
                 availibilityTutor,
                 allInfoTutors,
-getAvailibilityTutor,
+                getAvailibilityTutor,
                 getAllInfoTutors,
             }}
         >

@@ -35,7 +35,6 @@ function TaskCard({ task }) {
         }
     }
 
-
     function getCurrentHours(hours) {
         try{
             const dateOptions = { hour: '2-digit', minute: '2-digit' };
@@ -43,7 +42,7 @@ function TaskCard({ task }) {
               hours= new Date(hours);
             }
             const timePart = hours.toLocaleTimeString('en-GB', dateOptions);
-            console.log("datePart:", timePart)
+            // console.log("datePart:", timePart)
             return `${timePart}`
         } catch (error) {
             console.error("Error in getCurrentDate:", error);
@@ -58,7 +57,7 @@ function TaskCard({ task }) {
             }
             time.setHours(time.getHours() + 1)
             const timePart = time.toLocaleTimeString('en-GB', dateOptions);
-            console.log("datePart:", timePart)
+            // console.log("datePart:", timePart)
             return `${timePart}`
         } catch (error) {
             console.error("Error in getCurrentDate:", error);
@@ -85,7 +84,7 @@ function TaskCard({ task }) {
         <FiUser className="mr-2" /> Participant: {user.username}
       </div>
       <div className="flex items-center mb-2">
-        <FiVideo className="mr-2" /> Zoom link
+        <FiVideo className="mr-2" /> Zoom link {task.platformLink}
       </div>
       <p className="text-slate-500 text-sm italic ml-6 mb-4">
         Zoom link will be provided 5 minutes before the class.
@@ -93,43 +92,6 @@ function TaskCard({ task }) {
 
       <ButtonClass task={task} />
 
-{/* other button  aber besser nicht verwendet */}
-      {/* <div className="flex">
-        <button
-          className="bg-slate-500 text-white font-bold py-2 px-4 rounded-l-lg hover:bg-slate-600"
-          onClick={() => {
-            // Agrega la lógica para unirte a la clase aquí
-          }}
-        >
-          Join class
-        </button>
-        <div className="relative inline-block">
-          <button
-            onClick={toggleMenu}
-            className="bg-slate-200 text-black font-bold py-4 px-4 rounded-r-lg hover:bg-slate-200"
-          >
-            <FiChevronDown />
-          </button>
-          {isMenuOpen && (
-            <div className="origin-top-right absolute right-0 mt-2 w-44 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-              <button
-                onClick={() => deleteTask(task._id)}
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 w-full text-left"
-              >
-                Cancel this class
-              </button>
-              <button
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 w-full text-left"
-                onClick={() => {
-                  // Agrega la lógica para agregar a calendario aquí
-                }}
-              >
-                Add to calendar
-              </button>
-            </div>
-          )}
-        </div>
-      </div> */}
     </div>
   );
 }

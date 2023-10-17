@@ -23,10 +23,10 @@ const Home = () => {
       </section>
 
       {/* Sección de la derecha */}
-      <section className="py-40 w-1/2 float-right">
+      <section className="py-20 w-1/2 float-right">
         <div className="container text-right">
           <img
-            src="img/isometric-vr-game-headset.gif"
+            src="img/profile.png"
             alt="Descripción de la imagen"
             className="w-full max-h-100"
           />
