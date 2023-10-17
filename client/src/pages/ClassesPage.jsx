@@ -44,7 +44,7 @@ export function ClassesPage() {
         </div>
       ) : (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-0">
-          {tasks.map((task) => (
+          {tasks.map((task)=> (
             <TaskCard task={task} key={task._id} />
           ))}
         </div>
