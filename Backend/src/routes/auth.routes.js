@@ -6,19 +6,26 @@ import {
   verifyToken,
 } from "../controllers/auth.controller.js";
 import { validateSchema } from "../middlewares/validator.middleware.js";
-import { loginSchema, registerSchema } from "../schemas/auth.schema.js";
+import {
+  loginSchema,
+  registerSchema,
+} from "../schemas/auth.schema.js";
 import { auth } from "../middlewares/auth.middleware.js";
 import { tutorSchema } from "../schemas/infotutor.schema.js";
-import { getUserImage } from "../controllers/user-controller.js";
-
-import multerController from '../controllers/multer-controller.js';
-
-
+import { studentSchema } from "../schemas/infostudent.schema.js"
 
 import {
-  createTutorClass, getAvailibility,
+  createTutorClass,
+  getAvailibility,
   getTutors,
 } from "../controllers/infotutor.controller.js";
+import {
+  createStudentClass,
+  getStudents,
+} from '../controllers/infostudent.controller.js'
+
+import { getUserImage } from "../controllers/user-controller.js";
+import multerController from '../controllers/multer-controller.js';
 
 
 
@@ -32,8 +39,12 @@ router.get("/verify", verifyToken);
 
 
 router.get("/tutors", getTutors);
-router.get("/availibility", auth,getAvailibility);
-router.post("/tutors2", validateSchema(tutorSchema),createTutorClass);
+router.get("/availibility", auth, getAvailibility);
+router.post("/tutors2", validateSchema(tutorSchema), createTutorClass);
+
+
+router.get("/students", getStudents);
+router.post("/students/info", validateSchema(studentSchema),createStudentClass);
 
 
 router.get("/user-image", auth, getUserImage);

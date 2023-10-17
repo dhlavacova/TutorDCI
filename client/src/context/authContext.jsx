@@ -15,7 +15,8 @@ import {
 //import{createTutorClassRequer} from "../api/infotutor.js"
 
 import Cookies from "js-cookie";
-import {createTutorClassRequer} from "../api/infotutor.js";
+import { createTutorClassRequer } from "../api/infotutor.js";
+import { createStudentClass } from '../api/infostudent.js';
 
 const AuthContext = createContext();
 
@@ -30,7 +31,8 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
-const [tutorClass, setTutorClass] = useState(null)
+  const [tutorClass, setTutorClass] = useState(null);
+  const [studentClass, setStudentClass] = useState(null);
   // clear errors after 5 seconds
   useEffect(() => {
     if (errors.length > 0) {
@@ -54,17 +56,21 @@ const [tutorClass, setTutorClass] = useState(null)
     }
   };
 
-  const signin = async (user) => {
-    try {
-      const res = await loginRequest(user);
-      setUser(res.data);
-      setIsAuthenticated(true);
-    } catch (error) {
-      console.log(error);
-      setErrors(error.response.data.message);
-      setIsAuthenticated(false);
-    }
-  };
+  const [zoomLink, setZoomLink] = useState(null);
+
+
+const signin = async (user) => {
+  try {
+    const res = await loginRequest(user);
+    setUser(res.data);
+    setZoomLink(res.data.zoomLink); // Establece el enlace de Zoom
+    setIsAuthenticated(true);
+  } catch (error) {
+    console.log(error);
+    setErrors(error.response.data.message);
+    setIsAuthenticated(false);
+  }
+};
 
   const logout = async () => {
     await logoutRequest();
@@ -112,22 +118,39 @@ const [tutorClass, setTutorClass] = useState(null)
     }
   }
 
+  const studentsClass = async (data) => {
+    console.log("studentClass", data)
+    try {
+      const res = await createStudentClass(data)
+      if (res.status === 200) {
+        setStudentClass(res.data)
+      }
+    } catch (err) {
+      console.log(err.response.data);
+      setErrors(err.response.data.message);
+    }
+  }
+
+
   return (
     <AuthContext.Provider
-      value={{
-        tutorClass,
-        tutClass,
-        user,
-        signup,
-        signin,
-        logout,
-        isAuthenticated,
-        errors,
-        loading,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
+  value={{
+    tutorClass,
+    tutClass,
+    studentClass,
+    studentsClass,
+    user,
+    zoomLink, // Incluye el enlace de Zoom en el contexto
+    signup,
+    signin,
+    logout,
+    isAuthenticated,
+    errors,
+    loading,
+  }}
+>
+  {children}
+</AuthContext.Provider>
   );
 };
 

@@ -21,11 +21,13 @@ import { AuthProvider } from "./context/authContext";
 import { TaskProvider } from "./context/tasksContext";
 import { ProtocolProvider } from "./context/protocolContext";
 import { SettingsProvider } from "./context/settingsContext.jsx";
-import { InfoTutorProvider } from './context/infotutorContext'
+import { InfoTutorProvider } from './context/infotutorContext';
+import { InfoStudentProvider } from './context/infostudentContext';
 import { Navbar } from "./components/Navbar";
 import Footer from "./components/footer";
 import './index.css';
 import CreatTutorClass from "./components/SelectCours/CreatTutorClass.jsx";
+import CreateStudentClass from './components/StudentInfo/CreateStudentClass.jsx';
 
 // import {ClassTutorProvider} from "./context/creatTutorClassContext.jsx";
 
@@ -35,8 +37,7 @@ function App() {
     <AuthProvider>
       <TaskProvider>
         <ProtocolProvider>
-
-
+          <InfoStudentProvider>
             <InfoTutorProvider>
               <SettingsProvider>
                 <BrowserRouter>
@@ -48,6 +49,7 @@ function App() {
                         <Route path="/login" element={<LoginPage />} />
                         <Route path="/register" element={<RegisterPage />} />
                         <Route path="/register2/:role" element={<CreatTutorClass />} /> {/* <--- Add this route */}
+                        <Route path="/register3/:role" element={<CreateStudentClass />} />
                         <Route path="/forgot-password" element={<ForgotPassword />} />
                         <Route element={<ProtectedRoute />}>
                           <Route path="/book" element={<ClassesPage />} />
@@ -69,7 +71,7 @@ function App() {
                 </BrowserRouter>
               </SettingsProvider>
             </InfoTutorProvider>
-
+          </InfoStudentProvider>
         </ProtocolProvider>
       </TaskProvider>
     </AuthProvider>

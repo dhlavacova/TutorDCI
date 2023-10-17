@@ -1,17 +1,19 @@
-import React, {useEffect, useState} from "react";
-import {useInfoTutor} from "../context/infotutorContext";
-import {Button, Card, Input, Label} from "../components/ui";
-import {useTasks} from "../context/tasksContext.jsx";
+import React, { useEffect, useState } from "react";
+import { useInfoTutor } from "../context/infotutorContext";
+import { Button, Card, Input, Label } from "../components/ui";
+import { useTasks } from "../context/tasksContext.jsx";
 
 export function TutoringBookingForm() {
-    const {allInfoTutors, getAllInfoTutors} = useInfoTutor();
+    const { allInfoTutors, getAllInfoTutors } = useInfoTutor();
     const [selectedTutor, setSelectedTutor] = useState(null);
     const [selectedDay, setSelectedDay] = useState("");
     const [selectedTime, setSelectedTime] = useState("");
     const [theme, setTheme] = useState("");
     const [date, setDate] = useState("");
+
     //const [isreserviert, setIsreserviert] = useState(false)
     const{createTask} = useTasks()
+
     useEffect(() => {
         getAllInfoTutors()
             .then(() => {
@@ -22,8 +24,7 @@ export function TutoringBookingForm() {
             });
     }, []);
 
-    console.log({allInfoTutors});
-    const handleTutorChange = (event) => {
+       const handleTutorChange = (event) => {
         const tutorId = event.target.value;
         const selected = allInfoTutors.tutors.find((tutor) => tutor._id === tutorId);
         setSelectedTutor(selected);
@@ -31,16 +32,17 @@ export function TutoringBookingForm() {
         setSelectedTime("");
 
 
-    };
-/*    const handleDayChange = (event) => {
-        const selectedDay = event.target.value;
-        setSelectedDay(selectedDay);
-    };
 
-    const handleTimeChange = (event) => {
-        const selectedTime = event.target.value;
-        setSelectedTime(selectedTime);
-    };*/
+    };
+    /*    const handleDayChange = (event) => {
+            const selectedDay = event.target.value;
+            setSelectedDay(selectedDay);
+        };
+    
+        const handleTimeChange = (event) => {
+            const selectedTime = event.target.value;
+            setSelectedTime(selectedTime);
+        };*/
     const handleThemeChange = (event) => {
         const theme = event.target.value;
         setTheme(theme);
@@ -112,6 +114,7 @@ console.log({selectedTutor})
                                     name="daySelect"
                                     onChange={handleDateChange}
                                     className="block w-full bg-gray-200 text-black mt-2 mb-2 px-4 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-300"
+
                                 >
                                     <option value="">Select day</option>
                                     {selectedTutor.availability.map((day) => {

@@ -5,6 +5,7 @@ import { ButtonLink } from "./ui/ButtonLink";
 import UserImage from "../components/UserImage";
 import { ImFileEmpty } from "react-icons/im";
 import { useLocation } from "react-router-dom";
+import TourGuide from "../driver/TourGuide";
 
 export function Navbar() {
   const { isAuthenticated } = useAuth(); // 
@@ -14,7 +15,7 @@ export function Navbar() {
   const isLoginPage = location.pathname === "/login";
   const isRegisterPage = location.pathname === "/register";
   const isRegisterPage2 = location.pathname.startsWith("/register2/");
-const ispagenotfound = location.pathname === "*"
+  const ispagenotfound = location.pathname === "*"
 
   // const isRegisterPage2 = location.pathname === "/register2/:role";
 
@@ -24,9 +25,13 @@ const ispagenotfound = location.pathname === "*"
       <div className="flex items-center">
         {/* Contenedor izquierdo */}
         <Link to={isAuthenticated ? "" : "/"}>
-          {/* <img src="img/30.png" alt="Logo" width="100" height="40"  /> */}
-          <h1 className="font-bold text-2xl text-red-600">D&OS</h1>
+          {/* <img src="img/l0.png" alt="Logo" width="50" height="40" /> */}
+
+          <img src="/img/l0.png" alt="Logo" width="60" height="50" />
+
         </Link>
+        {/* <h1 className="font-bold text-2xl text-slate-600 ">D&OS</h1> */}
+        {/* <p className="text-xs ml-2">Learn and Grow</p> */}
       </div>
       <div className="flex items-center">
         {/* Contenedor derecho */}
@@ -34,11 +39,21 @@ const ispagenotfound = location.pathname === "*"
           {isAuthenticated ? (
             <>
               <li>
-                 <Link
-                  to="/add-task"
-                  className="bg-slate-200 hover:bg-slate-300 text-black font-semibold rounded-full py-2 px-5 inline-flex items-center"
-                >Book now <ImFileEmpty className="ml-2 animate-icon" />
-                </Link>
+               
+                <div >
+ {/* <TourGuide isAuthenticated={isAuthenticated} /> */}
+
+                  <Link
+
+                    to="/add-task"
+                    id="botton-book"
+                    className="bg-slate-200 shadow-xl hover:bg-slate-300 text-black font-semibold rounded-full py-2 px-5 inline-flex items-center"
+                  >
+Book now 
+<ImFileEmpty className="ml-2 animate-icon" />
+                  </Link>
+                </div>
+
               </li>
               <li >
                 <UserImage />

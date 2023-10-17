@@ -1,22 +1,25 @@
-import React, { useState } from "react";
-import { Button, Card, Input, Label } from "../components/ui";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/authContext";
 import { FaCamera } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa";
-import curve from "../assets/ttten.svg"
-import gggyrate from "../assets/gggyrate.svg"
-import ssstar from "../assets/ssstar.svg"
-import haikei from "../assets/blurry-gradient-haikei.svg"
-
+import curve from "../assets/ttten.svg";
+import { useInfoStudent } from "../context/infostudentContext";
 
 function StudentProfile() {
-  const [classNumber, setClassNumber] = useState("");
-  const [course, setCourse] = useState("");
-  const [availability, setAvailability] = useState([]);
   const [profileImage, setProfileImage] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
-
   const { isAuthenticated, user } = useAuth();
+  const { allInfoStudents, getAllInfoStudents } = useInfoStudent();
+
+  useEffect(() => {
+    getAllInfoStudents();
+  }, []);
+
+  const currentStudent = allInfoStudents.students
+    ? allInfoStudents.students.find(
+      (student) => student.studentName === user.username
+    )
+    : null;
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -31,26 +34,19 @@ function StudentProfile() {
     setIsHovered(false);
   };
 
-
   return (
     <div>
       <div className="w-full p-10 rounded-xs">
-
-        <div className="bg-slate-300 flex items-center p-10 rounded-md relative" style={{
-          backgroundImage: `url(${curve})`, // Establece el SVG como fondo
-
-          backgroundSize: "cover", // Ajusta el tamaño del fondo según sea necesario
-          backgroundRepeat: "no-repeat", // Evita la repetición del fondo
-          boxShadow: `-6px 6px 10px rgba(0, 0, 0, 0.2)`,
-          zIndex: 1,
-        }}>
-
-
-
-
-
-
-
+        <div
+          className="bg-slate-300 flex items-center p-10 rounded-md relative"
+          style={{
+            backgroundImage: `url(${curve})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            boxShadow: `-6px 6px 10px rgba(0, 0, 0, 0.2)`,
+            zIndex: 1,
+          }}
+        >
           <label
             htmlFor="profileImageInput"
             className="relative cursor-pointer"
@@ -58,7 +54,7 @@ function StudentProfile() {
             onMouseLeave={handleMouseLeave}
           >
             <img
-              src={profileImage ? URL.createObjectURL(profileImage) : "/img/avatar-default.jpeg"}
+              src={profileImage ? URL.createObjectURL(profileImage) : "/img/avatar-default.png"}
               alt=""
               className="w-40 h-40 rounded-full"
             />
@@ -76,60 +72,29 @@ function StudentProfile() {
               </div>
             )}
           </label>
-          <div className="text-gray-900 ml-4">
-            <p className="text-sm font-semibold">My Profile</p>
-            <p className="text-4xl font-semibold mb-1">{isAuthenticated ? user.username : ""}
+          <div className="text-gray-900 ml-5">
+            <p className="text-lg font-semibold border-b-2"
+              style={{ borderColor: 'blue' }}>My Profile</p>
+            <p className="text-4xl font-semibold">
+              {isAuthenticated ? user.username : ""}
             </p>
-
-
-            <p className="font-semibold">{course}  </p>
-            <p className="text-xs">DCI {isAuthenticated ? user.role : ""} {classNumber}</p>
-            <p className="text-xs flex items-center">
-              {isAuthenticated && (
-                <>
-                  <FaEnvelope className="mr-1" /> {user.email}
-                </>
-              )}
-            </p>
+            {currentStudent && (
+              <>
+                <p className="font-semibold">
+                  {currentStudent.profession}</p>
+                <p className="text-xs">DCI
+                  {isAuthenticated ? user.role : ""}
+                  {currentStudent.classNumber}</p>
+              </>
+            )}
+            {currentStudent && (
+              <p className="text-xs flex items-center">
+                <FaEnvelope className="mr-1" />
+                {currentStudent.studentEmail}
+              </p>
+            )}
           </div>
         </div>
-
-      </div>
-      <div className="max-w-md w-full p-10 rounded-md ">
-
-        <form>
-          <Label htmlFor="course">Select your profession</Label>
-          <select
-            className="w-full bg-gray-200 px-4 py-2 rounded-md text-black"
-            name="course"
-            value={course}
-            onChange={(e) => setCourse(e.target.value)}
-            required
-          >
-            <option value="">Select your profession</option>
-            <option value="Web Developer">Web Developer</option>
-            <option value="Online Marketer">Online Marketer</option>
-          </select>
-
-
-          <Label htmlFor="classNumber">Class Number</Label>
-          <Input
-            type="text"
-            name="classNumber"
-            value={classNumber}
-            onChange={(e) => setClassNumber(e.target.value)}
-            placeholder="e.g., 22-d08-a"
-            required
-          />
-
-          <Button type="button" >
-            Save
-          </Button>
-
-
-
-
-        </form>
       </div>
     </div>
   );

@@ -56,7 +56,7 @@ function TutorProfile() {
             onMouseLeave={handleMouseLeave}
           >
             <img
-              src={profileImage ? URL.createObjectURL(profileImage) : "/img/avatar-default.jpeg"}
+              src={profileImage ? URL.createObjectURL(profileImage) : "/img/avatar.png"}
               alt=""
               className="w-40 h-40 rounded-full"
             />
@@ -96,12 +96,12 @@ function TutorProfile() {
       <div className="max-w-md  p-10 m-5 rounded-md bg-slate-200 bg-cover bg-no-repeat relative shadow-xl transform translate-x-6 translate-y-6 z-10"
         style={{ backgroundImage: `url(${curve})` }}>
         {availibilityTutor && (
-          <div className="mt-2">
+          <div className="mt-4 ">
             <ul>
               {availibilityTutor.map((tutor, index) =>
                 tutor.availability.map((avail, availIndex) => (
                   <li key={index} >
-                    <label htmlFor="availableHours" className="text-lg font-bold block mb-2" >
+                    <label htmlFor="availableHours" className="text-lg font-bold block mb-2 " >
                       Available Hours:
                     </label>
                     <div className="flex items-center text-sm mt-2">
@@ -111,7 +111,7 @@ function TutorProfile() {
                       <FaClock className="mr-2" /> {avail.time}
                     </div>
                     <div className="flex items-center text-sm mt-2">
-                      <FaHourglass className="mr-2" /> {avail.duration} Hour
+                      <FaHourglass className="mr-2 " /> {avail.duration} Hour
                     </div>
                   </li>
                 ))
