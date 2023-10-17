@@ -9,7 +9,7 @@ export const changePassword = async (req, res) => {
     try {
         if (!req.user) {
 
-            return res.status(400).json({message: "Chyba autentikace."});
+            return res.status(400).json({message: ["Chyba autentikace."]});
         }
         console.log(req.body)
         const userId = req.user.id; //Anfrage das Cookei Object
@@ -20,14 +20,14 @@ export const changePassword = async (req, res) => {
         const passwordMatch = await bcrypt.compare(oldPassword, passwordDatabase.password);
         console.log("compare" + passwordMatch)
         if (!passwordMatch) {
-            return res.status(400).json({message: "The password is incorrect"});
+            return res.status(400).json({message: ["The password is incorrect"]});
         } else {
             const salt = await bcrypt.genSalt(10);
             const passwordHash = await bcrypt.hash(newPassword, salt);
             const userUpdatedPassword = await User.findOneAndUpdate({_id: userId}, {$set :{password: passwordHash,  passwordCreatedAt: null}}, {new: true});
             console.log("findoneandupdate" + userUpdatedPassword)
             if (userUpdatedPassword) {
-                return res.status(200).json({message: "Password changed."})
+                return res.status(200).json({message: ["Password changed."]})
             }
         }
     } catch (err) {
@@ -46,7 +46,7 @@ export const forgetPassword = async(req, res) => {
             const isUserinRegister=await User.findOne({email:req.body.email})
             //if user is not in register
             if(!isUserinRegister){
-                return res.status(400).json({message: "User was not finde. Pleas make registration"})
+                return res.status(400).json({message: ["User was not finde. Pleas make registration"]})
             }
             else{
                 //if user is in register
@@ -104,7 +104,7 @@ export const forgetPassword = async(req, res) => {
                         .catch(console.error);*/
 
                     sendEmail(randomPassword,email)
-                    return res.status(200).json({message: "Password changed,email send."})
+                    return res.status(200).json({message: ["Password changed,email send."]})
                 }
 
 

@@ -26,8 +26,6 @@ export function TutoringBookingForm() {
         const tutorId = event.target.value;
         const selected = allInfoTutors.tutors.find((tutor) => tutor._id === tutorId);
         setSelectedTutor(selected);
-     /*   setSelectedDay("");
-        setSelectedTime("");*/
 
     };
        const handleMyBooking = (event) => {
@@ -43,8 +41,8 @@ export function TutoringBookingForm() {
         setDate(choosedate);
     };
 
-   async function sendDatainTask(event) {
-    /*const sendDatainTask = async (event) => {*/
+
+    const sendDatainTask = async (event) => {
         event.preventDefault();
         console.log('klik')
         const data = {
@@ -64,7 +62,7 @@ console.log({selectedTutor})
         <div>
 
             {formSubmitted ? (
-                <div className="p-10">
+                <div className="h-[calc(100vh-100px)] flex items-center justify-center">
                     <Card>
                     <p>The form was successfully submitted :)</p>
                     <Button onClick={handleMyBooking}>
