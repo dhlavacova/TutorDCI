@@ -19,7 +19,6 @@ export function Navbar() {
 
   // const isRegisterPage2 = location.pathname === "/register2/:role";
 
-
   return (
     <nav className="flex justify-between py-5 px-10 rounded-lg bg-opacity-50 text-gray-800">
       <div className="flex items-center">
@@ -39,10 +38,8 @@ export function Navbar() {
           {isAuthenticated ? (
             <>
               <li>
-
                 <div >
                   {/* <TourGuide isAuthenticated={isAuthenticated} /> */}
-
                   <Link
 
                     to="/add-task"
