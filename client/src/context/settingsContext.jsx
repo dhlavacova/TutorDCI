@@ -48,7 +48,7 @@ export const SettingsProvider = ({children}) => {
             const res = await forgotPasswordRequest(data)
             setEmail(res.data);
             if (res.status === 200) {
-
+console.log('res.status');
                 setSuccess(true)
             }
         } catch (err) {

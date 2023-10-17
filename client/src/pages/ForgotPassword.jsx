@@ -20,15 +20,14 @@ function ForgotPassword(props) {
         resolver: zodResolver(forgotPasswordSchema),
     });
 
-    const {forgotPassword, errors: loginErrors } = useSetting();
-    const [formSubmitted, setFormSubmitted] = React.useState(false);
+    const {forgotPassword, errors: loginErrors, success} = useSetting();
     const navigate = useNavigate();
 
 
     const onSubmit1 = async (data) => {
         console.log('submit', data);
-        await forgotPassword(data);  // Předpokládám, že tato funkce vrací odpověď z backendu
-
+        const res = await forgotPassword(data);  // Předpokládám, že tato funkce vrací odpověď z backendu
+        console.log(res);
 
     };
 
@@ -38,7 +37,7 @@ function ForgotPassword(props) {
 
     return (
         <div className="h-[calc(100vh-100px)] flex items-center justify-center">
-           {formSubmitted ? (
+           {success  ?  (
                 <div>
                     <Card>
                         <p>A replacement password has been sent to your email address.</p>

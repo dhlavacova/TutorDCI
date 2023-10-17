@@ -106,9 +106,6 @@ export const forgetPassword = async(req, res) => {
                     sendEmail(randomPassword,email)
                     return res.status(200).json({message: ["Password changed,email send."]})
                 }
-
-
-
                 }
             }
         }
