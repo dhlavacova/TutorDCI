@@ -20,17 +20,39 @@ body {
 }
 
 .animate-icon {
-  animation: scale 2s infinite; /* Tu animación CSS específica para el icono "File Empty" */
+  animation: scale 2s infinite;
+  /* Tu animación CSS específica para el icono "File Empty" */
 }
 
 @keyframes scale {
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.2);
   }
+
   100% {
     transform: scale(1);
   }
 }
+
+/* Estilo para elementos resaltados */
+.driver-highlighted {
+  outline: none;
+  /* Elimina el borde de relieve en los elementos resaltados */
+  box-shadow: none;
+  /* Elimina las sombras alrededor de los elementos resaltados */
+  /* Agrega otros estilos personalizados según tus preferencias */
+}
+
+/* Estilo para popovers */
+.driver-popover {
+  background-color: #fff;
+  /* Cambia el color de fondo del popover */
+  border: 1px solid rgb(0, 85, 255);
+  /* Agrega un borde al popover si lo deseas */
+  /* Agrega otros estilos personalizados para los popovers */
+}
+
