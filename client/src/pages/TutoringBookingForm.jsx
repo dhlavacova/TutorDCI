@@ -6,8 +6,8 @@ import { useTasks } from "../context/tasksContext.jsx";
 export function TutoringBookingForm() {
     const { allInfoTutors, getAllInfoTutors } = useInfoTutor();
     const [selectedTutor, setSelectedTutor] = useState(null);
-    const [selectedDay, setSelectedDay] = useState("");
-    const [selectedTime, setSelectedTime] = useState("");
+    /*const [selectedDay, setSelectedDay] = useState("");
+    const [selectedTime, setSelectedTime] = useState("");*/
     const [theme, setTheme] = useState("");
     const [date, setDate] = useState("");
 
@@ -28,8 +28,8 @@ export function TutoringBookingForm() {
         const tutorId = event.target.value;
         const selected = allInfoTutors.tutors.find((tutor) => tutor._id === tutorId);
         setSelectedTutor(selected);
-        setSelectedDay("");
-        setSelectedTime("");
+     /*   setSelectedDay("");
+        setSelectedTime("");*/
 
 
 
@@ -61,6 +61,9 @@ export function TutoringBookingForm() {
             theme: theme,
             date: date
         }
+       setSelectedTutor("");
+       setTheme("");
+       setDate("");
         console.log(data)
         await createTask(data);
     }
@@ -123,8 +126,9 @@ console.log({selectedTutor})
                                             <option
                                                 key={day._id}
                                                 value={day.date}
-                                                className={isReserved ? "text-red-500" : "text-stone-950"}>
-                                                {day.dateforUser}
+                                                disabled={ isReserved }
+                                                className={ isReserved ? "text-red-500" : "text-stone-950"}>
+                                                {day.dateforUser} {isReserved ? " - Reserved" : ""}
                                             </option>
                                         );
                                     })}
