@@ -2,18 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useInfoTutor } from "../context/infotutorContext";
 import { Button, Card, Input, Label } from "../components/ui";
 import { useTasks } from "../context/tasksContext.jsx";
-
+import { useNavigate } from "react-router-dom";
 export function TutoringBookingForm() {
     const { allInfoTutors, getAllInfoTutors } = useInfoTutor();
     const [selectedTutor, setSelectedTutor] = useState(null);
-    /*const [selectedDay, setSelectedDay] = useState("");
-    const [selectedTime, setSelectedTime] = useState("");*/
     const [theme, setTheme] = useState("");
     const [date, setDate] = useState("");
+    const [formSubmitted, setFormSubmitted] = useState(false);
 
-    //const [isreserviert, setIsreserviert] = useState(false)
     const{createTask} = useTasks()
-
+    const navigate = useNavigate();
     useEffect(() => {
         getAllInfoTutors()
             .then(() => {
@@ -31,18 +29,11 @@ export function TutoringBookingForm() {
      /*   setSelectedDay("");
         setSelectedTime("");*/
 
-
-
     };
-    /*    const handleDayChange = (event) => {
-            const selectedDay = event.target.value;
-            setSelectedDay(selectedDay);
+       const handleMyBooking = (event) => {
+           navigate(`/book`)
         };
-    
-        const handleTimeChange = (event) => {
-            const selectedTime = event.target.value;
-            setSelectedTime(selectedTime);
-        };*/
+
     const handleThemeChange = (event) => {
         const theme = event.target.value;
         setTheme(theme);
@@ -64,20 +55,33 @@ export function TutoringBookingForm() {
        setSelectedTutor("");
        setTheme("");
        setDate("");
+       setFormSubmitted(true);
         console.log(data)
         await createTask(data);
     }
 console.log({selectedTutor})
     return (
         <div>
-            <header className="flex justify-between pl-10 pt-10">
-                <h1 className="text-3xl font-semibold text-slate-800">
-                    Start today!
-                </h1>
-            </header>
-            <p className="text-slate-700 text-xs pl-10">
+
+            {formSubmitted ? (
+                <div className="p-10">
+                    <Card>
+                    <p>The form was successfully submitted :)</p>
+                    <Button onClick={handleMyBooking}>
+                        My Booking
+                    </Button>
+                    </Card>
+                </div>
+            ) : (
+                <div>
+                <header className="flex justify-between pl-10 pt-10">
+                    <h1 className="text-3xl font-semibold text-slate-800">
+                        Start today!
+                    </h1>
+                </header>
+                <p className="text-slate-700 text-xs pl-10">
                 Reserve a class with our expert tutor and take one step closer to your academic goals.
-            </p>
+                </p>
             <div className="p-10">
                 <Card>
                     <form>
@@ -140,6 +144,8 @@ console.log({selectedTutor})
                     </form>
                 </Card>
             </div>
+                </div>
+                )}
         </div>
     );
 }
