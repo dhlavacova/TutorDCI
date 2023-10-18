@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import {createContext, useContext, useEffect, useState} from "react";
 import {
   createTaskRequest,
   deleteTaskRequest,
@@ -17,7 +17,18 @@ export const useTasks = () => {
 
 export function TaskProvider({ children }) {
   const [tasks, setTasks] = useState([]);
+  const [errors, setErrors] = useState([]);
+  const [success, setSuccess] = useState(false);
+  const [formData, setFormData] = useState(null);
 
+  useEffect(() => {
+    if (errors.length > 0) {
+      const timer = setTimeout(() => {
+        setErrors([]);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [errors]);
   const getTasks = async () => {
     const res = await getTasksRequest();
     setTasks(res.data);
@@ -32,12 +43,19 @@ export function TaskProvider({ children }) {
     }
   };
 
-  const createTask = async (task) => {
+  const createTask = async (data) => {
     try {
-      const res = await createTaskRequest(task);
+      const res = await createTaskRequest(data);
       console.log(res.data);
+      setFormData(res.data);
+      if (res.status === 200) {
+        setSuccess(true)
+      }
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
+      setErrors(error.response.data.message);
+
+
     }
   };
 
@@ -67,6 +85,7 @@ export function TaskProvider({ children }) {
         createTask,
         getTask,
         updateTask,
+        errors,success,formData
       }}
     >
       {children}

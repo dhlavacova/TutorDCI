@@ -1,17 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { useInfoTutor } from "../context/infotutorContext";
-import { Button, Card, Input, Label } from "../components/ui";
+import {Button, Card, Input, Label, Message} from "../components/ui";
 import { useTasks } from "../context/tasksContext.jsx";
 import { useNavigate } from "react-router-dom";
+import {BookingTutorSchema} from "../schemas/task.js";
+import { useForm } from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
+
 export function TutoringBookingForm() {
-    const { allInfoTutors, getAllInfoTutors } = useInfoTutor();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
+        resolver: zodResolver(BookingTutorSchema),
+    });
+
+        const { allInfoTutors, getAllInfoTutors} = useInfoTutor();
+    const{createTask,errors: loginErrors,success,formData} = useTasks()
+
     const [selectedTutor, setSelectedTutor] = useState(null);
     const [theme, setTheme] = useState("");
     const [date, setDate] = useState("");
-    const [formSubmitted, setFormSubmitted] = useState(false);
+   // const [formSubmitted, setFormSubmitted] = useState(false);
 
-    const{createTask} = useTasks()
     const navigate = useNavigate();
+
     useEffect(() => {
         getAllInfoTutors()
             .then(() => {
@@ -43,19 +57,17 @@ export function TutoringBookingForm() {
         setDate(choosedate);
     };
 
-   async function sendDatainTask(event) {
-    /*const sendDatainTask = async (event) => {*/
-        event.preventDefault();
+   async function onSubmit(data) {
+       {console.log(day.date)}
         console.log('klik')
-        const data = {
+       /* const data = {
             tutor: selectedTutor.tutorName,
             theme: theme,
             date: date
-        }
+        }*/
        setSelectedTutor("");
        setTheme("");
        setDate("");
-       setFormSubmitted(true);
         console.log(data)
         await createTask(data);
     }
@@ -63,9 +75,10 @@ console.log({selectedTutor})
     return (
         <div>
 
-            {formSubmitted ? (
+            {success ? (
                 <div className="p-10">
                     <Card>
+
                     <p>The form was successfully submitted :)</p>
                     <Button onClick={handleMyBooking}>
                         My Booking
@@ -84,28 +97,36 @@ console.log({selectedTutor})
                 </p>
             <div className="p-10">
                 <Card>
-                    <form>
+                    {loginErrors.map((error, i) => (
+                        <Message message={error} key={i} />
+                    ))}
+                    <form onSubmit={handleSubmit(onSubmit)}>
                         <Label htmlFor="theme">Theme</Label>
                         <Input
                             type="text"
                             name="theme"
                             placeholder="Enter the theme"
-                            value={theme}
+                           // value={theme}
                             onChange={handleThemeChange}
+                            {...register("theme", {required: true})}
                         />
+                        <p>{errors.theme?.message}</p>
+
                         <Label htmlFor="tutorSelect">Choose a Tutor</Label>
                         <select
-                            name="tutorSelect"
+                            {...register("tutor")}
+                            name="tutor"
                             className="block w-full bg-gray-200 text-black mt-2 mb-2 px-4 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-300"
                             onChange={handleTutorChange}
                         >
                             <option value="">Select tutor</option>
                             {allInfoTutors && allInfoTutors.tutors ? (
                                 allInfoTutors.tutors.map((tutor) => (
-                                    <option key={tutor._id} value={tutor._id} >
+                                    <option key={tutor._id} value={tutor._id}>
                                         {tutor.tutorName}
 
                                     </option>
+
                                 ))
                             ) : (
                                 <option value="" disabled>
@@ -113,11 +134,12 @@ console.log({selectedTutor})
                                 </option>
                             )}
                         </select>
-
+                        <p>{errors.tutor?.message}</p>
                         {selectedTutor && (
                             <div className="mt-4">
                                 <Label htmlFor="daySelect">Choose a Day</Label>
                                 <select
+                                    {...register("date",{ required: true })}
                                     name="daySelect"
                                     onChange={handleDateChange}
                                     className="block w-full bg-gray-200 text-black mt-2 mb-2 px-4 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-300"
@@ -128,19 +150,21 @@ console.log({selectedTutor})
                                         const isReserved = day.isreserviert;
                                         return (
                                             <option
+
                                                 key={day._id}
                                                 value={day.date}
-                                                disabled={ isReserved }
-                                                className={ isReserved ? "text-red-500" : "text-stone-950"}>
+                                               // disabled={isReserved}
+                                                className={isReserved ? "text-red-500" : "text-stone-950"}>
                                                 {day.dateforUser} {isReserved ? " - Reserved" : ""}
                                             </option>
                                         );
                                     })}
                                 </select>
+                                <p>{errors.date?.message}</p>
                             </div>
                         )}
 
-                        <Button type="submit" onClick={sendDatainTask}>Confirm</Button>
+                        <Button type="butten" >Confirm</Button>
                     </form>
                 </Card>
             </div>
