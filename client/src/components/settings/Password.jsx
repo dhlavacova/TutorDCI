@@ -16,7 +16,7 @@ function Password() {
         resolver: zodResolver(passwordSchema),
     });
 
-    const { changePassword, errors: loginErrors,currentPassword} = useSetting();
+    const { changePassword, errors: loginErrors,currentPassword,setCurrentPassword} = useSetting();
     const navigate = useNavigate();
     const onSubmit = async (data) => {
         console.log('submit', data);
@@ -25,8 +25,9 @@ function Password() {
     }
 
     const handleBook = () => {
-        navigate("/book");
         setCurrentPassword(false)
+        navigate("/book");
+
     }
     return (
         <div className="h-[calc(100vh-100px)] flex items-center justify-center">

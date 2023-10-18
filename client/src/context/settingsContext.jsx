@@ -59,7 +59,7 @@ export const SettingsProvider = ({children}) => {
     }
 
     return (<SettingsContext.Provider
-            value={{changePassword, errors, password, loading, forgotPassword, email, success,currentPassword}}
+            value={{changePassword, errors, password, loading, forgotPassword, email, success,currentPassword,setCurrentPassword}}
         >
             {children}
         </SettingsContext.Provider>
