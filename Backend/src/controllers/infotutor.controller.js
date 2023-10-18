@@ -39,6 +39,7 @@ export const getAvailibility = async (req, res) => {
 //filter for the studenten (my Booking form) hir kann er die Tutor suchen und reservation booken
 export const getTutors = async (req, res) => {
     try {
+//search tutor from student class
 
 
         const preDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
