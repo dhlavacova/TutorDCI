@@ -26,7 +26,7 @@ function ForgotPassword(props) {
 
     const onSubmit1 = async (data) => {
         console.log('submit', data);
-        const res = await forgotPassword(data);  // Předpokládám, že tato funkce vrací odpověď z backendu
+        const res = await forgotPassword(data);  // this functon fetch (zurückkehren) data from backend
         console.log(res);
 
     };
