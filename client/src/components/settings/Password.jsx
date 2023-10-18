@@ -16,15 +16,30 @@ function Password() {
         resolver: zodResolver(passwordSchema),
     });
 
-    const { changePassword, errors: loginErrors } = useSetting();
+    const { changePassword, errors: loginErrors,currentPassword} = useSetting();
     const navigate = useNavigate();
     const onSubmit = async (data) => {
         console.log('submit', data);
         await changePassword(data);
-        navigate('/book');
+
+    }
+
+    const handleBook = () => {
+        navigate("/book");
+        setCurrentPassword(false)
     }
     return (
         <div className="h-[calc(100vh-100px)] flex items-center justify-center">
+            {currentPassword  ?  (
+                <div>
+                    <Card>
+                        <p>Password has been changed.</p>
+                        <Button onClick={handleBook}>
+                            OK
+                        </Button>
+                    </Card>
+                </div>
+            ) : (
             <Card>
                 {loginErrors.map((error, i) => (
                     <Message message={error} key={i} />
@@ -63,6 +78,7 @@ function Password() {
                 </form>
 
             </Card>
+            )}
         </div>
     );
 }

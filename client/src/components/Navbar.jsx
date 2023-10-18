@@ -41,7 +41,7 @@ export function Navbar() {
               <li>
                
                 <div >
-  <TourGuide isAuthenticated={isAuthenticated} />
+  {/*<TourGuide isAuthenticated={isAuthenticated} />*/}
 
                   <Link
 

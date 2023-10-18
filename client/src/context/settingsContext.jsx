@@ -17,7 +17,7 @@ export const SettingsProvider = ({children}) => {
     const [errors, setErrors] = useState([]);
     const [loading, setLoading] = useState(true);
     const [success, setSuccess] = useState(false);
-
+    const [currentPassword, setCurrentPassword] = useState(false)
     useEffect(() => {
         if (errors.length > 0) {
             const timer = setTimeout(() => {
@@ -33,7 +33,7 @@ export const SettingsProvider = ({children}) => {
             const res = await changePasswordRequest(data)
             if (res.status === 200) {
                 setPassword(res.data);
-
+                setCurrentPassword(true)
             }
         } catch (err) {
             console.log(err.response.data);
@@ -48,7 +48,7 @@ export const SettingsProvider = ({children}) => {
             const res = await forgotPasswordRequest(data)
             setEmail(res.data);
             if (res.status === 200) {
-console.log('res.status');
+                console.log('res.status');
                 setSuccess(true)
             }
         } catch (err) {
@@ -59,7 +59,7 @@ console.log('res.status');
     }
 
     return (<SettingsContext.Provider
-            value={{changePassword, errors, password, loading, forgotPassword, email,success}}
+            value={{changePassword, errors, password, loading, forgotPassword, email, success,currentPassword}}
         >
             {children}
         </SettingsContext.Provider>

@@ -74,15 +74,15 @@ console.log(`${preDay[dayIndex]} ${toDay.getDate()}.${toDay.getMonth() + 1} at $
         );
         const OnCheckTerminDates = await Task.find().lean();
         tutors.map(tutor => {
-            // Pro každý termín v availability
+
             tutor.availability.map(termin => {
-                // Zkontrolujeme, jestli se tento termín nachází v OnCheckTermin
-                if (OnCheckTerminDates.map(task => task.date.toISOString().split('T')[0]).includes(termin.date.split('T')[0]) &&OnCheckTerminDates.map(task => task.tutor).includes(tutor.tutorName)) {
-                    // Pokud ano, přidáme k tomuto termínu isreserviert: true
+                // check if this termin is in the Task collection
+                if (OnCheckTerminDates.map(task => task.date.toISOString().split('.')[0]).includes(termin.date.split('.')[0]) &&OnCheckTerminDates.map(task => task.tutor).includes(tutor.tutorName)) {
+                    // If thrue, we will add the following attribute to this date: isReserved: thrue."
                     termin.isreserviert = true;
                 }
                 else {
-                    // Pokud ne, přidáme k tomuto termínu isreserviert: false
+                    // "If not, we will add the following attribute to this date: isReserved: false."
                     termin.isreserviert = false;
                 }
             });

@@ -17,8 +17,7 @@ const Home = () => {
           Unleash your academic potential with D&OS, where excellence meets opportunity. Our handpicked team of top tutors is here to empower you on your path to success. Join us in this transformative educational experience!
         </p>
 
-        <ButtonLink>
-          <Link to="/register">Get Started</Link>
+        <ButtonLink to="/register">Get Started
         </ButtonLink>
       </section>
 
