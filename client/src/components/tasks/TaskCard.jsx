@@ -33,37 +33,38 @@ function TaskCard({ task, platformLink }) {
       console.error("Error in getCurrentDate:", error);
       return "Invalid Date";
     }
-  }
 
-  function getCurrentHours(hours) {
-    try {
-      const dateOptions = { hour: '2-digit', minute: '2-digit' };
-      if (!(hours instanceof Date)) {
-        hours = new Date(hours);
-      }
-      const timePart = hours.toLocaleTimeString('en-GB', dateOptions);
-      // console.log("datePart:", timePart)
-      return `${timePart}`
-    } catch (error) {
-      console.error("Error in getCurrentDate:", error);
-      return "Invalid Date";
-    }
-  }
-  function addHours(time) {
-    try {
-      const dateOptions = { hour: '2-digit', minute: '2-digit' };
-      if (!(time instanceof Date)) {
-        time = new Date(time)
-      }
-      time.setHours(time.getHours() + 1)
-      const timePart = time.toLocaleTimeString('en-GB', dateOptions);
-      // console.log("datePart:", timePart)
-      return `${timePart}`
-    } catch (error) {
-      console.error("Error in getCurrentDate:", error);
-      return "Invalid Date";
-    }
-  }
+console.log('task', task)
+    function getCurrentHours(hours) {
+        try{
+            const dateOptions = { hour: '2-digit', minute: '2-digit' };
+            if (!(hours instanceof Date)) {
+              hours= new Date(hours);
+            }
+            const timePart = hours.toLocaleTimeString('en-GB', dateOptions);
+            // console.log("datePart:", timePart)
+            return `${timePart}`
+        } catch (error) {
+            console.error("Error in getCurrentDate:", error);
+            return "Invalid Date";
+        }
+        }
+        function addHours(time) {
+        try{
+            const dateOptions = { hour: '2-digit', minute: '2-digit' };
+            if (!(time instanceof Date)) {
+              time= new Date(time)
+            }
+            time.setHours(time.getHours() + 1)
+            const timePart = time.toLocaleTimeString('en-GB', dateOptions);
+            // console.log("datePart:", timePart)
+            return `${timePart}`
+        } catch (error) {
+            console.error("Error in getCurrentDate:", error);
+            return "Invalid Date";
+        }
+        }
+
 
 
   return (
