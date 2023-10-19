@@ -9,7 +9,7 @@ import curve from "../assets/ttten.svg"
 
 
 
-function TutorProfile() {
+export function TutorProfile() {
   const [classNumber, setClassNumber] = useState("");
   const [course, setCourse] = useState("");
   const [profileImage, setProfileImage] = useState(null);
@@ -96,11 +96,11 @@ function TutorProfile() {
       <div className="max-w-md  p-10 m-5 rounded-md bg-slate-200 bg-cover bg-no-repeat relative shadow-xl transform translate-x-6 translate-y-6 z-10"
         style={{ backgroundImage: `url(${curve})` }}>
         {availibilityTutor && (
-          <div className="mt-4 ">
+          <div className="mt-4">
             <ul>
               {availibilityTutor.map((tutor, index) =>
                 tutor.availability.map((avail, availIndex) => (
-                  <li key={index} >
+                  <li key={`${index}-${availIndex}`}>
                     <label htmlFor="availableHours" className="text-lg font-bold block mb-2 " >
                       Available Hours:
                     </label>
@@ -124,4 +124,3 @@ function TutorProfile() {
   );
 }
 
-export default TutorProfile;
