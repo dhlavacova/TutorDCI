@@ -40,9 +40,7 @@ export function TutoringBookingForm() {
         const tutorName = event.target.value;
         const selected = allInfoTutors.tutors.find((tutor) => tutor.tutorName === tutorName);
         setSelectedTutor(selected);
-     /*   setSelectedDay("");
-        setSelectedTime("");*/
-console.log(selected);
+
     };
        const handleMyBooking = (event) => {
 
@@ -74,8 +72,10 @@ console.log({selectedTutor})
     return (
         <div>
 
+
             {success ? (
                 <div className="p-10">
+
                     <Card>
 
                     <p>The form was successfully submitted.</p>
