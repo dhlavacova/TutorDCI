@@ -38,7 +38,7 @@ router.post("/logout", logout);
 router.get("/verify", verifyToken);
 
 
-router.get("/tutors", getTutors);
+router.get("/tutors", auth,getTutors);
 router.get("/availibility", auth, getAvailibility);
 router.post("/tutors2", validateSchema(tutorSchema), createTutorClass);
 

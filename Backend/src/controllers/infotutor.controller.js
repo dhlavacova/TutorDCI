@@ -1,5 +1,6 @@
 import Tutor from '../models/infotutor.model.js';
 import Task from '../models/task.model.js';
+import Student from '../models/infostudent.model.js';
 export const createTutorClass = async (req, res) => {
     const tutorData = req.body;
     if (!tutorData) {
@@ -39,13 +40,35 @@ export const getAvailibility = async (req, res) => {
 //filter for the studenten (my Booking form) hir kann er die Tutor suchen und reservation booken
 export const getTutors = async (req, res) => {
     try {
+        if(!req.user.username) {
+
+        return res.status(400).json({message:[ "Misstake autentikace."]});
+    } else {
+//search tutor from student class
+            // search student
+            let person = await Student.findOne({ studentName: req.user.username });
+
+            // if not student exist search tutor
+            if (!person) {
+                person = await Tutor.findOne({ tutorName: req.user.username });
+            }
+
+            // if nobody exist return error
+            if (!person) {
+                return res.status(404).json({ message: ["User not search."] });
+            }
+
+            const personClass=person.classNumber;
+
+
+        const tutors = await Tutor.find({classNumber: personClass}).lean();
 
 
         const preDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         const toDay = new Date();
         const toDayWoche = toDay.getDay();
 
-        const tutors = await Tutor.find().lean();
+
          tutors.map((tutor) =>
             tutor.availability.map((days) => {
 
@@ -90,7 +113,7 @@ console.log(`${preDay[dayIndex]} ${toDay.getDate()}.${toDay.getMonth() + 1} at $
 
 
 res.json({tutors});
-    } catch (error) {
+        }} catch (error) {
         res.status(500).json({message: error.message});
     }
 };

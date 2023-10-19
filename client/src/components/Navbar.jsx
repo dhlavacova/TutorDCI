@@ -19,7 +19,6 @@ export function Navbar() {
 
   // const isRegisterPage2 = location.pathname === "/register2/:role";
 
-
   return (
     <nav className="flex justify-between py-5 px-10 rounded-lg bg-opacity-50 text-gray-800">
       <div className="flex items-center">
@@ -39,9 +38,9 @@ export function Navbar() {
           {isAuthenticated ? (
             <>
               <li>
-               
                 <div >
-  {/*<TourGuide isAuthenticated={isAuthenticated} />*/}
+
+                  {/* <TourGuide isAuthenticated={isAuthenticated} /> */}
 
                   <Link
 
@@ -49,8 +48,8 @@ export function Navbar() {
                     id="botton-book"
                     className="bg-slate-200 shadow-xl hover:bg-slate-300 text-black font-semibold rounded-full py-2 px-5 inline-flex items-center"
                   >
-Book now 
-<ImFileEmpty className="ml-2 animate-icon" />
+                    Book now
+                    <ImFileEmpty className="ml-2 animate-icon" />
                   </Link>
                 </div>
 

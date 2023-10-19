@@ -10,7 +10,7 @@ import {
 } from "react-icons/fi";
 import ButtonClass from '../ButtonClass';
 
-function TaskCard({ task }) {
+function TaskCard({ task, platformLink }) {
   const { deleteTask } = useTasks();
   const { user } = useAuth();
 
@@ -19,22 +19,22 @@ function TaskCard({ task }) {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-    function getCurrentDate(datum) {
-        try {
-            const dateOptions = { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' };
-            /*const timeOptions = { hour: '2-digit', minute: '2-digit' };*/
-            if (!(datum instanceof Date)) {
-                datum = new Date(datum);
-            }
-            const datePart = datum.toLocaleDateString('en-GB', dateOptions);
-            console.log("datePart:", datePart)
-            return `${datePart}`
-        } catch (error) {
-            console.error("Error in getCurrentDate:", error);
-            return "Invalid Date";
-        }
+  function getCurrentDate(datum) {
+    try {
+      const dateOptions = { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' };
+      /*const timeOptions = { hour: '2-digit', minute: '2-digit' };*/
+      if (!(datum instanceof Date)) {
+        datum = new Date(datum);
+      }
+      const datePart = datum.toLocaleDateString('en-GB', dateOptions);
+      console.log("datePart:", datePart)
+      return `${datePart}`
+    } catch (error) {
+      console.error("Error in getCurrentDate:", error);
+      return "Invalid Date";
     }
 
+console.log('task', task)
     function getCurrentHours(hours) {
         try{
             const dateOptions = { hour: '2-digit', minute: '2-digit' };
@@ -66,6 +66,7 @@ function TaskCard({ task }) {
         }
 
 
+
   return (
     <div className="bg-gray-100 shadow-xl max-w-md m-10 p-10 rounded-md">
       <header className="flex justify-between">
@@ -84,13 +85,13 @@ function TaskCard({ task }) {
         <FiUser className="mr-2" /> Participant: {user.username}
       </div>
       <div className="flex items-center mb-2">
-        <FiVideo className="mr-2" /> Zoom link {task.platformLink}
+        <FiVideo className="mr-2" /> Zoom link
       </div>
       <p className="text-slate-500 text-sm italic ml-6 mb-4">
         Zoom link will be provided 5 minutes before the class.
       </p>
 
-      <ButtonClass task={task} />
+      <ButtonClass task={task} platformLink={platformLink} />
 
     </div>
   );
