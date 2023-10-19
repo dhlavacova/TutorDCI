@@ -17,19 +17,19 @@ export function TutoringBookingForm() {
     });
 
         const { allInfoTutors, getAllInfoTutors} = useInfoTutor();
-    const{createTask,errors: loginErrors,success,formData} = useTasks()
+    const{createTask,errors: loginErrors,success,setSuccess} = useTasks()
 
     const [selectedTutor, setSelectedTutor] = useState(null);
     const [theme, setTheme] = useState("");
     const [date, setDate] = useState("");
-   // const [formSubmitted, setFormSubmitted] = useState(false);
+
 
     const navigate = useNavigate();
 
     useEffect(() => {
         getAllInfoTutors()
             .then(() => {
-                console.log(allInfoTutors); // Depuración
+                console.log({allInfoTutors}); // Depuración
             })
             .catch((error) => {
                 console.error("Error", error);
@@ -37,28 +37,26 @@ export function TutoringBookingForm() {
     }, []);
 
        const handleTutorChange = (event) => {
-        const tutorId = event.target.value;
-        const selected = allInfoTutors.tutors.find((tutor) => tutor._id === tutorId);
+        const tutorName = event.target.value;
+        const selected = allInfoTutors.tutors.find((tutor) => tutor.tutorName === tutorName);
         setSelectedTutor(selected);
      /*   setSelectedDay("");
         setSelectedTime("");*/
-
+console.log(selected);
     };
        const handleMyBooking = (event) => {
+
            navigate(`/book`)
+           setSuccess(false)
         };
 
-    const handleThemeChange = (event) => {
-        const theme = event.target.value;
-        setTheme(theme);
-    }
     const handleDateChange = (event) => {
         const choosedate = event.target.value;
         setDate(choosedate);
     };
 
-   async function onSubmit(data) {
-       {console.log(day.date)}
+   async function onSubmit(data1) {
+
         console.log('klik')
        /* const data = {
             tutor: selectedTutor.tutorName,
@@ -68,8 +66,9 @@ export function TutoringBookingForm() {
        setSelectedTutor("");
        setTheme("");
        setDate("");
-        console.log(data)
-        await createTask(data);
+        console.log(data1)
+        await createTask(data1);
+
     }
 console.log({selectedTutor})
     return (
@@ -79,7 +78,7 @@ console.log({selectedTutor})
                 <div className="p-10">
                     <Card>
 
-                    <p>The form was successfully submitted :)</p>
+                    <p>The form was successfully submitted.</p>
                     <Button onClick={handleMyBooking}>
                         My Booking
                     </Button>
@@ -106,8 +105,6 @@ console.log({selectedTutor})
                             type="text"
                             name="theme"
                             placeholder="Enter the theme"
-                           // value={theme}
-                            onChange={handleThemeChange}
                             {...register("theme", {required: true})}
                         />
                         <p>{errors.theme?.message}</p>
@@ -122,7 +119,7 @@ console.log({selectedTutor})
                             <option value="">Select tutor</option>
                             {allInfoTutors && allInfoTutors.tutors ? (
                                 allInfoTutors.tutors.map((tutor) => (
-                                    <option key={tutor._id} value={tutor._id}>
+                                    <option key={tutor._id} value={tutor.tutorName}>
                                         {tutor.tutorName}
 
                                     </option>
@@ -137,16 +134,17 @@ console.log({selectedTutor})
                         <p>{errors.tutor?.message}</p>
                         {selectedTutor && (
                             <div className="mt-4">
-                                <Label htmlFor="daySelect">Choose a Day</Label>
+                                <Label htmlFor="date">Choose a Day</Label>
                                 <select
                                     {...register("date",{ required: true })}
-                                    name="daySelect"
+                                    name="date"
                                     onChange={handleDateChange}
                                     className="block w-full bg-gray-200 text-black mt-2 mb-2 px-4 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-300"
 
                                 >
                                     <option value="">Select day</option>
                                     {selectedTutor.availability.map((day) => {
+                                        console.log(day.date)
                                         const isReserved = day.isreserviert;
                                         return (
                                             <option

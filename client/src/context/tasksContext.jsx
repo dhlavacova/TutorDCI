@@ -45,6 +45,7 @@ export function TaskProvider({ children }) {
 
   const createTask = async (data) => {
     try {
+      console.log({data});
       const res = await createTaskRequest(data);
       console.log(res.data);
       setFormData(res.data);
@@ -85,7 +86,7 @@ export function TaskProvider({ children }) {
         createTask,
         getTask,
         updateTask,
-        errors,success,formData
+        errors,success,setSuccess,
       }}
     >
       {children}

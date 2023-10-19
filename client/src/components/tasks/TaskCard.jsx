@@ -34,7 +34,7 @@ function TaskCard({ task }) {
             return "Invalid Date";
         }
     }
-
+console.log('task', task)
     function getCurrentHours(hours) {
         try{
             const dateOptions = { hour: '2-digit', minute: '2-digit' };
