@@ -5,6 +5,7 @@ import { useAuth } from "../context/authContext";
 import { FaCalendar, FaCamera, FaClock, FaHourglass } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa";
 import curve from "../assets/ttten.svg"
+import SlackComunity from "../components/Slack/SlackComunity.jsx";
 
 
 
@@ -120,6 +121,7 @@ export function TutorProfile() {
           </div>
         )}
       </div>
+      <SlackComunity />
     </div>
   );
 }

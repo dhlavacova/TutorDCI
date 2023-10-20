@@ -91,24 +91,7 @@ export const forgetPassword = async (req, res) => {
                      * For this example to work, you need to set up a sending domain,
                      * and obtain a token that is authorized to send from the domain.
                      */
-                    /*
-                                       const TOKEN = "ea668bbf7c92dc9863f539c9f9345cb6";
-                                        const SENDER_EMAIL = "diosabesteam@gmail.com";
-                                        const RECIPIENT_EMAIL = "dana@hlavacova.de";
 
-                                        const client = new MailtrapClient({ token: TOKEN });
-
-                                        const sender = { name: "Mailtrap Test", email: SENDER_EMAIL };
-
-                                        client
-                                            .send({
-                                                from: sender,
-                                                to: [{ email: RECIPIENT_EMAIL }],
-                                                subject: "Hello from Mailtrap!",
-                                                text: "Welcome to Mailtrap Sending!",
-                                            })
-                                            .then(console.log("send email"))
-                                            .catch(console.error);*/
 
                     sendEmail(randomPassword, email)
                     return res.status(200).json({message: ["Password changed,email send."]})

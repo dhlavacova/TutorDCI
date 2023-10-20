@@ -28,6 +28,7 @@ import Footer from "./components/footer";
 import './index.css';
 import CreatTutorClass from "./components/SelectCours/CreatTutorClass.jsx";
 import CreateStudentClass from './components/StudentInfo/CreateStudentClass.jsx';
+import {SlackProvider} from "./context/slackContext.jsx";
 
 // import {ClassTutorProvider} from "./context/creatTutorClassContext.jsx";
 
@@ -40,6 +41,7 @@ function App() {
           <InfoStudentProvider>
             <InfoTutorProvider>
               <SettingsProvider>
+                <SlackProvider>
                 <BrowserRouter>
                   <div className="min-h-screen flex flex-col">
                     <main className="container content-container mx-auto px-2 md:px-10 flex-grow">
@@ -69,6 +71,7 @@ function App() {
                   <Outlet />
                   <Footer />
                 </BrowserRouter>
+                </SlackProvider>
               </SettingsProvider>
             </InfoTutorProvider>
           </InfoStudentProvider>

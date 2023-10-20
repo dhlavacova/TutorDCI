@@ -151,7 +151,7 @@ console.log({selectedTutor})
 
                                                 key={day._id}
                                                 value={day.date}
-                                               // disabled={isReserved}
+                                                disabled={isReserved}
                                                 className={isReserved ? "text-red-500" : "text-stone-950"}>
                                                 {day.dateforUser} {isReserved ? " - Reserved" : ""}
                                             </option>

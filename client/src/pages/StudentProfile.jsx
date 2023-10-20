@@ -5,6 +5,7 @@ import { FaEnvelope } from "react-icons/fa";
 import curve from "../assets/ttten.svg";
 import { useInfoStudent } from "../context/infostudentContext";
 
+
 function StudentProfile() {
   const [profileImage, setProfileImage] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -96,6 +97,7 @@ function StudentProfile() {
           </div>
         </div>
       </div>
+
     </div>
   );
 }

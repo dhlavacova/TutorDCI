@@ -3,8 +3,13 @@ import axios from "axios";
 export const slackTutorCommunity = async (req, res) => {
 
     try {
+      /*  if (!req.user) {
+            return res.status(400).json({ message: "Chyba autentikace." });
+        }
+        else{*/
        /* const message = req.body.message; */// Extract 'message' from the POST request body
-const message= ` :wave: Hi! `;
+const message= req.body.message;
+console.log(message);
         if (!message) {
             return res
                 .status(400)
@@ -16,7 +21,7 @@ const message= ` :wave: Hi! `;
         });
 
         res.send("Message sent to Slack successfully");
-    } catch (error) {
+    }/*} */catch (error) {
         res.send("Failed to send message to Slack"+error.message)
     }
 };
@@ -24,10 +29,10 @@ const message= ` :wave: Hi! `;
 export const slackToOnePerson = async (req, res, next) => {
     const token = process.env.TOKEN_SLACK_TUTOR2;
     const message = ` :wave: Hi, in 15 Minuten beginnt dein Tutorium. Wir freuen uns auf dich!`;
-    const headers = {
+  /*  const headers = {
         Authorization: `Bearer ${token}`,
         "Content-type": "application/json; charset=utf-8",
-    };
+    };*/
 
     try {
         const response = await axios.get("https://slack.com/api/users.list", {
