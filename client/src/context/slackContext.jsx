@@ -13,6 +13,7 @@ export const useSSlack = () => {
 
 export const SlackProvider = ({children}) => {
     const [message, setMessage] = useState('')
+    const [nachricht, setNachricht] = useState('')
 
 
     const slackFromcontext = async (message) => {
@@ -20,7 +21,7 @@ export const SlackProvider = ({children}) => {
         try {
             const res = await slackRequest(message)
             if (res.status === 200) {
-                setMessage('Message sent')
+
 
             }
         } catch (err) {
@@ -33,7 +34,7 @@ export const SlackProvider = ({children}) => {
 
 
     return (<SlackContext.Provider
-            value={{slackFromcontext,message}}
+            value={{slackFromcontext,message,setMessage, nachricht}}
         >
             {children}
         </SlackContext.Provider>

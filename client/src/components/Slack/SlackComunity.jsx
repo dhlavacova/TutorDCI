@@ -16,7 +16,7 @@ function SlackComunity(props) {
     } = useForm({
        resolver: zodResolver(messageSleckschema),
     });
-    const {slackFromcontext,message} = useSSlack();
+    const {slackFromcontext,nachricht,setNachricht,setMessage} = useSSlack();
 
 
 
@@ -25,7 +25,8 @@ function SlackComunity(props) {
     const onSubmit1 = async (message) => {
         console.log('submit', message);
 await slackFromcontext(message)
-        me
+        setMessage('')
+        setNachricht('Message was sent to your class')
     };
 
 
@@ -35,7 +36,7 @@ await slackFromcontext(message)
                 <div>
                     <Card>
 
-                        {message}
+                        {nachricht}
                         <h1 className="text-2xl font-bold flex items-center"><BiMessageDetail className="text-4xl mb-2 mr-2"/>Contact your class via Slack</h1>
                         <p className="text-sm mb-9">
 
