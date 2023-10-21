@@ -1,4 +1,5 @@
 import { Router } from "express";
+import express from 'express';
 import {
   login,
   logout,
@@ -12,7 +13,7 @@ import {
 } from "../schemas/auth.schema.js";
 import { auth } from "../middlewares/auth.middleware.js";
 import { tutorSchema } from "../schemas/infotutor.schema.js";
-import { studentSchema } from "../schemas/infostudent.schema.js"
+import { studentSchema } from "../schemas/infostudent.schema.js";
 
 import {
   createTutorClass,
@@ -22,15 +23,11 @@ import {
 import {
   createStudentClass,
   getStudents,
-} from '../controllers/infostudent.controller.js'
-
-import { getUserImage } from "../controllers/user-controller.js";
-import multerController from '../controllers/multer-controller.js';
-
-
-
+} from '../controllers/infostudent.controller.js';
 
 const router = Router();
+
+
 
 router.post("/register", validateSchema(registerSchema), register);
 router.post("/login", validateSchema(loginSchema), login);
@@ -44,10 +41,8 @@ router.post("/tutors2", validateSchema(tutorSchema), createTutorClass);
 
 
 router.get("/students", getStudents);
-router.post("/students/info", validateSchema(studentSchema),createStudentClass);
+router.post("/students/info", validateSchema(studentSchema), createStudentClass);
 
 
-router.get("/user-image", auth, getUserImage);
-router.post("/upload", auth, multerController);
 
 export default router;

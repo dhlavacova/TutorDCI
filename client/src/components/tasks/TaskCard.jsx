@@ -10,7 +10,11 @@ import {
 } from "react-icons/fi";
 import ButtonClass from '../ButtonClass';
 
-function TaskCard({ task, platformLink }) {
+function TaskCard({
+  task,
+  platformLink,
+  //  addToGoogleCalendar, 
+}) {
   const { deleteTask } = useTasks();
   const { user } = useAuth();
 
@@ -19,6 +23,7 @@ function TaskCard({ task, platformLink }) {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
     function getCurrentDate(datum) {
         try {
             const dateOptions = { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' };
@@ -33,6 +38,7 @@ function TaskCard({ task, platformLink }) {
             console.error("Error in getCurrentDate:", error);
             return "Invalid Date";
         }
+
     }
 
 console.log('task', task)
@@ -92,7 +98,9 @@ console.log('task', task)
         Zoom link will be provided 5 minutes before the class.
       </p>
 
-      <ButtonClass task={task} platformLink={platformLink} />
+      <ButtonClass task={task} platformLink={platformLink} 
+// onAddToCalendar={addToGoogleCalendar} 
+/>
 
     </div>
   );

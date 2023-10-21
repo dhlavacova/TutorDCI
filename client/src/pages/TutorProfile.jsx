@@ -5,27 +5,54 @@ import { useAuth } from "../context/authContext";
 import { FaCalendar, FaCamera, FaClock, FaHourglass } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa";
 import curve from "../assets/ttten.svg"
+
+import axios from "axios";
+
 import SlackComunity from "../components/Slack/SlackComunity.jsx";
+
 
 
 
 
 export function TutorProfile() {
   const [classNumber, setClassNumber] = useState("");
-  const [course, setCourse] = useState("");
   const [profileImage, setProfileImage] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
-
+  const [imgSrc, setImgSrc] = useState("http://localhost:4000/api/user-image")
   const { isAuthenticated, user } = useAuth();
   const { availibilityTutor, getAvailibilityTutor } = useInfoTutor();
+
   useEffect(() => {
     getAvailibilityTutor();
   }, []);
+
+ const currentTutor = allInfoStudents.students
+    ? allInfoStudents.students.find(
+      (student) => student.studentName === user.username
+    )
+    : null;
 
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setProfileImage(file);
+    const formData = new FormData();
+    formData.append("file", file);
+
+    axios.post("http://localhost:4000/upload", formData, {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+      .then((response) => {
+        // Actualiza la URL de la imagen en el estado local
+        setImgSrc(`http://localhost:4000/api/user-image?timestamp=${new Date().getTime()}`);
+        console.log("Imagen subida exitosamente", response.data);
+      })
+      .catch((error) => {
+        console.error("Error al subir la imagen", error);
+      });
   };
 
   const handleMouseEnter = () => {
@@ -57,12 +84,13 @@ console.log(isAuthenticated)
             onMouseLeave={handleMouseLeave}
           >
             <img
-              src={profileImage ? URL.createObjectURL(profileImage) : "/img/avatar.png"}
+              src={imgSrc}
+              key={Date.now()}
               alt=""
               className="w-40 h-40 rounded-full"
             />
             {isHovered && (
-              <div className="absolute inset-0 bg-gray-300 bg-opacity-40 flex justify-center items-center rounded-full">
+              <div className="absolute inset-0 bg-gray-300 bg-opacity-40 flex justify-center items-center rounded-full ">
                 <input
                   type="file"
                   name="profileImage"
@@ -75,14 +103,15 @@ console.log(isAuthenticated)
               </div>
             )}
           </label>
-          <div className="text-gray-900 ml-4">
-            <p className="text-sm font-semibold">My Profile</p>
-            <p className="text-4xl font-semibold mb-1">{isAuthenticated ? user.username : ""}
+          <div className="text-gray-900 ml-5">
+            <p className="text-lg font-semibold border-b-2" style={{ borderColor: 'blue' }}>My Profile</p>
+            <p className="text-4xl font-semibold">{isAuthenticated ? user.username : ""}
             </p>
 
 
-            <p className="font-semibold">{course}  </p>
+            <p className="font-semibold">Web Developer</p>
             <p className="text-xs">DCI {isAuthenticated ? user.role : ""} {classNumber}</p>
+
             <p className="text-xs flex items-center">
               {isAuthenticated && (
                 <>
@@ -132,6 +161,7 @@ console.log(isAuthenticated)
       <div className="py-0 w-1/2 float-right ">
         <SlackComunity/>
       </div>
+
 
     </div>
   );

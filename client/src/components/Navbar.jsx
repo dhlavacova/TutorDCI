@@ -8,7 +8,7 @@ import { useLocation } from "react-router-dom";
 import TourGuide from "../driver/TourGuide";
 
 export function Navbar() {
-  const { isAuthenticated } = useAuth(); // 
+  const { isAuthenticated, user } = useAuth(); // 
   const location = useLocation();
 
   // Verifica si la ruta actual es "/login" o "/register"

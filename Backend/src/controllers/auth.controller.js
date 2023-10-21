@@ -24,6 +24,7 @@ export const register = async (req, res) => {
       email,
       role,
       password: passwordHash,
+      profileImage,
     });
 
     // saving the user in the database
@@ -56,6 +57,7 @@ export const login = async (req, res) => {
     const { email, password } = req.body;
     const userFound = await User.findOne({ email });
 
+    console.log("userfound" + userFound)
     if (!userFound)
       return res.status(400).json({
         message: ["The email does not exist"],
@@ -77,6 +79,8 @@ export const login = async (req, res) => {
       id: userFound._id,
       username: userFound.username,
       role: userFound.role,
+      profileImage: userFound.profileImage,
+
     });
 
     res.cookie("token", token, {
@@ -85,10 +89,12 @@ export const login = async (req, res) => {
       sameSite: "none",
     });
     res.cookie("isLogged", token)
+    console.log(userFound)
     res.json({
       id: userFound._id,
       username: userFound.username,
       role: userFound.role,
+      profileImage: userFound.profileImage,
       // userType: userFound.role === 'student' ? 'student' : 'tutor', 
       /*email: userFound.email,*/
     });
@@ -120,7 +126,8 @@ export const verifyToken = async (req, res) => {
       id: userFound._id,
       username: userFound.username,
       email: userFound.email,
-      role: userFound.role
+      role: userFound.role,
+      profileImage: userFound.profileImage,
     });
   });
 };

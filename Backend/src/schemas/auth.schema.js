@@ -13,7 +13,6 @@ export const registerSchema = z.object({
     .email({
       message: "Email is not valid",
     }),
-
   role: roleSchema,
   password: z
     .string({
@@ -22,7 +21,9 @@ export const registerSchema = z.object({
     .min(6, {
       message: "Password must be at least 6 characters",
     }),
+  profileImage: z.string().optional(), 
 });
+
 
 export const loginSchema = z.object({
   email: z.string().email(),

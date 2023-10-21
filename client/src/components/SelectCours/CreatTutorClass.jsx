@@ -66,7 +66,13 @@ function CreatTutorClass(props) {
                         value={user.username}
                         {...register("tutorName", { required: true })}
                     />
-
+                    <Label htmlFor="tutorEmail"> </Label>
+                    <Input
+                        type="hidden"
+                        name="tutorEmail"
+                        value={user.email}
+                        {...register("tutorEmail", { required: true })}
+                    />
                     <Label htmlFor="course"> Select the course you wish to teach</Label>
                     <select
                         {...register("course")}

@@ -1,18 +1,20 @@
 import Tutor from '../models/infotutor.model.js';
 import Task from '../models/task.model.js';
+
 import Student from '../models/infostudent.model.js';
+
 export const createTutorClass = async (req, res) => {
     const tutorData = req.body;
     if (!tutorData) {
-        return res.status(400).json({message: "not data"});
+        return res.status(400).json({ message: "not data" });
     }
     try {
         const tutor = new Tutor(tutorData);
         await tutor.save();
-        res.status(201).json({message: 'Tutor information was created successfully'});
+        res.status(201).json({ message: 'Tutor information was created successfully' });
     } catch (error) {
         console.error(error.message);
-        res.status(500).json({error: 'Error'});
+        res.status(500).json({ error: 'Error' });
     }
 };
 /**
@@ -27,14 +29,14 @@ export const getAvailibility = async (req, res) => {
     try {
         if (!req.user.username) {
 
-            return res.status(400).json({message: "Chyba autentikace."});
+            return res.status(400).json({ message: "Chyba autentikace." });
         } else {
-            const availibity = await Tutor.find({tutorName: req.user.username});
-            console.log({availibity})
+            const availibity = await Tutor.find({ tutorName: req.user.username });
+            console.log({ availibity })
             res.json(availibity);
         }
     } catch (error) {
-        res.status(500).json({message: error.message});
+        res.status(500).json({ message: error.message });
     }
 };
 //filter for the studenten (my Booking form) hir kann er die Tutor suchen und reservation booken
@@ -69,7 +71,9 @@ export const getTutors = async (req, res) => {
         const toDayWoche = toDay.getDay();
 
 
-         tutors.map((tutor) =>
+        const tutors = await Tutor.find().lean();
+        tutors.map((tutor) =>
+        
             tutor.availability.map((days) => {
 
                 const dayIndex = preDay.indexOf(days.day);
@@ -85,12 +89,12 @@ export const getTutors = async (req, res) => {
                 if (difference < 0) {
                     futureDate.setDate(toDay.getDate() + difference + 7);
                 } else if (difference === 0) {
-console.log(`${preDay[dayIndex]} ${toDay.getDate()}.${toDay.getMonth() + 1} at ${days.time}`)
-                    return (days.date = futureDate.toISOString(), days.dateforUser=`${preDay[dayIndex]} ${toDay.getDate()}.${toDay.getMonth() + 1} at ${days.time}`);
+                    console.log(`${preDay[dayIndex]} ${toDay.getDate()}.${toDay.getMonth() + 1} at ${days.time}`)
+                    return (days.date = futureDate.toISOString(), days.dateforUser = `${preDay[dayIndex]} ${toDay.getDate()}.${toDay.getMonth() + 1} at ${days.time}`);
                 } else {
                     futureDate.setDate(toDay.getDate() + difference);
                 }
-                days.dateforUser=`${preDay[dayIndex]} ${futureDate.getDate()}.${futureDate.getMonth() + 1}.${futureDate.getFullYear()} at ${days.time}`
+                days.dateforUser = `${preDay[dayIndex]} ${futureDate.getDate()}.${futureDate.getMonth() + 1}.${futureDate.getFullYear()} at ${days.time}`
                 days.date = futureDate.toISOString();
             })
 
@@ -99,9 +103,11 @@ console.log(`${preDay[dayIndex]} ${toDay.getDate()}.${toDay.getMonth() + 1} at $
         tutors.map(tutor => {
 
             tutor.availability.map(termin => {
+
                 // check if this termin is in the Task collection
                 if (OnCheckTerminDates.map(task => task.date.toISOString().split('.')[0]).includes(termin.date.split('.')[0]) &&OnCheckTerminDates.map(task => task.tutor).includes(tutor.tutorName)) {
                     // If thrue, we will add the following attribute to this date: isReserved: thrue."
+
                     termin.isreserviert = true;
                 }
                 else {
@@ -112,9 +118,11 @@ console.log(`${preDay[dayIndex]} ${toDay.getDate()}.${toDay.getMonth() + 1} at $
         });
 
 
+
 res.json({tutors});
         }} catch (error) {
         res.status(500).json({message: error.message});
+
     }
 };
 

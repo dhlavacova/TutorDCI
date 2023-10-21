@@ -1,11 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useProtocol } from "../context/protocolContext.jsx";
+import { useAuth } from "../context/authContext";
 //import { Button, } from "../components/ui";
 //import {data} from "autoprefixer";
 //import {  Table,  TableHeader,  TableBody,  TableColumn,  TableRow,  TableCell} from "@nextui-org/react";
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Tooltip, getKeyValue, Link } from "@nextui-org/react";
-
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Tooltip, getKeyValue, Link, Avatar } from "@nextui-org/react";
 import { AiOutlineDownload } from "react-icons/ai";
+
+
+
 const columns = [
     { name: "PARTICIPANT", uid: "student" },
     { name: "DATE", uid: "date" },
@@ -15,12 +18,17 @@ const columns = [
 
 function Protocol() {
     const { allProtocols, getAllProtocols } = useProtocol();
-    // allProtocols, setAllProtocols
+    // const [imgSrc, setImgSrc] = useState(`http://localhost:4000/api/user-image?timestamp=${new Date().getTime()}`)
+
+    // const { user } = useAuth()
+
+    // console.log(user)
 
     useEffect(() => {
         getAllProtocols();
-    }, []);
+        // setImgSrc(`http://localhost:4000/api/user-image?timestamp=${new Date().getTime()}`);
 
+    }, []);
 
 
     const users = allProtocols
@@ -30,11 +38,11 @@ function Protocol() {
             const dateOptions = { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' };
             /*const timeOptions = { hour: '2-digit', minute: '2-digit' };*/
             if (!(datum instanceof Date)) {
-                console.log("datum was not a date object");
+                // console.log("datum was not a date object");
                 datum = new Date(datum);
             }
             const datePart = datum.toLocaleDateString('en-GB', dateOptions);
-            console.log("datePart:", datePart)
+            // console.log("datePart:", datePart)
             return `${datePart}`
         } catch (error) {
             console.error("Error in getCurrentDate:", error);
@@ -44,19 +52,28 @@ function Protocol() {
     const renderCell = React.useCallback((user, columnKey) => {
         // console.log("renderCell ausgeführt")
         const cellValue = user[columnKey];
-
         // console.log("columnkey", columnKey);
 
         switch (columnKey) {
-
             case "student":
                 return (
+                    // <div className="flex items-center">
+                    //     <Avatar
+                    //         isBordered
+                    //         color="default"
+                    //         className="w-20 h-20 text-large"
+                    //         src={imgSrc || "https://i.pravatar.cc/150?u=a042581f4e29026024d"}
+                    //     />
+                    //     <span className='ml-4 font-medium'>{user.student}</span>
+                    // </div>
                     <User
-                           avatarProps={{radius: "lg", src: user.profileImage}}
-                       /* description={user.student}*/
+                        avatarProps={{
+                            radius: "lg",
+                            src: user.profileImage
+                        }}
+                        /* description={user.student}*/
                         name={cellValue}
                     >
-                        {user.student}
                     </User>
                 );
             case "date":
@@ -77,14 +94,14 @@ function Protocol() {
                     <div className="relative flex items-center ">
                         <button
 
-                            >
-                        <Link style={{marginLeft:'6px'}} href={"/api/pdf/" + user._id} className="bg-slate-500 text-white font-bold py-2 px-2 rounded-lg hover:bg-slate-600 ml-6" ><AiOutlineDownload/></Link>
-                    </button>
-           </div>
-           )
-               ;
+                        >
+                            <Link style={{ marginLeft: '6px' }} href={"/api/pdf/" + user._id} className="bg-slate-300 text-black font-bold py-2 px-2 rounded-lg hover:bg-slate-600  hover:text-white ml-6" ><AiOutlineDownload /></Link>
+                        </button>
+                    </div>
+                )
+                    ;
 
-                        
+
             default:
                 return cellValue;
         }
@@ -116,8 +133,8 @@ function Protocol() {
                         </TableRow>
                     )}
                 </TableBody>
+                {/* <TableBody emptyContent={"No Lessons."}>{[]}</TableBody> */}
             </Table>
-
 
         </div>
 

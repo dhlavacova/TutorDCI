@@ -9,6 +9,7 @@ export const verifyTokenRequest = async () => axios.get(`/auth/verify`);
 
 export const logoutRequest = async () => axios.post(`/auth/logout`);
 
-// export const getTutorAvailability = async (tutorId) => axios.get(`/auth/tutors/${tutorId}/availability`)
+export const upload = async (formData) =>
+  axios.post(`/upload`, formData);
 
 

@@ -30,10 +30,13 @@ import CreatTutorClass from "./components/SelectCours/CreatTutorClass.jsx";
 import CreateStudentClass from './components/StudentInfo/CreateStudentClass.jsx';
 import {SlackProvider} from "./context/slackContext.jsx";
 
-// import {ClassTutorProvider} from "./context/creatTutorClassContext.jsx";
+
+
 
 
 function App() {
+
+
   return (
     <AuthProvider>
       <TaskProvider>
@@ -57,7 +60,11 @@ function App() {
                           <Route path="/book" element={<ClassesPage />} />
                           <Route path="/add-task" element={<TutoringBookingForm />} />
                           <Route path="/book/:id" element={<TutoringBookingForm />} />
+                   
+
+
                           <Route path="/profile">
+
                             <Route path="student" element={<StudentProfile />} />
                             <Route path="tutor" element={<TutorProfile />} />
                           </Route>
