@@ -26,12 +26,12 @@ export function TutorProfile() {
     getAvailibilityTutor();
   }, []);
 
- const currentTutor = allInfoStudents.students
+ /*const currentTutor = allInfoStudents.students
     ? allInfoStudents.students.find(
       (student) => student.studentName === user.username
     )
     : null;
-
+*/
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
