@@ -5,6 +5,7 @@ import { useAuth } from "../context/authContext";
 import { FaCalendar, FaCamera, FaClock, FaHourglass } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa";
 import curve from "../assets/ttten.svg"
+import SlackComunity from "../components/Slack/SlackComunity.jsx";
 
 
 
@@ -34,7 +35,7 @@ export function TutorProfile() {
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
-
+console.log(isAuthenticated)
 
   return (
     <div>
@@ -93,33 +94,45 @@ export function TutorProfile() {
         </div>
 
       </div>
-      <div className="max-w-md  p-10 m-5 rounded-md bg-slate-200 bg-cover bg-no-repeat relative shadow-xl transform translate-x-6 translate-y-6 z-10"
+
+      <div className="max-w-md  p-10 m-5 rounded-md bg-slate-200 bg-cover bg-no-repeat relative shadow-xl transform translate-x-6 translate-y-6 z-10 py-5 w-1/2 float-left mt-40 "
         style={{ backgroundImage: `url(${curve})` }}>
         {availibilityTutor && (
           <div className="mt-4">
             <ul>
               {availibilityTutor.map((tutor, index) =>
                 tutor.availability.map((avail, availIndex) => (
-                  <li key={`${index}-${availIndex}`}>
-                    <label htmlFor="availableHours" className="text-lg font-bold block mb-2 " >
-                      Available Hours:
-                    </label>
-                    <div className="flex items-center text-sm mt-2">
-                      <FaCalendar className="mr-2" /> {avail.day}
-                    </div>
-                    <div className="flex items-center text-sm mt-2">
-                      <FaClock className="mr-2" /> {avail.time}
-                    </div>
-                    <div className="flex items-center text-sm mt-2">
-                      <FaHourglass className="mr-2 " /> {avail.duration} Hour
-                    </div>
-                  </li>
+                    <li key={`${index}-${availIndex}`}>
+                      <label htmlFor="availableHours" className="text-lg font-bold block mb-2 ">
+                        Available Hours:
+                      </label>
+                      <div className="flex items-center text-sm mt-2">
+                        <FaCalendar className="mr-2"/> {avail.day}
+                      </div>
+                      <div className="flex items-center text-sm mt-2">
+                        <FaClock className="mr-2"/> {avail.time}
+                      </div>
+
+                      <div className="flex items-center text-sm mt-2">
+                        <FaHourglass className="mr-2 "/> {avail.duration} Hour
+                      </div>
+                      <hr style={{
+                        color: '#000000',
+                        backgroundColor: '#000000',
+                        height: .5,
+                        borderColor: '#000000'
+                      }}/>
+                    </li>
                 ))
               )}
             </ul>
           </div>
         )}
       </div>
+      <div className="py-0 w-1/2 float-right ">
+        <SlackComunity/>
+      </div>
+
     </div>
   );
 }

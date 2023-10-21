@@ -19,19 +19,20 @@ function TaskCard({ task, platformLink }) {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-  function getCurrentDate(datum) {
-    try {
-      const dateOptions = { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' };
-      /*const timeOptions = { hour: '2-digit', minute: '2-digit' };*/
-      if (!(datum instanceof Date)) {
-        datum = new Date(datum);
-      }
-      const datePart = datum.toLocaleDateString('en-GB', dateOptions);
-      console.log("datePart:", datePart)
-      return `${datePart}`
-    } catch (error) {
-      console.error("Error in getCurrentDate:", error);
-      return "Invalid Date";
+    function getCurrentDate(datum) {
+        try {
+            const dateOptions = { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' };
+            /*const timeOptions = { hour: '2-digit', minute: '2-digit' };*/
+            if (!(datum instanceof Date)) {
+                datum = new Date(datum);
+            }
+            const datePart = datum.toLocaleDateString('en-GB', dateOptions);
+            console.log("datePart:", datePart)
+            return `${datePart}`
+        } catch (error) {
+            console.error("Error in getCurrentDate:", error);
+            return "Invalid Date";
+        }
     }
 
 console.log('task', task)
