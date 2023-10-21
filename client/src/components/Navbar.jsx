@@ -39,7 +39,9 @@ export function Navbar() {
             <>
               <li>
                 <div >
+
                   {/* <TourGuide isAuthenticated={isAuthenticated} /> */}
+
                   <Link
 
                     to="/add-task"

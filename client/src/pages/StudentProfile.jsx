@@ -6,7 +6,9 @@ import curve from "../assets/ttten.svg";
 import { useInfoStudent } from "../context/infostudentContext";
 import axios from "axios";
 
+
 export default function StudentProfile() {
+
   const [profileImage, setProfileImage] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
   const { isAuthenticated, user } = useAuth();
@@ -116,6 +118,7 @@ export default function StudentProfile() {
           </div>
         </div>
       </div>
+
     </div>
   );
 }

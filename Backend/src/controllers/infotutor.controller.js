@@ -1,6 +1,8 @@
 import Tutor from '../models/infotutor.model.js';
 import Task from '../models/task.model.js';
 
+import Student from '../models/infostudent.model.js';
+
 export const createTutorClass = async (req, res) => {
     const tutorData = req.body;
     if (!tutorData) {
@@ -40,14 +42,38 @@ export const getAvailibility = async (req, res) => {
 //filter for the studenten (my Booking form) hir kann er die Tutor suchen und reservation booken
 export const getTutors = async (req, res) => {
     try {
+        if(!req.user.username) {
+
+        return res.status(400).json({message:[ "Misstake autentikace."]});
+    } else {
+//search tutor from student class
+            // search student
+            let person = await Student.findOne({ studentName: req.user.username });
+
+            // if not student exist search tutor
+            if (!person) {
+                person = await Tutor.findOne({ tutorName: req.user.username });
+            }
+
+            // if nobody exist return error
+            if (!person) {
+                return res.status(404).json({ message: ["User not search."] });
+            }
+
+            const personClass=person.classNumber;
+
+
+        const tutors = await Tutor.find({classNumber: personClass}).lean();
 
 
         const preDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         const toDay = new Date();
         const toDayWoche = toDay.getDay();
 
+
         const tutors = await Tutor.find().lean();
         tutors.map((tutor) =>
+        
             tutor.availability.map((days) => {
 
                 const dayIndex = preDay.indexOf(days.day);
@@ -75,24 +101,28 @@ export const getTutors = async (req, res) => {
         );
         const OnCheckTerminDates = await Task.find().lean();
         tutors.map(tutor => {
-            // Pro každý termín v availability
+
             tutor.availability.map(termin => {
-                // Zkontrolujeme, jestli se tento termín nachází v OnCheckTermin
-                if (OnCheckTerminDates.map(task => task.date.toISOString().split('T')[0]).includes(termin.date.split('T')[0]) && OnCheckTerminDates.map(task => task.tutor).includes(tutor.tutorName)) {
-                    // Pokud ano, přidáme k tomuto termínu isreserviert: true
+
+                // check if this termin is in the Task collection
+                if (OnCheckTerminDates.map(task => task.date.toISOString().split('.')[0]).includes(termin.date.split('.')[0]) &&OnCheckTerminDates.map(task => task.tutor).includes(tutor.tutorName)) {
+                    // If thrue, we will add the following attribute to this date: isReserved: thrue."
+
                     termin.isreserviert = true;
                 }
                 else {
-                    // Pokud ne, přidáme k tomuto termínu isreserviert: false
+                    // "If not, we will add the following attribute to this date: isReserved: false."
                     termin.isreserviert = false;
                 }
             });
         });
 
 
-        res.json({ tutors });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
+
+res.json({tutors});
+        }} catch (error) {
+        res.status(500).json({message: error.message});
+
     }
 };
 
