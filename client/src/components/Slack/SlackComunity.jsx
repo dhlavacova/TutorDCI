@@ -26,7 +26,7 @@ function SlackComunity(props) {
         console.log('submit', message);
 await slackFromcontext(message)
         setMessage('')
-        setNachricht('Message was sent to your class')
+        //setNachricht('Message was sent to your class')
     };
 
 
@@ -58,7 +58,6 @@ await slackFromcontext(message)
                             <Button>Send message</Button>
 
                         </form>
-
 
                     </Card>
                 </div>

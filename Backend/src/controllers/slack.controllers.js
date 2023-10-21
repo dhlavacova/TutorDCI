@@ -13,16 +13,16 @@ console.log(message);
         if (!message) {
             return res
                 .status(400)
-                .send("Message field is missing in the request body");
+                .send(["Message field is missing in the request body"]);
         }
 
         await axios.post(process.env.SLACK, {
             text: message, // Use the extracted 'message' value
         });
 
-        res.send("Message sent to Slack successfully");
-    }/*} */catch (error) {
-        res.send("Failed to send message to Slack"+error.message)
+        res.status(200).send(["Message sent to Slack successfully"]);
+    }catch (error) {
+        res.status(500).send(["Failed to send message to Slack"]+error.message)
     }
 };
 
