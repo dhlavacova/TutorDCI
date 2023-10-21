@@ -71,7 +71,7 @@ export const getTutors = async (req, res) => {
         const toDayWoche = toDay.getDay();
 
 
-        const tutors = await Tutor.find().lean();
+      const tutors = await Tutor.find().lean();
         tutors.map((tutor) =>
         
             tutor.availability.map((days) => {
