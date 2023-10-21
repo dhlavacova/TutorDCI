@@ -3,7 +3,7 @@ import Task from "../models/task.model.js";
 import { createTaskSchema } from "../schemas/task.schema.js";
 
 export const getTasks = async (req, res) => {
-
+try{
     const tasks = await Task.find({ user: req.user.id }).populate("user")
 
     res.json(tasks);
