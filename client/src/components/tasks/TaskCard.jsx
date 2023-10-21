@@ -10,7 +10,11 @@ import {
 } from "react-icons/fi";
 import ButtonClass from '../ButtonClass';
 
-function TaskCard({ task, platformLink }) {
+function TaskCard({
+  task,
+  platformLink,
+  //  addToGoogleCalendar, 
+}) {
   const { deleteTask } = useTasks();
   const { user } = useAuth();
 
@@ -27,7 +31,7 @@ function TaskCard({ task, platformLink }) {
         datum = new Date(datum);
       }
       const datePart = datum.toLocaleDateString('en-GB', dateOptions);
-      console.log("datePart:", datePart)
+      // console.log("datePart:", datePart)
       return `${datePart}`
     } catch (error) {
       console.error("Error in getCurrentDate:", error);
@@ -90,7 +94,9 @@ function TaskCard({ task, platformLink }) {
         Zoom link will be provided 5 minutes before the class.
       </p>
 
-      <ButtonClass task={task} platformLink={platformLink} />
+      <ButtonClass task={task} platformLink={platformLink} 
+// onAddToCalendar={addToGoogleCalendar} 
+/>
 
     </div>
   );

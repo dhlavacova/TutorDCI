@@ -1,7 +1,4 @@
-import React, {
-  useEffect,
-  useState
-} from "react";
+import React, { useEffect, useState } from "react";
 import axios from "../api/axios";
 import { useTasks } from "../context/tasksContext";
 import {
@@ -10,41 +7,74 @@ import {
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
-  DropdownItem
+  DropdownItem,
 } from "@nextui-org/react";
 import { FiChevronDown } from "react-icons/fi";
+// import Calendar from "../calendar.jsx"
 
-export default function ButtonClass({ task }) {
+export default function ButtonClass({ task, addToGoogleCalendar }) {
   const { deleteTask } = useTasks();
   const [selectedOption, setSelectedOption] = React.useState(new Set(["join"]));
   const [platformLink, setPlatformLink] = useState("");
 
   useEffect(() => {
-
-    axios.get("/auth/availibility").then((response) => {
-      // console.log("Response from API:", response.data); 
-      const tutorData = response.data;
-      // console.log("Tutor Data ", tutorData); 
-      setPlatformLink(tutorData[0].platformLink);
-    }).catch((error) => {
-
-      console.error("Error fetching platform link:", error);
-    });
+    axios
+      .get("/auth/availibility")
+      .then((response) => {
+        const tutorData = response.data;
+        setPlatformLink(tutorData[0].platformLink);
+      })
+      .catch((error) => {
+        console.error("Error fetching platform link:", error);
+      });
   }, []);
+  // useEffect(() => {
+  //   gapi.load('client:auth2', () => {
+  //     gapi.client.init({
+  //       apiKey: 'AIzaSyBpuv2HQAoMR9HSuCElXbj972qI596Ii7k',
+  //       clientId: '542822958898-kj68tsrqpvg1j2mo1r04b8vpqv1c8o3u.apps.googleusercontent.com',
+  //       discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
+  //       scope: 'https://www.googleapis.com/auth/calendar.events',
+  //     });
+  //   });
+  // }, []);
+
+
+
+  // function addToGoogleCalendar(classDetails) {
+  //   gapi.client.calendar.events.insert({
+  //     calendarId: 'primary', // Puedes cambiarlo si quieres usar un calendario diferente
+  //     resource: {
+  //       summary: classDetails.theme,
+  //       description: 'Descripción del evento',
+  //       start: {
+  //         dateTime: classDetails.date, // Debe ser una fecha y hora en formato ISO 8601
+  //       },
+  //       end: {
+  //         dateTime: classDetails.date, // Debe ser una fecha y hora en formato ISO 8601
+  //       },
+  //     },
+  //   }).then((response) => {
+  //     console.log('Evento creado:', response.result);
+  //   }).catch((error) => {
+  //     console.error('Error al crear el evento:', error);
+  //   });
+  // }
+
 
   const descriptionsMap = {
     join:
       "Enter the Zoom session and engage in real-time educational experiences, where you can learn and participate interactively.",
     cancel:
       "If your plans change, easily cancel your reservation to allow other students to benefit from this learning opportunity.",
-    calendar:
-      "Streamline your academic life with a single click by adding this class to your Google Calendar, ensuring you never miss an important session on your journey to knowledge.",
-  };
+  //   calendar:
+  //     "Streamline your academic life with a single click by adding this class to your Google Calendar, ensuring you never miss an important session on your journey to knowledge.",//
+   };
 
   const labelsMap = {
     join: "Join class",
     cancel: "Cancel this class",
-    calendar: "Add to calendar",
+    // calendar: "Add to calendar",
   };
 
   const selectedOptionValue = Array.from(selectedOption)[0];
@@ -55,14 +85,19 @@ export default function ButtonClass({ task }) {
         deleteTask(task._id);
       }
     } else if (selectedOptionValue === "join") {
-      // console.log("Platform Link:", platformLink); 
       if (platformLink) {
         window.location.href = platformLink;
       }
     } else if (selectedOptionValue === "calendar") {
-      // Implement the logic to add the class to the Google Calendar
-      // You may need to pass some data to the API to add the event to the calendar.
-      // Example: axios.post('/api/add-to-calendar', { event: task, platformLink });
+      if (task) {
+        // addToGoogleCalendar({
+        //   theme: task.theme,
+        //   tutor: task.tutor,
+        //   student: task.student,
+        //   date: task.date,
+        // });
+
+      }
     }
   };
 
@@ -89,9 +124,9 @@ export default function ButtonClass({ task }) {
           <DropdownItem key="cancel" description={descriptionsMap["cancel"]}>
             {labelsMap["cancel"]}
           </DropdownItem>
-          <DropdownItem key="calendar" description={descriptionsMap["calendar"]}>
+          {/* <DropdownItem key="calendar" description={descriptionsMap["calendar"]}>
             {labelsMap["calendar"]}
-          </DropdownItem>
+          </DropdownItem> */}
         </DropdownMenu>
       </Dropdown>
     </ButtonGroup>

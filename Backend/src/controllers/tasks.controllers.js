@@ -4,6 +4,8 @@ import { createTaskSchema } from "../schemas/task.schema.js";
 
 export const getTasks = async (req, res) => {
   try {
+
+
     const tasks = await Task.find({ user: req.user.id }).populate("user");
     res.json(tasks);
   } catch (error) {
@@ -16,7 +18,10 @@ export const createTask = async (req, res) => {
 
 
   try {
-    const {theme, tutor, date } = req.body;
+
+
+
+    const { theme, tutor, date } = req.body;
     const newTask = new Task({
       student: student,
       theme,

@@ -1,19 +1,25 @@
-import React from "react";
-import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Avatar } from "@nextui-org/react";
+import React, { useEffect, useState } from "react"; import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Avatar } from "@nextui-org/react";
 import { useAuth } from "../context/authContext";
 import { Link } from "react-router-dom";
 
+
 export default function UserImage() {
     const { logout, user, isAuthenticated } = useAuth();
-
     const userRole = isAuthenticated && user.role;
     const isTutor = isAuthenticated && user.role === "tutor";
+    const [imgSrc, setImgSrc] = useState(`http://localhost:4000/api/user-image?timestamp=${new Date().getTime()}`)
+
 
     return (
         <div className="flex items-center gap-4">
             <Dropdown placement="bottom-start">
                 <DropdownTrigger>
-                    <Avatar isBordered color="default" />
+                    <Avatar
+                        isBordered
+                        color="default"
+                        src={imgSrc || "https://i.pravatar.cc/150?u=a042581f4e29026024d"}
+                        key={Date.now()}
+                    />
                 </DropdownTrigger>
                 <DropdownMenu aria-label="User Actions" variant="faded" disabledKeys={["profile"]} className="text-black rounded-lg">
                     <DropdownItem key="profile" textValue="View Profile" className="h-16 gap-2 bg-slate-100">

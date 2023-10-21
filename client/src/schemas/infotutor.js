@@ -14,6 +14,7 @@ export const register2Schema = z.object({
             message: "All availability fields are required",
         }))
     , tutorName: z.string().trim().nonempty({ required_error: "Tutor name is required" }),
+    tutorEmail: z.string().nonempty({ required_error: "Email is required" }),
     platformLink: z.string().trim().nonempty({ required_error: "Platform link is required" })
         .refine(value => /^(http|https):\/\/[^ "]+$/.test(value), "Invalid URL format"),
 })

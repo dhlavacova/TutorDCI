@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
     {
+        profileImage: {
+            type: String,
+            required: false,
+        },
         username: {
             type: String,
             required: true,
@@ -25,7 +29,7 @@ const userSchema = new mongoose.Schema(
             type: Date,
             required: false,
         },
-        profileImage: String,
+
     },
     {
         timestamps: true,

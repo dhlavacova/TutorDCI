@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Card, Message, Button, Input, Label } from "../components/ui";
 import { loginSchema } from "../schemas/auth";
-import logo from "../../public/d-os.svg";
+
 
 
 
@@ -36,7 +36,7 @@ function LoginPage() {
           <Message message={error} key={i} />
         ))}
 
-        <img src={logo} alt="Logo" className="w-20 h-20 mb-4 mx-auto" />
+        <img src="/d-os.svg" alt="Logo" className="w-20 h-20 mb-4 mx-auto" />
         <h1 className="text-2xl font-bold">Welcome Back!</h1>
         <p className="text-sm mb-8">Log in to your account</p>
 

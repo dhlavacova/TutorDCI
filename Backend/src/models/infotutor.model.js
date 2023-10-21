@@ -8,7 +8,10 @@ const tutorSchema = new mongoose.Schema({
     type: "string",
     required: true,
   },
-
+  tutorEmail: {
+    type: "string",
+    required: true,
+  },
   course: {
     type: String,
     required: true,
@@ -18,8 +21,8 @@ const tutorSchema = new mongoose.Schema({
     required: true,
   },
 
-  availability:[ 
-{
+  availability: [
+    {
       day: String,
       time: String,
       duration: String,

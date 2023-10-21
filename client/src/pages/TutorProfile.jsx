@@ -5,26 +5,49 @@ import { useAuth } from "../context/authContext";
 import { FaCalendar, FaCamera, FaClock, FaHourglass } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa";
 import curve from "../assets/ttten.svg"
-
+import axios from "axios";
 
 
 
 export function TutorProfile() {
   const [classNumber, setClassNumber] = useState("");
-  const [course, setCourse] = useState("");
   const [profileImage, setProfileImage] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
-
+  const [imgSrc, setImgSrc] = useState("http://localhost:4000/api/user-image")
   const { isAuthenticated, user } = useAuth();
   const { availibilityTutor, getAvailibilityTutor } = useInfoTutor();
+
   useEffect(() => {
     getAvailibilityTutor();
   }, []);
+
+ const currentTutor = allInfoStudents.students
+    ? allInfoStudents.students.find(
+      (student) => student.studentName === user.username
+    )
+    : null;
 
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setProfileImage(file);
+    const formData = new FormData();
+    formData.append("file", file);
+
+    axios.post("http://localhost:4000/upload", formData, {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+      .then((response) => {
+        // Actualiza la URL de la imagen en el estado local
+        setImgSrc(`http://localhost:4000/api/user-image?timestamp=${new Date().getTime()}`);
+        console.log("Imagen subida exitosamente", response.data);
+      })
+      .catch((error) => {
+        console.error("Error al subir la imagen", error);
+      });
   };
 
   const handleMouseEnter = () => {
@@ -56,12 +79,13 @@ export function TutorProfile() {
             onMouseLeave={handleMouseLeave}
           >
             <img
-              src={profileImage ? URL.createObjectURL(profileImage) : "/img/avatar.png"}
+              src={imgSrc}
+              key={Date.now()}
               alt=""
               className="w-40 h-40 rounded-full"
             />
             {isHovered && (
-              <div className="absolute inset-0 bg-gray-300 bg-opacity-40 flex justify-center items-center rounded-full">
+              <div className="absolute inset-0 bg-gray-300 bg-opacity-40 flex justify-center items-center rounded-full ">
                 <input
                   type="file"
                   name="profileImage"
@@ -74,14 +98,15 @@ export function TutorProfile() {
               </div>
             )}
           </label>
-          <div className="text-gray-900 ml-4">
-            <p className="text-sm font-semibold">My Profile</p>
-            <p className="text-4xl font-semibold mb-1">{isAuthenticated ? user.username : ""}
+          <div className="text-gray-900 ml-5">
+            <p className="text-lg font-semibold border-b-2" style={{ borderColor: 'blue' }}>My Profile</p>
+            <p className="text-4xl font-semibold">{isAuthenticated ? user.username : ""}
             </p>
 
 
-            <p className="font-semibold">{course}  </p>
+            <p className="font-semibold">Web Developer</p>
             <p className="text-xs">DCI {isAuthenticated ? user.role : ""} {classNumber}</p>
+
             <p className="text-xs flex items-center">
               {isAuthenticated && (
                 <>
@@ -93,33 +118,33 @@ export function TutorProfile() {
         </div>
 
       </div>
-      <div className="max-w-md  p-10 m-5 rounded-md bg-slate-200 bg-cover bg-no-repeat relative shadow-xl transform translate-x-6 translate-y-6 z-10"
-        style={{ backgroundImage: `url(${curve})` }}>
-        {availibilityTutor && (
-          <div className="mt-4">
-            <ul>
-              {availibilityTutor.map((tutor, index) =>
-                tutor.availability.map((avail, availIndex) => (
-                  <li key={`${index}-${availIndex}`}>
-                    <label htmlFor="availableHours" className="text-lg font-bold block mb-2 " >
-                      Available Hours:
-                    </label>
-                    <div className="flex items-center text-sm mt-2">
-                      <FaCalendar className="mr-2" /> {avail.day}
-                    </div>
-                    <div className="flex items-center text-sm mt-2">
-                      <FaClock className="mr-2" /> {avail.time}
-                    </div>
-                    <div className="flex items-center text-sm mt-2">
-                      <FaHourglass className="mr-2 " /> {avail.duration} Hour
-                    </div>
-                  </li>
-                ))
-              )}
-            </ul>
-          </div>
-        )}
-      </div>
+      {availibilityTutor && (
+        <div className="mt-4">
+          {availibilityTutor.map((tutor, index) =>
+            tutor.availability.map((avail, availIndex) => (
+              <div
+                key={`${index}-${availIndex}`}
+                className="max-w-md p-10 m-5 rounded-md bg-slate-200 bg-cover bg-no-repeat relative shadow-xl transform translate-x-6 translate-y-6 z-10"
+                style={{ backgroundImage: `url(${curve})` }}
+              >
+                <label htmlFor="availableHours" className="text-lg font-bold block mb-2">
+                  Available Hours:
+                </label>
+                <div className="flex items-center text-sm mt-2">
+                  <FaCalendar className="mr-2" /> {avail.day}
+                </div>
+                <div className="flex items-center text-sm mt-2">
+                  <FaClock className="mr-2" /> {avail.time}
+                </div>
+                <div className="flex items-center text-sm mt-2">
+                  <FaHourglass className="mr-2 " /> {avail.duration} Hour
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      )}
+
     </div>
   );
 }
