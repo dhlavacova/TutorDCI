@@ -26,11 +26,11 @@ export function TutorProfile() {
     getAvailibilityTutor();
   }, []);
 
- const currentTutor = allInfoStudents.students
-    ? allInfoStudents.students.find(
-      (student) => student.studentName === user.username
-    )
-    : null;
+//  const currentTutor = availibilityTutor.students
+//     ? availibilityTutor.tutors.find(
+//       (tutor) => tutor.tutorName === user.username
+//     )
+//     : null;
 
 
   const handleImageChange = (e) => {
